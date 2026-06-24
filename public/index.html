@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyberArk · Health Check</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-mark">CYBER<b>ARK</b></span>
+        </div>
+        <nav class="nav">
+          <div class="nav-group">Monitoring</div>
+          <a class="nav-item" href="#">Dashboard</a>
+          <a class="nav-item active" href="#">PSM Clients</a>
+          <a class="nav-item" href="#">PSM Servers</a>
+          <a class="nav-item" href="#">CPM Scanner</a>
+          <a class="nav-item" href="#">PVWA</a>
+          <a class="nav-item" href="#">Vault</a>
+          <div class="nav-group">Health Check</div>
+          <a class="nav-item" href="#">Health Check Details</a>
+          <a class="nav-item" href="#">Scheduled Checks</a>
+          <a class="nav-item" href="#">Report History</a>
+          <div class="nav-group">System</div>
+          <a class="nav-item" href="#">Configuration</a>
+          <a class="nav-item" href="#">Audit Log</a>
+        </nav>
+      </aside>
+
+      <!-- Main -->
+      <main class="main">
+        <header class="topbar">
+          <div class="crumbs">Monitoring <span>/</span> <strong>Health Check</strong></div>
+          <div class="topbar-right">
+            <span id="source-badge" class="badge badge-mock">MOCK</span>
+            <span id="last-refresh" class="muted">—</span>
+            <button id="refresh-btn" class="btn btn-ghost" title="Refresh">⟳</button>
+          </div>
+        </header>
+
+        <section class="page-head">
+          <h1>PSM Clients Health</h1>
+          <p class="muted">Live overview of all PSM clients, connection components and services.</p>
+        </section>
+
+        <!-- Summary tiles -->
+        <section class="tiles" id="tiles"></section>
+
+        <!-- Toolbar -->
+        <section class="toolbar">
+          <input id="search" class="search" type="search" placeholder="Search PSM client…" />
+          <select id="status-filter" class="select">
+            <option value="all">All statuses</option>
+            <option value="healthy">Healthy</option>
+            <option value="warning">Warning</option>
+            <option value="critical">Critical</option>
+          </select>
+          <button class="btn btn-primary" id="run-hc">Run Health Check</button>
+        </section>
+
+        <!-- Table -->
+        <section class="card table-card">
+          <table class="grid" id="clients-table">
+            <thead>
+              <tr>
+                <th>PSM Client</th>
+                <th>Status</th>
+                <th class="grp">Total</th>
+                <th class="grp">Active</th>
+                <th class="grp">Stopped</th>
+                <th class="grp">Dropped</th>
+                <th id="svc-head"></th>
+                <th>Sessions</th>
+                <th>Last Check</th>
+              </tr>
+              <tr class="subhead">
+                <th></th><th></th>
+                <th class="grp" colspan="4">Connection Components</th>
+                <th>Services</th>
+                <th></th><th></th>
+              </tr>
+            </thead>
+            <tbody id="clients-body"></tbody>
+          </table>
+        </section>
+
+        <!-- Detail panel -->
+        <section class="card detail" id="detail">
+          <div class="detail-head">
+            <h2 id="detail-title">Detailed Health Information</h2>
+            <span id="detail-status" class="pill"></span>
+          </div>
+          <div class="tabs">
+            <button class="tab active" data-tab="components">Connection Components</button>
+            <button class="tab" data-tab="services">Services</button>
+            <button class="tab" data-tab="hc">Health Check Details</button>
+            <button class="tab" data-tab="logs">Health Check Logs</button>
+          </div>
+          <div class="detail-body">
+            <div class="detail-main" id="tab-content"></div>
+            <aside class="detail-side" id="detail-meta"></aside>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

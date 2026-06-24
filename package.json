@@ -1,0 +1,17 @@
+{
+  "name": "cyberark-health-dashboard",
+  "version": "0.1.0",
+  "description": "Internal web dashboard for CyberArk component health (PSM Clients, CPM, PVWA ...) built on top of the PVWA System Health REST API.",
+  "type": "module",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node --watch server/server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
