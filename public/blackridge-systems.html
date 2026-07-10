@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Blackridge Systems — Equipment. Technology. Solutions.</title>
+<style>
+  :root{
+    --bg:#0c0e11;
+    --bg2:#12151a;
+    --panel:#171b21;
+    --panel2:#1d222a;
+    --line:#2a313b;
+    --red:#d21f2b;
+    --red-dark:#8f141d;
+    --text:#e8ebef;
+    --muted:#9aa4b0;
+    --steel:#c6ccd4;
+    font-size:16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(12,14,17,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    max-width:1200px;margin:0 auto;padding:0 20px;
+    display:flex;align-items:center;justify-content:space-between;height:64px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.14em;font-size:.95rem;white-space:nowrap;cursor:pointer;}
+  .brand .b1{color:#fff;}
+  .brand .b2{color:var(--red);}
+  .brand .chev{color:var(--red);font-size:1.1rem;line-height:1;}
+  nav.links{display:flex;gap:26px;align-items:center;}
+  nav.links a{
+    font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--steel);
+    padding:6px 2px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;
+  }
+  nav.links a:hover{color:#fff;border-color:var(--red);}
+  .nav-right{display:flex;align-items:center;gap:14px;}
+  .lang{display:flex;gap:4px;border:1px solid var(--line);border-radius:6px;padding:3px;}
+  .lang button{
+    background:none;border:none;color:var(--muted);font-size:.72rem;font-weight:700;
+    letter-spacing:.08em;padding:5px 9px;border-radius:4px;cursor:pointer;transition:all .2s;
+  }
+  .lang button:hover{color:#fff;}
+  .lang button.active{background:var(--red);color:#fff;}
+  .cta-mini{
+    background:var(--red);color:#fff;font-size:.75rem;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;padding:10px 18px;border-radius:6px;transition:background .2s;white-space:nowrap;
+  }
+  .cta-mini:hover{background:var(--red-dark);}
+  .burger{display:none;background:none;border:1px solid var(--line);border-radius:6px;color:#fff;font-size:1.2rem;padding:6px 12px;cursor:pointer;}
+  .mobile-menu{display:none;flex-direction:column;background:var(--bg2);border-top:1px solid var(--line);padding:10px 20px 18px;}
+  .mobile-menu a{padding:12px 4px;border-bottom:1px solid var(--line);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--steel);}
+  .mobile-menu a:last-child{border-bottom:none;}
+  .mobile-menu.open{display:flex;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:130px 20px 70px;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(210,31,43,.10), transparent 70%),
+      linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);
+    border-bottom:1px solid var(--line);
+  }
+  .hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--red);color:#ff5b64;font-size:.7rem;font-weight:700;
+    letter-spacing:.18em;text-transform:uppercase;padding:6px 14px;border-radius:999px;margin-bottom:22px;
+  }
+  .badge::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);}
+  h1{font-size:clamp(1.9rem,4.2vw,3rem);line-height:1.15;font-weight:800;letter-spacing:.02em;margin-bottom:18px;}
+  h1 .accent{color:var(--red);}
+  .hero p.lead{color:var(--muted);font-size:1.05rem;max-width:34em;margin-bottom:30px;}
+  .btn-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;padding:14px 28px;border-radius:6px;font-weight:700;font-size:.85rem;
+    letter-spacing:.1em;text-transform:uppercase;transition:all .2s;cursor:pointer;border:none;
+  }
+  .btn.primary{background:var(--red);color:#fff;}
+  .btn.primary:hover{background:var(--red-dark);transform:translateY(-2px);}
+  .btn.ghost{border:1px solid var(--line);color:var(--steel);background:transparent;}
+  .btn.ghost:hover{border-color:var(--red);color:#fff;transform:translateY(-2px);}
+  .hero-logo{
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(210,31,43,.08);
+  }
+  .tagline{
+    text-align:center;color:var(--muted);letter-spacing:.35em;text-transform:uppercase;
+    font-size:.72rem;margin-top:14px;
+  }
+  .tagline b{color:var(--red);}
+
+  /* ---------- STATS ---------- */
+  .stats{max-width:1100px;margin:0 auto;padding:46px 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px 20px;text-align:center;}
+  .stat .num{font-size:1.7rem;font-weight:800;color:#fff;}
+  .stat .num span{color:var(--red);}
+  .stat .lbl{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:6px;}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:80px 20px;}
+  section:nth-of-type(even){background:var(--bg2);}
+  .wrap{max-width:1100px;margin:0 auto;}
+  .kicker{color:var(--red);font-size:.75rem;font-weight:800;letter-spacing:.28em;text-transform:uppercase;margin-bottom:10px;}
+  h2{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:800;letter-spacing:.02em;margin-bottom:14px;}
+  .rule{width:64px;height:3px;background:var(--red);border-radius:2px;margin:18px 0 30px;}
+  .sub{color:var(--muted);max-width:46em;margin-bottom:36px;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+
+  .card{
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:30px 28px;
+    transition:transform .2s,border-color .2s;
+  }
+  .card:hover{transform:translateY(-4px);border-color:#3a434f;}
+  .card .icon{
+    width:46px;height:46px;border-radius:9px;background:linear-gradient(145deg,var(--red),var(--red-dark));
+    display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:18px;color:#fff;
+  }
+  .card h3{font-size:1.05rem;letter-spacing:.05em;text-transform:uppercase;margin-bottom:12px;}
+  .card p{color:var(--muted);font-size:.93rem;}
+  .card ul{margin-top:14px;display:flex;flex-direction:column;gap:9px;}
+  .card ul li{
+    color:var(--steel);font-size:.9rem;padding-inline-start:22px;position:relative;
+  }
+  .card ul li::before{content:"▸";color:var(--red);position:absolute;inset-inline-start:0;top:0;}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:start;}
+  .about-grid p{color:var(--muted);margin-bottom:16px;}
+  .founder{
+    background:var(--panel);border:1px solid var(--line);border-inline-start:4px solid var(--red);
+    border-radius:12px;padding:28px;
+  }
+  .founder h3{font-size:.95rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;color:#fff;}
+  .founder ul{display:flex;flex-direction:column;gap:12px;}
+  .founder li{color:var(--steel);font-size:.92rem;padding-inline-start:24px;position:relative;}
+  .founder li::before{content:"★";color:var(--red);position:absolute;inset-inline-start:0;font-size:.8rem;top:2px;}
+
+  /* process */
+  .steps{display:flex;flex-direction:column;gap:14px;counter-reset:step;}
+  .step{
+    display:flex;gap:20px;align-items:flex-start;background:var(--panel);
+    border:1px solid var(--line);border-radius:10px;padding:20px 24px;
+  }
+  .step .n{
+    flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:var(--red);
+    display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:.95rem;
+  }
+  .step h4{font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;}
+  .step p{color:var(--muted);font-size:.9rem;}
+  .process-note{
+    margin-top:26px;background:var(--panel);border:1px dashed var(--line);border-radius:10px;
+    padding:18px 22px;color:var(--steel);font-size:.92rem;
+  }
+  .process-note b{color:var(--red);}
+
+  /* faq */
+  .faq-item{border:1px solid var(--line);border-radius:10px;background:var(--panel);margin-bottom:12px;overflow:hidden;}
+  .faq-q{
+    width:100%;background:none;border:none;color:var(--text);cursor:pointer;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+    padding:18px 22px;font-size:.98rem;font-weight:600;text-align:start;font-family:inherit;
+  }
+  .faq-q .chevron{color:var(--red);transition:transform .25s;font-size:.9rem;flex:0 0 auto;}
+  .faq-item.open .chevron{transform:rotate(90deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .faq-a-inner{padding:0 22px 20px;color:var(--muted);font-size:.93rem;}
+
+  /* contact */
+  .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:start;}
+  .contact-info p{color:var(--muted);margin-bottom:20px;}
+  .contact-line{
+    display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);
+    border-radius:10px;padding:16px 18px;margin-bottom:12px;transition:border-color .2s;
+  }
+  .contact-line:hover{border-color:var(--red);}
+  .contact-line .ci{
+    width:38px;height:38px;border-radius:8px;background:linear-gradient(145deg,var(--red),var(--red-dark));
+    display:flex;align-items:center;justify-content:center;flex:0 0 auto;
+  }
+  .contact-line .cl-label{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+  .contact-line .cl-val{font-size:.95rem;color:#fff;font-weight:600;}
+  form{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:30px;}
+  .field{margin-bottom:18px;}
+  label{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}
+  input,textarea,select{
+    width:100%;background:var(--bg);border:1px solid var(--line);border-radius:8px;
+    color:var(--text);padding:12px 14px;font-size:.95rem;font-family:inherit;transition:border-color .2s;
+  }
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--red);}
+  textarea{min-height:120px;resize:vertical;}
+  .form-note{font-size:.78rem;color:var(--muted);margin-top:14px;}
+
+  /* referral banner */
+  .referral{
+    background:linear-gradient(90deg,rgba(210,31,43,.12),transparent 60%);
+    border:1px solid rgba(210,31,43,.4);border-radius:12px;padding:22px 26px;
+    max-width:1100px;margin:0 auto 0;display:flex;gap:16px;align-items:flex-start;
+  }
+  .referral .ri{font-size:1.4rem;color:var(--red);line-height:1;}
+  .referral p{color:var(--steel);font-size:.93rem;}
+  .referral b{color:#fff;}
+
+  /* footer */
+  footer{border-top:1px solid var(--line);background:var(--bg2);padding:46px 20px 30px;}
+  .foot{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:center;}
+  .foot .brand{font-size:.9rem;}
+  .foot .ftag{color:var(--muted);font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;margin-top:6px;}
+  .foot-right{color:var(--muted);font-size:.8rem;text-align:end;}
+  .top-btn{
+    position:fixed;bottom:24px;inset-inline-end:24px;z-index:90;width:46px;height:46px;border-radius:50%;
+    background:var(--red);color:#fff;border:none;font-size:1.1rem;cursor:pointer;
+    opacity:0;pointer-events:none;transition:opacity .3s;box-shadow:0 8px 24px rgba(0,0,0,.5);
+  }
+  .top-btn.show{opacity:1;pointer-events:auto;}
+  .top-btn:hover{background:var(--red-dark);}
+
+  /* RTL tweaks */
+  [dir="rtl"] body,[dir="rtl"] .faq-q{text-align:right;}
+
+  /* responsive */
+  @media(max-width:960px){
+    .hero-inner,.about-grid,.contact-grid{grid-template-columns:1fr;}
+    .grid3{grid-template-columns:1fr 1fr;}
+    .grid4,.stats{grid-template-columns:1fr 1fr;}
+    nav.links{display:none;}
+    .cta-mini{display:none;}
+    .burger{display:block;}
+  }
+  @media(max-width:560px){
+    .grid2,.grid3,.grid4,.stats{grid-template-columns:1fr;}
+    section{padding:60px 16px;}
+    .hero{padding-top:110px;}
+    .nav{padding:0 12px;gap:8px;}
+    .nav-right{gap:8px;}
+    .brand{font-size:.72rem;gap:6px;}
+    .lang button{padding:4px 6px;font-size:.65rem;}
+    .burger{padding:4px 10px;font-size:1rem;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="#top">
+      <span class="chev">▲</span>
+      <span><span class="b1">BLACKRIDGE</span> <span class="b2">SYSTEMS</span></span>
+    </a>
+    <nav class="links">
+      <a href="#about" data-i18n="nav_about"></a>
+      <a href="#services" data-i18n="nav_services"></a>
+      <a href="#process" data-i18n="nav_process"></a>
+      <a href="#why" data-i18n="nav_why"></a>
+      <a href="#faq" data-i18n="nav_faq"></a>
+      <a href="#contact" data-i18n="nav_contact"></a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang" id="langSwitch">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="fr">FR</button>
+        <button data-lang="es">ES</button>
+        <button data-lang="ar">AR</button>
+      </div>
+      <a href="#contact" class="cta-mini" data-i18n="nav_cta"></a>
+      <button class="burger" id="burger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" data-i18n="nav_about"></a>
+    <a href="#services" data-i18n="nav_services"></a>
+    <a href="#process" data-i18n="nav_process"></a>
+    <a href="#why" data-i18n="nav_why"></a>
+    <a href="#faq" data-i18n="nav_faq"></a>
+    <a href="#contact" data-i18n="nav_contact"></a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="badge" data-i18n="hero_badge"></span>
+        <h1 data-i18n-html="hero_title"></h1>
+        <p class="lead" data-i18n="hero_lead"></p>
+        <div class="btn-row">
+          <a href="#contact" class="btn primary" data-i18n="hero_cta1"></a>
+          <a href="#services" class="btn ghost" data-i18n="hero_cta2"></a>
+        </div>
+      </div>
+      <div>
+        <div class="hero-logo"><img src="data:image/jpeg;base64,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" alt="Blackridge Systems logo"></div>
+        <div class="tagline" data-i18n-html="hero_tagline"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><div class="num">15<span>+</span></div><div class="lbl" data-i18n="stat1"></div></div>
+    <div class="stat"><div class="num">2</div><div class="lbl" data-i18n="stat2"></div></div>
+    <div class="stat"><div class="num">100<span>%</span></div><div class="lbl" data-i18n="stat3"></div></div>
+    <div class="stat"><div class="num">24<span>–48h</span></div><div class="lbl" data-i18n="stat4"></div></div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="kicker" data-i18n="about_kicker"></div>
+      <h2 data-i18n="about_title"></h2>
+      <div class="rule"></div>
+      <div class="about-grid">
+        <div>
+          <p data-i18n="about_p1"></p>
+          <p data-i18n="about_p2"></p>
+          <p data-i18n="about_p3"></p>
+        </div>
+        <div class="founder">
+          <h3 data-i18n="founder_title"></h3>
+          <ul id="founderList"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="kicker" data-i18n="svc_kicker"></div>
+      <h2 data-i18n="svc_title"></h2>
+      <div class="rule"></div>
+      <p class="sub" data-i18n="svc_sub"></p>
+      <div class="grid2">
+        <div class="card">
+          <div class="icon">🎖</div>
+          <h3 data-i18n="svc1_title"></h3>
+          <p data-i18n="svc1_desc"></p>
+          <ul id="svc1List"></ul>
+        </div>
+        <div class="card">
+          <div class="icon">⚙</div>
+          <h3 data-i18n="svc2_title"></h3>
+          <p data-i18n="svc2_desc"></p>
+          <ul id="svc2List"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES / CLIENTS -->
+  <section id="clients">
+    <div class="wrap">
+      <div class="kicker" data-i18n="cli_kicker"></div>
+      <h2 data-i18n="cli_title"></h2>
+      <div class="rule"></div>
+      <p class="sub" data-i18n="cli_sub"></p>
+      <div class="grid4" id="clientCards"></div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="wrap">
+      <div class="kicker" data-i18n="proc_kicker"></div>
+      <h2 data-i18n="proc_title"></h2>
+      <div class="rule"></div>
+      <p class="sub" data-i18n="proc_sub"></p>
+      <div class="steps" id="stepsList"></div>
+      <div class="process-note" data-i18n-html="proc_note"></div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section id="why">
+    <div class="wrap">
+      <div class="kicker" data-i18n="why_kicker"></div>
+      <h2 data-i18n="why_title"></h2>
+      <div class="rule"></div>
+      <div class="grid3" id="whyCards"></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="kicker" data-i18n="faq_kicker"></div>
+      <h2 data-i18n="faq_title"></h2>
+      <div class="rule"></div>
+      <div id="faqList"></div>
+    </div>
+  </section>
+
+  <!-- REFERRAL -->
+  <section id="referral" style="padding-top:0;">
+    <div class="referral">
+      <div class="ri">🛡</div>
+      <p data-i18n-html="ref_text"></p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="kicker" data-i18n="ct_kicker"></div>
+      <h2 data-i18n="ct_title"></h2>
+      <div class="rule"></div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p data-i18n="ct_text"></p>
+          <a class="contact-line" href="mailto:contact@blackridge-systems.com">
+            <div class="ci">✉</div>
+            <div><div class="cl-label" data-i18n="ct_email"></div><div class="cl-val">contact@blackridge-systems.com</div></div>
+          </a>
+          <a class="contact-line" href="tel:+15550000000">
+            <div class="ci">☎</div>
+            <div><div class="cl-label" data-i18n="ct_phone"></div><div class="cl-val">+1 (555) 000-0000</div></div>
+          </a>
+          <div class="contact-line">
+            <div class="ci">📍</div>
+            <div><div class="cl-label" data-i18n="ct_loc"></div><div class="cl-val">Canada</div></div>
+          </div>
+        </div>
+        <form id="contactForm">
+          <div class="field"><label for="fName" data-i18n="f_name"></label><input id="fName" required></div>
+          <div class="field"><label for="fOrg" data-i18n="f_org"></label><input id="fOrg"></div>
+          <div class="field"><label for="fEmail" data-i18n="f_email"></label><input id="fEmail" type="email" required></div>
+          <div class="field"><label for="fMsg" data-i18n="f_msg"></label><textarea id="fMsg" required></textarea></div>
+          <button type="submit" class="btn primary" style="width:100%;" data-i18n="f_send"></button>
+          <p class="form-note" data-i18n="f_note"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot">
+    <div>
+      <div class="brand"><span class="chev">▲</span>&nbsp;<span class="b1">BLACKRIDGE</span>&nbsp;<span class="b2">SYSTEMS</span></div>
+      <div class="ftag" data-i18n="foot_tag"></div>
+    </div>
+    <div class="foot-right">
+      <div data-i18n="foot_rights"></div>
+      <div data-i18n="foot_discreet" style="margin-top:4px;"></div>
+    </div>
+  </div>
+</footer>
+
+<button class="top-btn" id="topBtn" aria-label="Back to top">▲</button>
+
+<script>
+const I18N = {
+
+/* ================= ENGLISH ================= */
+en: {
+  dir:"ltr",
+  nav_about:"About", nav_services:"Services", nav_process:"Process", nav_why:"Why Us", nav_faq:"FAQ", nav_contact:"Contact",
+  nav_cta:"Request a Quote",
+  hero_badge:"By referral only",
+  hero_title:'Field-tested tactical equipment.<br>Defense technology, <span class="accent">managed end-to-end.</span>',
+  hero_lead:"Blackridge Systems supplies field-tested tactical equipment and manages defense technology projects. Founded by an active Canadian Armed Forces member with 15+ years of military experience across two armies, we test everything we sell under real conditions. When you buy from Blackridge, you're buying equipment a soldier has already trusted.",
+  hero_cta1:"Discuss Your Needs", hero_cta2:"Our Services",
+  hero_tagline:'EQUIPMENT<b> · </b>TECHNOLOGY<b> · </b>SOLUTIONS',
+  stat1:"Years of military experience", stat2:"Armies served (Canada & Belgium)", stat3:"Products field-tested by us", stat4:"Response time",
+  about_kicker:"Who we are", about_title:"A Canadian defense company built on real service",
+  about_p1:"Blackridge Systems is a Canadian defense company with two service lines: supplying tactical and military-grade equipment — packs, load-bearing gear, field equipment — and managing technology projects and R&D for defense and security applications.",
+  about_p2:"Clients often don't know if equipment will actually survive field conditions, or they waste time dealing with overseas suppliers, language barriers, and unreliable quality. We remove that risk: we handle supplier relations directly (including in Chinese), field-test products ourselves under real operational conditions, and deliver equipment that's been validated by people who've actually used it in service.",
+  about_p3:"We source, test, and validate every product ourselves before offering it to clients. Nothing we sell is simply resold from a catalog.",
+  founder_title:"Founder credentials",
+  founder_list:[
+    "Active member of the Canadian Armed Forces",
+    "Prior service as a paratrooper in Belgium",
+    "15+ years of military experience across two armies",
+    "Bilingual FR / EN — direct supplier communication in Chinese",
+    "Documented field-testing protocols for every product line"
+  ],
+  svc_kicker:"What we do", svc_title:"Two service lines, one standard",
+  svc_sub:"Products, consulting, and project management — delivered under two clear service lines.",
+  svc1_title:"Equipment Supply",
+  svc1_desc:"Tactical and military-grade equipment, sourced and validated at the source.",
+  svc1_list:["Tactical packs & load-bearing gear","Field equipment for real operational conditions","Direct supplier negotiation — including in Chinese","Sample evaluation & documented field testing","Order management, quality control & delivery"],
+  svc2_title:"Technology Projects & R&D",
+  svc2_desc:"Project management and R&D coordination for defense and security applications.",
+  svc2_list:["Project scoping & requirements definition","End-to-end project management","R&D coordination for defense & security","Clear proposals with timeline and pricing","Direct communication — no middleman"],
+  cli_kicker:"Who we serve", cli_title:"Built for professionals who can't afford failures",
+  cli_sub:"Primarily B2B: you explain the need, we source and validate with the supplier, and manage the order end-to-end. We also serve individual professionals buying their own gear.",
+  cli_cards:[
+    {icon:"🪖", t:"Military", d:"Units and individual members of the armed forces."},
+    {icon:"🚔", t:"Law Enforcement", d:"Police and security agencies with operational requirements."},
+    {icon:"🏛", t:"Government", d:"Procurement offices and public-sector buyers."},
+    {icon:"🧭", t:"Private Security & Outdoor", d:"Security companies and outdoor professionals who need military-grade durability."}
+  ],
+  proc_kicker:"How we work", proc_title:"From need to delivery — one accountable partner",
+  proc_sub:"A clear, documented process. You deal with the founder directly at every step.",
+  proc_steps:[
+    {t:"Needs assessment", d:"A short call or exchange to define exactly what you need and under which conditions it must perform."},
+    {t:"Sourcing & supplier negotiation", d:"We identify the right manufacturers and negotiate directly at the source — including in Chinese."},
+    {t:"Sample evaluation & field testing", d:"We test samples ourselves under real operational conditions, with documented results."},
+    {t:"Order management & quality control", d:"We manage production, verify quality, and keep you informed — no overseas runaround."},
+    {t:"Delivery", d:"Validated equipment, delivered as agreed. On the tech side: scoping, management and R&D coordination."}
+  ],
+  proc_note:"<b>What to expect after contacting us:</b> a response within 24–48 hours, a short call to define the need, then a clear proposal with timeline and pricing. No middleman runaround — you deal with the founder directly.",
+  why_kicker:"Why Blackridge", why_title:"Tested by someone who carried the gear",
+  why_cards:[
+    {icon:"🎖", t:"Real military experience", d:"Founded by an active Canadian Armed Forces member with prior paratrooper service in Belgium. Every product is tested by someone who has carried gear in real operations."},
+    {icon:"🔬", t:"Validated, not resold", d:"We source, test, and validate equipment ourselves before offering it — with documented field-testing protocols for every product line."},
+    {icon:"🌐", t:"Direct at the source", d:"Bilingual FR/EN and Canadian-based, we manage supplier relationships directly in Asia, communicating in the supplier's own language."}
+  ],
+  faq_kicker:"Questions & answers", faq_title:"Frequently asked questions",
+  faq:[
+    {q:"What exactly does Blackridge do?", a:"Blackridge Systems is a Canadian defense company with two service lines: supplying tactical and military-grade equipment (packs, load-bearing gear, field equipment), and managing technology projects and R&D for defense and security applications. We source, test, and validate equipment ourselves before offering it to clients."},
+    {q:"Who are your typical clients?", a:"Military units and members, law enforcement and security agencies, government procurement offices, and private security companies. Also outdoor professionals who need military-grade durability."},
+    {q:"Is this B2B only?", a:"Primarily yes: the client explains their need, we source and validate with the supplier, and manage the order end-to-end. But we can also serve individual professionals — soldiers, police officers — buying their own gear."},
+    {q:"What makes Blackridge different?", a:"The founder is an active member of the Canadian Armed Forces with prior service as a paratrooper in Belgium. Every product we offer is tested by someone who has carried gear in real operations — not just resold from a catalog. We're bilingual (FR/EN), Canadian-based, and we manage supplier relationships directly at the source."},
+    {q:"What industries do you specialize in?", a:"Defense, law enforcement, private security, and tactical/outdoor equipment."},
+    {q:"What should I expect after contacting you?", a:"A response within 24–48 hours, a short call or exchange to define the need, then a clear proposal with timeline and pricing. No middleman runaround — you deal with the founder directly."},
+    {q:"Do you work with new clients directly?", a:"We work by referral. If you were referred to us, mention who sent you when you get in touch — it helps us respond faster."}
+  ],
+  ref_text:"<b>We work by referral.</b> This site is not public-facing marketing — it exists for clients and partners who were pointed to us. If someone sent you here, mention their name when you reach out.",
+  ct_kicker:"Get in touch", ct_title:"Tell us what your mission requires",
+  ct_text:"Explain your need — we'll respond within 24–48 hours with a short call or exchange, followed by a clear proposal with timeline and pricing. You deal with the founder directly.",
+  ct_email:"Email", ct_phone:"Phone", ct_loc:"Based in",
+  f_name:"Your name", f_org:"Organization / Unit (optional)", f_email:"Email", f_msg:"Describe your need",
+  f_send:"Send Message",
+  f_note:"Submitting opens your email program with the message pre-filled — nothing is sent automatically.",
+  foot_tag:"Equipment. Technology. Solutions.",
+  foot_rights:"© 2026 Blackridge Systems. All rights reserved.",
+  foot_discreet:"Access by referral — please do not distribute this page.",
+  mail_subject:"Inquiry — Blackridge Systems",
+  mail_name:"Name", mail_org:"Organization", mail_msg:"Need"
+},
+
+/* ================= FRANÇAIS ================= */
+fr: {
+  dir:"ltr",
+  nav_about:"À propos", nav_services:"Services", nav_process:"Processus", nav_why:"Pourquoi nous", nav_faq:"FAQ", nav_contact:"Contact",
+  nav_cta:"Demander un devis",
+  hero_badge:"Sur recommandation uniquement",
+  hero_title:'Équipement tactique testé sur le terrain.<br>Technologie de défense, <span class="accent">gérée de bout en bout.</span>',
+  hero_lead:"Blackridge Systems fournit de l'équipement tactique testé sur le terrain et gère des projets technologiques de défense. Fondée par un membre actif des Forces armées canadiennes avec plus de 15 ans d'expérience militaire dans deux armées, nous testons tout ce que nous vendons en conditions réelles. Acheter chez Blackridge, c'est acheter un équipement auquel un soldat a déjà fait confiance.",
+  hero_cta1:"Discuter de vos besoins", hero_cta2:"Nos services",
+  hero_tagline:'ÉQUIPEMENT<b> · </b>TECHNOLOGIE<b> · </b>SOLUTIONS',
+  stat1:"Années d'expérience militaire", stat2:"Armées servies (Canada & Belgique)", stat3:"Produits testés par nous", stat4:"Délai de réponse",
+  about_kicker:"Qui nous sommes", about_title:"Une entreprise de défense canadienne bâtie sur un vrai service militaire",
+  about_p1:"Blackridge Systems est une entreprise de défense canadienne avec deux lignes de services : la fourniture d'équipement tactique et de qualité militaire — sacs, équipement de portage, matériel de terrain — et la gestion de projets technologiques et de R&D pour des applications de défense et de sécurité.",
+  about_p2:"Les clients ignorent souvent si un équipement survivra réellement aux conditions du terrain, ou perdent du temps avec des fournisseurs étrangers, des barrières linguistiques et une qualité aléatoire. Nous éliminons ce risque : nous gérons les relations fournisseurs directement (y compris en chinois), nous testons les produits nous-mêmes en conditions opérationnelles réelles, et nous livrons un équipement validé par des gens qui l'ont réellement utilisé en service.",
+  about_p3:"Nous sourçons, testons et validons chaque produit nous-mêmes avant de le proposer à nos clients. Rien de ce que nous vendons n'est simplement revendu sur catalogue.",
+  founder_title:"Le fondateur",
+  founder_list:[
+    "Membre actif des Forces armées canadiennes",
+    "Ancien parachutiste en Belgique",
+    "Plus de 15 ans d'expérience militaire dans deux armées",
+    "Bilingue FR / EN — communication directe avec les fournisseurs en chinois",
+    "Protocoles de tests terrain documentés pour chaque gamme de produits"
+  ],
+  svc_kicker:"Ce que nous faisons", svc_title:"Deux lignes de services, un seul standard",
+  svc_sub:"Produits, conseil et gestion de projet — livrés sous deux lignes de services claires.",
+  svc1_title:"Fourniture d'équipement",
+  svc1_desc:"Équipement tactique et de qualité militaire, sourcé et validé à la source.",
+  svc1_list:["Sacs tactiques et équipement de portage","Matériel de terrain pour conditions opérationnelles réelles","Négociation directe avec les fournisseurs — y compris en chinois","Évaluation d'échantillons et tests terrain documentés","Gestion des commandes, contrôle qualité et livraison"],
+  svc2_title:"Projets technologiques & R&D",
+  svc2_desc:"Gestion de projet et coordination R&D pour des applications de défense et de sécurité.",
+  svc2_list:["Cadrage du projet et définition des besoins","Gestion de projet de bout en bout","Coordination R&D défense et sécurité","Propositions claires avec délais et tarifs","Communication directe — sans intermédiaire"],
+  cli_kicker:"Nos clients", cli_title:"Conçu pour des professionnels qui ne peuvent pas se permettre l'échec",
+  cli_sub:"Principalement B2B : vous expliquez le besoin, nous sourçons et validons avec le fournisseur, et gérons la commande de bout en bout. Nous servons aussi des professionnels individuels qui achètent leur propre équipement.",
+  cli_cards:[
+    {icon:"🪖", t:"Militaire", d:"Unités et membres individuels des forces armées."},
+    {icon:"🚔", t:"Forces de l'ordre", d:"Police et agences de sécurité avec des exigences opérationnelles."},
+    {icon:"🏛", t:"Gouvernement", d:"Bureaux d'approvisionnement et acheteurs du secteur public."},
+    {icon:"🧭", t:"Sécurité privée & Outdoor", d:"Sociétés de sécurité et professionnels outdoor exigeant une durabilité militaire."}
+  ],
+  proc_kicker:"Notre méthode", proc_title:"Du besoin à la livraison — un seul partenaire responsable",
+  proc_sub:"Un processus clair et documenté. Vous traitez directement avec le fondateur à chaque étape.",
+  proc_steps:[
+    {t:"Analyse du besoin", d:"Un court appel ou échange pour définir exactement ce dont vous avez besoin et dans quelles conditions le matériel doit performer."},
+    {t:"Sourcing & négociation fournisseur", d:"Nous identifions les bons fabricants et négocions directement à la source — y compris en chinois."},
+    {t:"Évaluation d'échantillons & tests terrain", d:"Nous testons les échantillons nous-mêmes en conditions opérationnelles réelles, avec résultats documentés."},
+    {t:"Gestion de commande & contrôle qualité", d:"Nous gérons la production, vérifions la qualité et vous tenons informé — sans allers-retours à l'étranger."},
+    {t:"Livraison", d:"Équipement validé, livré comme convenu. Côté technologie : cadrage, gestion et coordination R&D."}
+  ],
+  proc_note:"<b>À quoi vous attendre après nous avoir contactés :</b> une réponse sous 24–48 heures, un court appel pour définir le besoin, puis une proposition claire avec délais et tarifs. Pas d'intermédiaire — vous traitez directement avec le fondateur.",
+  why_kicker:"Pourquoi Blackridge", why_title:"Testé par quelqu'un qui a porté l'équipement",
+  why_cards:[
+    {icon:"🎖", t:"Une vraie expérience militaire", d:"Fondée par un membre actif des Forces armées canadiennes, ancien parachutiste en Belgique. Chaque produit est testé par quelqu'un qui a porté l'équipement en opérations réelles."},
+    {icon:"🔬", t:"Validé, pas revendu", d:"Nous sourçons, testons et validons l'équipement nous-mêmes avant de le proposer — avec des protocoles de tests terrain documentés pour chaque gamme."},
+    {icon:"🌐", t:"En direct à la source", d:"Bilingues FR/EN et basés au Canada, nous gérons les relations fournisseurs directement en Asie, dans la langue du fournisseur."}
+  ],
+  faq_kicker:"Questions & réponses", faq_title:"Questions fréquentes",
+  faq:[
+    {q:"Que fait exactement Blackridge ?", a:"Blackridge Systems est une entreprise de défense canadienne avec deux lignes de services : la fourniture d'équipement tactique et de qualité militaire (sacs, équipement de portage, matériel de terrain) et la gestion de projets technologiques et de R&D pour la défense et la sécurité. Nous sourçons, testons et validons l'équipement nous-mêmes avant de le proposer."},
+    {q:"Qui sont vos clients typiques ?", a:"Unités et membres militaires, forces de l'ordre et agences de sécurité, bureaux d'approvisionnement gouvernementaux et sociétés de sécurité privées. Également des professionnels outdoor exigeant une durabilité militaire."},
+    {q:"Est-ce uniquement du B2B ?", a:"Principalement oui : le client explique son besoin, nous sourçons et validons avec le fournisseur, et gérons la commande de bout en bout. Mais nous servons aussi des professionnels individuels — soldats, policiers — qui achètent leur propre équipement."},
+    {q:"Qu'est-ce qui rend Blackridge différent ?", a:"Le fondateur est un membre actif des Forces armées canadiennes, ancien parachutiste en Belgique. Chaque produit proposé est testé par quelqu'un qui a porté l'équipement en opérations réelles — pas simplement revendu sur catalogue. Nous sommes bilingues (FR/EN), basés au Canada, et gérons les relations fournisseurs directement à la source."},
+    {q:"Dans quels secteurs êtes-vous spécialisés ?", a:"Défense, forces de l'ordre, sécurité privée et équipement tactique/outdoor."},
+    {q:"À quoi dois-je m'attendre après vous avoir contactés ?", a:"Une réponse sous 24–48 heures, un court appel ou échange pour définir le besoin, puis une proposition claire avec délais et tarifs. Pas d'intermédiaire — vous traitez directement avec le fondateur."},
+    {q:"Travaillez-vous directement avec de nouveaux clients ?", a:"Nous travaillons sur recommandation. Si l'on vous a recommandé à nous, mentionnez qui vous envoie lors de votre prise de contact — cela nous aide à répondre plus vite."}
+  ],
+  ref_text:"<b>Nous travaillons sur recommandation.</b> Ce site n'est pas un outil de marketing public — il existe pour les clients et partenaires qui nous ont été référés. Si quelqu'un vous a envoyé ici, mentionnez son nom lors de votre prise de contact.",
+  ct_kicker:"Contact", ct_title:"Dites-nous ce que votre mission exige",
+  ct_text:"Expliquez votre besoin — nous répondons sous 24–48 heures par un court appel ou échange, suivi d'une proposition claire avec délais et tarifs. Vous traitez directement avec le fondateur.",
+  ct_email:"Courriel", ct_phone:"Téléphone", ct_loc:"Basés au",
+  f_name:"Votre nom", f_org:"Organisation / Unité (facultatif)", f_email:"Courriel", f_msg:"Décrivez votre besoin",
+  f_send:"Envoyer le message",
+  f_note:"L'envoi ouvre votre logiciel de messagerie avec le message pré-rempli — rien n'est envoyé automatiquement.",
+  foot_tag:"Équipement. Technologie. Solutions.",
+  foot_rights:"© 2026 Blackridge Systems. Tous droits réservés.",
+  foot_discreet:"Accès sur recommandation — merci de ne pas diffuser cette page.",
+  mail_subject:"Demande — Blackridge Systems",
+  mail_name:"Nom", mail_org:"Organisation", mail_msg:"Besoin"
+},
+
+/* ================= ESPAÑOL ================= */
+es: {
+  dir:"ltr",
+  nav_about:"Nosotros", nav_services:"Servicios", nav_process:"Proceso", nav_why:"Por qué", nav_faq:"FAQ", nav_contact:"Contacto",
+  nav_cta:"Solicitar presupuesto",
+  hero_badge:"Solo por recomendación",
+  hero_title:'Equipo táctico probado en el terreno.<br>Tecnología de defensa, <span class="accent">gestionada de principio a fin.</span>',
+  hero_lead:"Blackridge Systems suministra equipo táctico probado en el terreno y gestiona proyectos de tecnología de defensa. Fundada por un miembro activo de las Fuerzas Armadas Canadienses con más de 15 años de experiencia militar en dos ejércitos, probamos todo lo que vendemos en condiciones reales. Cuando compra a Blackridge, compra equipo en el que un soldado ya ha confiado.",
+  hero_cta1:"Hablemos de su necesidad", hero_cta2:"Nuestros servicios",
+  hero_tagline:'EQUIPO<b> · </b>TECNOLOGÍA<b> · </b>SOLUCIONES',
+  stat1:"Años de experiencia militar", stat2:"Ejércitos servidos (Canadá y Bélgica)", stat3:"Productos probados por nosotros", stat4:"Tiempo de respuesta",
+  about_kicker:"Quiénes somos", about_title:"Una empresa de defensa canadiense construida sobre servicio real",
+  about_p1:"Blackridge Systems es una empresa de defensa canadiense con dos líneas de servicio: el suministro de equipo táctico y de grado militar — mochilas, equipo de porte, material de campaña — y la gestión de proyectos tecnológicos e I+D para aplicaciones de defensa y seguridad.",
+  about_p2:"Los clientes a menudo no saben si el equipo sobrevivirá realmente a las condiciones del terreno, o pierden tiempo con proveedores extranjeros, barreras de idioma y calidad poco fiable. Eliminamos ese riesgo: gestionamos las relaciones con proveedores directamente (incluso en chino), probamos los productos nosotros mismos en condiciones operativas reales y entregamos equipo validado por personas que realmente lo han usado en servicio.",
+  about_p3:"Buscamos, probamos y validamos cada producto nosotros mismos antes de ofrecerlo a los clientes. Nada de lo que vendemos es simplemente revendido de un catálogo.",
+  founder_title:"El fundador",
+  founder_list:[
+    "Miembro activo de las Fuerzas Armadas Canadienses",
+    "Servicio previo como paracaidista en Bélgica",
+    "Más de 15 años de experiencia militar en dos ejércitos",
+    "Bilingüe FR / EN — comunicación directa con proveedores en chino",
+    "Protocolos de pruebas de campo documentados para cada línea de productos"
+  ],
+  svc_kicker:"Qué hacemos", svc_title:"Dos líneas de servicio, un solo estándar",
+  svc_sub:"Productos, consultoría y gestión de proyectos — entregados bajo dos líneas de servicio claras.",
+  svc1_title:"Suministro de equipo",
+  svc1_desc:"Equipo táctico y de grado militar, adquirido y validado en origen.",
+  svc1_list:["Mochilas tácticas y equipo de porte","Material de campaña para condiciones operativas reales","Negociación directa con proveedores — incluso en chino","Evaluación de muestras y pruebas de campo documentadas","Gestión de pedidos, control de calidad y entrega"],
+  svc2_title:"Proyectos tecnológicos e I+D",
+  svc2_desc:"Gestión de proyectos y coordinación de I+D para aplicaciones de defensa y seguridad.",
+  svc2_list:["Alcance del proyecto y definición de requisitos","Gestión de proyectos de principio a fin","Coordinación de I+D para defensa y seguridad","Propuestas claras con plazos y precios","Comunicación directa — sin intermediarios"],
+  cli_kicker:"A quién servimos", cli_title:"Hecho para profesionales que no pueden permitirse fallos",
+  cli_sub:"Principalmente B2B: usted explica la necesidad, nosotros buscamos y validamos con el proveedor y gestionamos el pedido de principio a fin. También atendemos a profesionales individuales que compran su propio equipo.",
+  cli_cards:[
+    {icon:"🪖", t:"Militar", d:"Unidades y miembros individuales de las fuerzas armadas."},
+    {icon:"🚔", t:"Fuerzas del orden", d:"Policía y agencias de seguridad con requisitos operativos."},
+    {icon:"🏛", t:"Gobierno", d:"Oficinas de adquisiciones y compradores del sector público."},
+    {icon:"🧭", t:"Seguridad privada y Outdoor", d:"Empresas de seguridad y profesionales outdoor que necesitan durabilidad de grado militar."}
+  ],
+  proc_kicker:"Cómo trabajamos", proc_title:"De la necesidad a la entrega — un solo socio responsable",
+  proc_sub:"Un proceso claro y documentado. Usted trata directamente con el fundador en cada paso.",
+  proc_steps:[
+    {t:"Evaluación de necesidades", d:"Una breve llamada o intercambio para definir exactamente qué necesita y en qué condiciones debe rendir."},
+    {t:"Búsqueda y negociación con proveedores", d:"Identificamos los fabricantes adecuados y negociamos directamente en origen — incluso en chino."},
+    {t:"Evaluación de muestras y pruebas de campo", d:"Probamos las muestras nosotros mismos en condiciones operativas reales, con resultados documentados."},
+    {t:"Gestión de pedidos y control de calidad", d:"Gestionamos la producción, verificamos la calidad y le mantenemos informado — sin vueltas con el extranjero."},
+    {t:"Entrega", d:"Equipo validado, entregado según lo acordado. En tecnología: alcance, gestión y coordinación de I+D."}
+  ],
+  proc_note:"<b>Qué esperar después de contactarnos:</b> una respuesta en 24–48 horas, una breve llamada para definir la necesidad y luego una propuesta clara con plazos y precios. Sin intermediarios — usted trata directamente con el fundador.",
+  why_kicker:"Por qué Blackridge", why_title:"Probado por alguien que ha llevado el equipo",
+  why_cards:[
+    {icon:"🎖", t:"Experiencia militar real", d:"Fundada por un miembro activo de las Fuerzas Armadas Canadienses con servicio previo como paracaidista en Bélgica. Cada producto es probado por alguien que ha llevado equipo en operaciones reales."},
+    {icon:"🔬", t:"Validado, no revendido", d:"Buscamos, probamos y validamos el equipo nosotros mismos antes de ofrecerlo — con protocolos de pruebas de campo documentados para cada línea de productos."},
+    {icon:"🌐", t:"Directo en origen", d:"Bilingües FR/EN y con base en Canadá, gestionamos las relaciones con proveedores directamente en Asia, comunicándonos en el idioma del proveedor."}
+  ],
+  faq_kicker:"Preguntas y respuestas", faq_title:"Preguntas frecuentes",
+  faq:[
+    {q:"¿Qué hace exactamente Blackridge?", a:"Blackridge Systems es una empresa de defensa canadiense con dos líneas de servicio: el suministro de equipo táctico y de grado militar (mochilas, equipo de porte, material de campaña) y la gestión de proyectos tecnológicos e I+D para defensa y seguridad. Buscamos, probamos y validamos el equipo nosotros mismos antes de ofrecerlo."},
+    {q:"¿Quiénes son sus clientes típicos?", a:"Unidades y miembros militares, fuerzas del orden y agencias de seguridad, oficinas gubernamentales de adquisiciones y empresas de seguridad privada. También profesionales outdoor que necesitan durabilidad de grado militar."},
+    {q:"¿Es solo B2B?", a:"Principalmente sí: el cliente explica su necesidad, nosotros buscamos y validamos con el proveedor y gestionamos el pedido de principio a fin. Pero también atendemos a profesionales individuales — soldados, policías — que compran su propio equipo."},
+    {q:"¿Qué hace diferente a Blackridge?", a:"El fundador es miembro activo de las Fuerzas Armadas Canadienses con servicio previo como paracaidista en Bélgica. Cada producto que ofrecemos es probado por alguien que ha llevado equipo en operaciones reales — no simplemente revendido de un catálogo. Somos bilingües (FR/EN), con base en Canadá, y gestionamos las relaciones con proveedores directamente en origen."},
+    {q:"¿En qué sectores se especializan?", a:"Defensa, fuerzas del orden, seguridad privada y equipo táctico/outdoor."},
+    {q:"¿Qué debo esperar después de contactarlos?", a:"Una respuesta en 24–48 horas, una breve llamada o intercambio para definir la necesidad y luego una propuesta clara con plazos y precios. Sin intermediarios — usted trata directamente con el fundador."},
+    {q:"¿Trabajan directamente con clientes nuevos?", a:"Trabajamos por recomendación. Si alguien le recomendó con nosotros, mencione quién le envió al ponerse en contacto — nos ayuda a responder más rápido."}
+  ],
+  ref_text:"<b>Trabajamos por recomendación.</b> Este sitio no es marketing público — existe para clientes y socios que fueron referidos a nosotros. Si alguien le envió aquí, mencione su nombre al contactarnos.",
+  ct_kicker:"Contacto", ct_title:"Díganos qué requiere su misión",
+  ct_text:"Explique su necesidad — responderemos en 24–48 horas con una breve llamada o intercambio, seguido de una propuesta clara con plazos y precios. Usted trata directamente con el fundador.",
+  ct_email:"Correo", ct_phone:"Teléfono", ct_loc:"Con base en",
+  f_name:"Su nombre", f_org:"Organización / Unidad (opcional)", f_email:"Correo electrónico", f_msg:"Describa su necesidad",
+  f_send:"Enviar mensaje",
+  f_note:"Al enviar se abre su programa de correo con el mensaje pre-rellenado — nada se envía automáticamente.",
+  foot_tag:"Equipo. Tecnología. Soluciones.",
+  foot_rights:"© 2026 Blackridge Systems. Todos los derechos reservados.",
+  foot_discreet:"Acceso por recomendación — por favor no difunda esta página.",
+  mail_subject:"Consulta — Blackridge Systems",
+  mail_name:"Nombre", mail_org:"Organización", mail_msg:"Necesidad"
+},
+
+/* ================= العربية ================= */
+ar: {
+  dir:"rtl",
+  nav_about:"من نحن", nav_services:"خدماتنا", nav_process:"طريقة العمل", nav_why:"لماذا نحن", nav_faq:"الأسئلة الشائعة", nav_contact:"اتصل بنا",
+  nav_cta:"اطلب عرض سعر",
+  hero_badge:"بالتوصية فقط",
+  hero_title:'معدات تكتيكية مُختبرة ميدانيًا.<br>تقنيات دفاعية <span class="accent">تُدار من البداية إلى النهاية.</span>',
+  hero_lead:"تورّد شركة بلاكريدج سيستمز معدات تكتيكية مُختبرة ميدانيًا وتدير مشاريع تقنيات الدفاع. أسّسها عضو عامل في القوات المسلحة الكندية يتمتع بخبرة عسكرية تتجاوز 15 عامًا في جيشين، ونختبر كل ما نبيعه في ظروف حقيقية. عندما تشتري من بلاكريدج، فأنت تشتري معدات وثق بها جندي بالفعل.",
+  hero_cta1:"ناقش احتياجاتك", hero_cta2:"خدماتنا",
+  hero_tagline:'معدات<b> · </b>تقنيات<b> · </b>حلول',
+  stat1:"سنوات من الخبرة العسكرية", stat2:"جيشان (كندا وبلجيكا)", stat3:"منتجات نختبرها بأنفسنا", stat4:"مدة الرد",
+  about_kicker:"من نحن", about_title:"شركة دفاع كندية مبنية على خدمة عسكرية حقيقية",
+  about_p1:"بلاكريدج سيستمز شركة دفاع كندية ذات خطّي خدمة: توريد المعدات التكتيكية والعسكرية — الحقائب ومعدات الحمل وتجهيزات الميدان — وإدارة المشاريع التقنية والبحث والتطوير لتطبيقات الدفاع والأمن.",
+  about_p2:"غالبًا لا يعرف العملاء ما إذا كانت المعدات ستصمد فعلًا في ظروف الميدان، أو يضيعون وقتهم مع مورّدين خارجيين وحواجز لغوية وجودة غير موثوقة. نحن نزيل هذا الخطر: نتعامل مع المورّدين مباشرة (بما في ذلك باللغة الصينية)، ونختبر المنتجات بأنفسنا في ظروف تشغيلية حقيقية، ونسلّم معدات تحقق منها أشخاص استخدموها فعلًا أثناء الخدمة.",
+  about_p3:"نحن نستورد ونختبر ونتحقق من كل منتج بأنفسنا قبل عرضه على العملاء. لا شيء مما نبيعه يُعاد بيعه ببساطة من كتالوج.",
+  founder_title:"المؤسس",
+  founder_list:[
+    "عضو عامل في القوات المسلحة الكندية",
+    "خدمة سابقة كمظلّي في بلجيكا",
+    "خبرة عسكرية تتجاوز 15 عامًا في جيشين",
+    "ثنائي اللغة فرنسي/إنجليزي — تواصل مباشر مع المورّدين باللغة الصينية",
+    "بروتوكولات اختبار ميداني موثّقة لكل خط منتجات"
+  ],
+  svc_kicker:"ماذا نفعل", svc_title:"خطّا خدمة، ومعيار واحد",
+  svc_sub:"منتجات واستشارات وإدارة مشاريع — تُقدَّم ضمن خطّي خدمة واضحين.",
+  svc1_title:"توريد المعدات",
+  svc1_desc:"معدات تكتيكية وعسكرية، يتم توريدها والتحقق منها من المصدر.",
+  svc1_list:["حقائب تكتيكية ومعدات حمل","تجهيزات ميدانية لظروف تشغيلية حقيقية","تفاوض مباشر مع المورّدين — بما في ذلك بالصينية","تقييم العينات واختبارات ميدانية موثّقة","إدارة الطلبات ومراقبة الجودة والتسليم"],
+  svc2_title:"المشاريع التقنية والبحث والتطوير",
+  svc2_desc:"إدارة المشاريع وتنسيق البحث والتطوير لتطبيقات الدفاع والأمن.",
+  svc2_list:["تحديد نطاق المشروع والمتطلبات","إدارة المشاريع من البداية إلى النهاية","تنسيق البحث والتطوير للدفاع والأمن","عروض واضحة مع الجدول الزمني والأسعار","تواصل مباشر — دون وسطاء"],
+  cli_kicker:"من نخدم", cli_title:"صُمّمت لمحترفين لا يحتملون الفشل",
+  cli_sub:"نعمل بشكل أساسي بين الشركات (B2B): تشرح احتياجك، ونتولى التوريد والتحقق مع المورّد وإدارة الطلب بالكامل. كما نخدم المحترفين الأفراد الذين يشترون معداتهم الخاصة.",
+  cli_cards:[
+    {icon:"🪖", t:"الجيش", d:"وحدات وأفراد القوات المسلحة."},
+    {icon:"🚔", t:"إنفاذ القانون", d:"الشرطة والأجهزة الأمنية ذات المتطلبات التشغيلية."},
+    {icon:"🏛", t:"الحكومة", d:"مكاتب المشتريات وجهات الشراء في القطاع العام."},
+    {icon:"🧭", t:"الأمن الخاص والأنشطة الخارجية", d:"شركات الأمن والمحترفون الميدانيون الذين يحتاجون متانة بمستوى عسكري."}
+  ],
+  proc_kicker:"كيف نعمل", proc_title:"من الحاجة إلى التسليم — شريك واحد مسؤول",
+  proc_sub:"عملية واضحة وموثّقة. تتعامل مباشرة مع المؤسس في كل خطوة.",
+  proc_steps:[
+    {t:"تقييم الاحتياجات", d:"مكالمة قصيرة أو تواصل لتحديد ما تحتاجه بدقة وفي أي ظروف يجب أن يعمل."},
+    {t:"التوريد والتفاوض مع المورّدين", d:"نحدد المصنّعين المناسبين ونتفاوض مباشرة من المصدر — بما في ذلك باللغة الصينية."},
+    {t:"تقييم العينات والاختبار الميداني", d:"نختبر العينات بأنفسنا في ظروف تشغيلية حقيقية، مع نتائج موثّقة."},
+    {t:"إدارة الطلب ومراقبة الجودة", d:"ندير الإنتاج ونتحقق من الجودة ونبقيك على اطلاع — دون معاناة مع الخارج."},
+    {t:"التسليم", d:"معدات مُتحقق منها تُسلَّم كما اتُّفق. وعلى الجانب التقني: تحديد النطاق والإدارة وتنسيق البحث والتطوير."}
+  ],
+  proc_note:"<b>ما يمكن توقعه بعد التواصل معنا:</b> رد خلال 24–48 ساعة، ثم مكالمة قصيرة لتحديد الحاجة، يليها عرض واضح مع الجدول الزمني والأسعار. دون وسطاء — تتعامل مباشرة مع المؤسس.",
+  why_kicker:"لماذا بلاكريدج", why_title:"اختبرها من حمل المعدات بنفسه",
+  why_cards:[
+    {icon:"🎖", t:"خبرة عسكرية حقيقية", d:"أسّسها عضو عامل في القوات المسلحة الكندية سبق له الخدمة كمظلّي في بلجيكا. كل منتج يختبره شخص حمل المعدات في عمليات حقيقية."},
+    {icon:"🔬", t:"مُتحقق منه، لا مُعاد بيعه", d:"نستورد ونختبر ونتحقق من المعدات بأنفسنا قبل عرضها — مع بروتوكولات اختبار ميداني موثّقة لكل خط منتجات."},
+    {icon:"🌐", t:"مباشرة من المصدر", d:"ثنائيو اللغة (فرنسي/إنجليزي) ومقرنا كندا، وندير علاقات المورّدين مباشرة في آسيا ونتواصل بلغة المورّد نفسه."}
+  ],
+  faq_kicker:"أسئلة وأجوبة", faq_title:"الأسئلة الشائعة",
+  faq:[
+    {q:"ما الذي تفعله بلاكريدج بالضبط؟", a:"بلاكريدج سيستمز شركة دفاع كندية ذات خطّي خدمة: توريد المعدات التكتيكية والعسكرية (الحقائب ومعدات الحمل وتجهيزات الميدان)، وإدارة المشاريع التقنية والبحث والتطوير للدفاع والأمن. نستورد ونختبر ونتحقق من المعدات بأنفسنا قبل عرضها على العملاء."},
+    {q:"من هم عملاؤكم عادةً؟", a:"وحدات وأفراد الجيش، وأجهزة الشرطة والأمن، ومكاتب المشتريات الحكومية، وشركات الأمن الخاص. وكذلك المحترفون الميدانيون الذين يحتاجون متانة بمستوى عسكري."},
+    {q:"هل تعملون فقط بين الشركات (B2B)؟", a:"بشكل أساسي نعم: يشرح العميل حاجته، فنتولى التوريد والتحقق مع المورّد وإدارة الطلب بالكامل. لكننا نخدم أيضًا المحترفين الأفراد — جنودًا وضباط شرطة — الذين يشترون معداتهم الخاصة."},
+    {q:"ما الذي يميّز بلاكريدج؟", a:"المؤسس عضو عامل في القوات المسلحة الكندية سبق له الخدمة كمظلّي في بلجيكا. كل منتج نعرضه اختبره شخص حمل المعدات في عمليات حقيقية — وليس مجرد إعادة بيع من كتالوج. نحن ثنائيو اللغة (فرنسي/إنجليزي)، ومقرنا كندا، وندير علاقات المورّدين مباشرة من المصدر."},
+    {q:"في أي قطاعات تتخصصون؟", a:"الدفاع، وإنفاذ القانون، والأمن الخاص، والمعدات التكتيكية والميدانية."},
+    {q:"ماذا أتوقع بعد التواصل معكم؟", a:"ردًا خلال 24–48 ساعة، ثم مكالمة قصيرة أو تواصل لتحديد الحاجة، يليه عرض واضح مع الجدول الزمني والأسعار. دون وسطاء — تتعامل مباشرة مع المؤسس."},
+    {q:"هل تتعاملون مع عملاء جدد مباشرة؟", a:"نعمل بالتوصية. إذا أوصى بك أحد إلينا، فاذكر من أرسلك عند التواصل — فهذا يساعدنا على الرد بشكل أسرع."}
+  ],
+  ref_text:"<b>نعمل بالتوصية.</b> هذا الموقع ليس تسويقًا عامًا — إنه موجود للعملاء والشركاء الذين تمت إحالتهم إلينا. إذا أرسلك أحد إلى هنا، فاذكر اسمه عند التواصل معنا.",
+  ct_kicker:"تواصل معنا", ct_title:"أخبرنا بما تتطلبه مهمتك",
+  ct_text:"اشرح حاجتك — سنرد خلال 24–48 ساعة بمكالمة قصيرة أو تواصل، يليه عرض واضح مع الجدول الزمني والأسعار. تتعامل مباشرة مع المؤسس.",
+  ct_email:"البريد الإلكتروني", ct_phone:"الهاتف", ct_loc:"المقر",
+  f_name:"اسمك", f_org:"الجهة / الوحدة (اختياري)", f_email:"البريد الإلكتروني", f_msg:"صف احتياجك",
+  f_send:"إرسال الرسالة",
+  f_note:"عند الإرسال يُفتح برنامج البريد لديك والرسالة معبأة مسبقًا — لا يُرسل شيء تلقائيًا.",
+  foot_tag:"معدات. تقنيات. حلول.",
+  foot_rights:"© 2026 بلاكريدج سيستمز. جميع الحقوق محفوظة.",
+  foot_discreet:"الوصول بالتوصية — يُرجى عدم نشر هذه الصفحة.",
+  mail_subject:"استفسار — Blackridge Systems",
+  mail_name:"الاسم", mail_org:"الجهة", mail_msg:"الحاجة"
+}
+};
+
+/* ---------- rendering ---------- */
+let currentLang = localStorage.getItem("br_lang") || "en";
+if(!I18N[currentLang]) currentLang = "en";
+
+function esc(s){const d=document.createElement("div");d.textContent=s;return d.innerHTML;}
+
+function render(lang){
+  const t = I18N[lang];
+  currentLang = lang;
+  localStorage.setItem("br_lang", lang);
+
+  const root = document.getElementById("htmlRoot");
+  root.setAttribute("lang", lang);
+  root.setAttribute("dir", t.dir);
+
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k = el.getAttribute("data-i18n");
+    if(t[k]!==undefined) el.textContent = t[k];
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach(el=>{
+    const k = el.getAttribute("data-i18n-html");
+    if(t[k]!==undefined) el.innerHTML = t[k];
+  });
+
+  document.getElementById("founderList").innerHTML = t.founder_list.map(x=>`<li>${esc(x)}</li>`).join("");
+  document.getElementById("svc1List").innerHTML = t.svc1_list.map(x=>`<li>${esc(x)}</li>`).join("");
+  document.getElementById("svc2List").innerHTML = t.svc2_list.map(x=>`<li>${esc(x)}</li>`).join("");
+
+  document.getElementById("clientCards").innerHTML = t.cli_cards.map(c=>
+    `<div class="card"><div class="icon">${c.icon}</div><h3>${esc(c.t)}</h3><p>${esc(c.d)}</p></div>`).join("");
+
+  document.getElementById("stepsList").innerHTML = t.proc_steps.map((s,i)=>
+    `<div class="step"><div class="n">${i+1}</div><div><h4>${esc(s.t)}</h4><p>${esc(s.d)}</p></div></div>`).join("");
+
+  document.getElementById("whyCards").innerHTML = t.why_cards.map(c=>
+    `<div class="card"><div class="icon">${c.icon}</div><h3>${esc(c.t)}</h3><p>${esc(c.d)}</p></div>`).join("");
+
+  document.getElementById("faqList").innerHTML = t.faq.map((f,i)=>
+    `<div class="faq-item" id="faqItem${i}">
+       <button class="faq-q" onclick="toggleFaq(${i})" aria-expanded="false">
+         <span>${esc(f.q)}</span><span class="chevron">▶</span>
+       </button>
+       <div class="faq-a"><div class="faq-a-inner">${esc(f.a)}</div></div>
+     </div>`).join("");
+
+  document.querySelectorAll("#langSwitch button").forEach(b=>{
+    b.classList.toggle("active", b.getAttribute("data-lang")===lang);
+  });
+
+  document.title = "Blackridge Systems — " + t.foot_tag;
+}
+
+function toggleFaq(i){
+  const item = document.getElementById("faqItem"+i);
+  const ans = item.querySelector(".faq-a");
+  const btn = item.querySelector(".faq-q");
+  const open = item.classList.toggle("open");
+  btn.setAttribute("aria-expanded", open);
+  ans.style.maxHeight = open ? ans.scrollHeight + "px" : "0";
+}
+
+/* language switch */
+document.querySelectorAll("#langSwitch button").forEach(b=>{
+  b.addEventListener("click", ()=>render(b.getAttribute("data-lang")));
+});
+
+/* mobile menu */
+const burger = document.getElementById("burger");
+const mobileMenu = document.getElementById("mobileMenu");
+burger.addEventListener("click", ()=>mobileMenu.classList.toggle("open"));
+mobileMenu.querySelectorAll("a").forEach(a=>a.addEventListener("click", ()=>mobileMenu.classList.remove("open")));
+
+/* back to top */
+const topBtn = document.getElementById("topBtn");
+window.addEventListener("scroll", ()=>topBtn.classList.toggle("show", window.scrollY>500));
+topBtn.addEventListener("click", ()=>window.scrollTo({top:0,behavior:"smooth"}));
+
+/* contact form -> opens the user's email program pre-filled */
+document.getElementById("contactForm").addEventListener("submit", e=>{
+  e.preventDefault();
+  const t = I18N[currentLang];
+  const name = document.getElementById("fName").value;
+  const org = document.getElementById("fOrg").value;
+  const email = document.getElementById("fEmail").value;
+  const msg = document.getElementById("fMsg").value;
+  const body = `${t.mail_name}: ${name}\n${t.mail_org}: ${org}\nEmail: ${email}\n\n${t.mail_msg}:\n${msg}`;
+  window.location.href = "mailto:contact@blackridge-systems.com?subject="
+    + encodeURIComponent(t.mail_subject) + "&body=" + encodeURIComponent(body);
+});
+
+render(currentLang);
+</script>
+</body>
+</html>
