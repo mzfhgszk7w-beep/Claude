@@ -135,6 +135,28 @@ Krypto-Kurse nur nennen, wenn eine aktuelle Quelle den Wert nennt, nie schätzen
 - `intro` und `outlook` sind Pflicht. `outlook` nennt konkrete Termine von morgen (Fed-Reden,
   Datenveröffentlichungen, Wahlen, Gesetze, die in Kraft treten).
 
+## Telegram-Bericht
+
+Nach dem Schreiben der Ausgabe den Kurzbericht an Telegram schicken:
+
+```bash
+bash news/telegram.sh <<'MSG'
+Nachrichtenlage 16:00 Uhr (Dubai)
+
+1. <Schlagzeile> (<Status>)
+2. <Schlagzeile> (<Status>)
+3. <Schlagzeile> (<Status>)
+
+22 Meldungen, 19 bestätigt
+https://claude.ai/artifact/RWKMSmyA63Z6uRavNQnqkK
+MSG
+```
+
+- Stündlich: die 3 wichtigsten Schlagzeilen, Deutschland/VAE bevorzugt. Abendausgabe: `intro` als Text plus die
+  5 wichtigsten Schlagzeilen und die `outlook`-Punkte.
+- Das Skript sendet nur, wenn `TELEGRAM_BOT_TOKEN` und `TELEGRAM_CHAT_ID` gesetzt sind; sonst tut es nichts.
+  Seine Ausgabe (gesendet/Fehler) im Abschlussbericht nennen.
+
 ## Grenzen
 
 - Nichts committen oder pushen. Die Ausgabe landet nur in der Artifact-Datenbank und ihrem Bilderspeicher.
