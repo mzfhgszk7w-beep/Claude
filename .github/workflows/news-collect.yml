@@ -1,8 +1,10 @@
 name: News collect
 
+# Ein Lauf sammelt ~6 Stunden lang alle 15 Minuten (news/loop.sh).
+# Der stündliche Zeitplan sorgt nur dafür, dass immer ein Lauf aktiv oder wartend ist.
 on:
   schedule:
-    - cron: '*/20 * * * *'
+    - cron: '7 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -15,38 +17,14 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 355
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: node news/collect.mjs
-      - name: Commit new items
-        run: |
-          git config user.name "news-bot"
-          git config user.email "news-bot@users.noreply.github.com"
-          git add data/news
-          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
-          git commit -m "news: collect $(date -u +%Y-%m-%dT%H:%MZ)"
-          for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done
-
-      # Bilder der letzten 3 Stunden auf dem Branch news-images (ohne Historie, wird jedes Mal ersetzt).
-      - name: Fetch previous images
-        run: |
-          mkdir -p /tmp/img
-          if git fetch --depth=1 origin news-images; then git --work-tree=/tmp/img checkout FETCH_HEAD -- . && git reset -q; fi
-      - name: Download images
-        run: |
-          npm install --no-save --no-package-lock sharp@0.33.5
-          node news/images.mjs /tmp/img
-      - name: Publish images branch
-        run: |
-          cd /tmp/img
-          rm -rf .git
-          git init -q -b news-images
-          git config user.name "news-bot"
-          git config user.email "news-bot@users.noreply.github.com"
-          git add -A
-          git commit -q -m "news images $(date -u +%Y-%m-%dT%H:%MZ)"
-          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" news-images
+      - run: npm install --no-save --no-package-lock sharp@0.33.5
+      - name: Collect loop
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: bash news/loop.sh
