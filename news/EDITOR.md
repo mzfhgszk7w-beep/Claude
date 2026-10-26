@@ -154,7 +154,7 @@ MSG
 
 - Stündlich: die 3 wichtigsten Schlagzeilen, Deutschland/VAE bevorzugt. Abendausgabe: `intro` als Text plus die
   5 wichtigsten Schlagzeilen und die `outlook`-Punkte.
-- Das Skript sendet nur, wenn `TELEGRAM_BOT_TOKEN` und `TELEGRAM_CHAT_ID` gesetzt sind; sonst tut es nichts.
+- Das Skript sendet nur, wenn `TELEGRAM_BOT_TOKEN` gesetzt ist (Chat-ID optional, sonst aus der letzten Nachricht an den Bot); sonst tut es nichts.
   Seine Ausgabe (gesendet/Fehler) im Abschlussbericht nennen.
 
 ## Grenzen
