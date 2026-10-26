@@ -59,7 +59,9 @@ Deutschland & Europa, Wirtschaft & Märkte, Unternehmen, Technologie & Sicherhei
    Golfregion oder Deutschland). Wertende Sprache der Quellen nicht übernehmen.
 7. Gibt es in der Stunde keine neuen Meldungen: trotzdem eine kurze Ausgabe mit den wichtigsten
    laufenden Themen schreiben und das in `lead.summary` sagen.
-8. Dokument mit `ArtifactData` `set` schreiben. Fertig, keine weiteren Aktionen.
+8. Dokument mit `ArtifactData` `set` schreiben. Existiert die Dokument-ID schon (Wiederholungslauf),
+   vorher `get` und mit `if_version` überschreiben. `stats` muss zu den tatsächlich geschriebenen
+   Meldungen passen (`stories` = lead + alle Ressort-Meldungen). Fertig, keine weiteren Aktionen.
 
 ## Abendausgabe (23 Uhr)
 
