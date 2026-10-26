@@ -27,9 +27,10 @@ const FEEDS = [
   // VAE & Golf
   { source: 'The National', cat: 'uae', url: 'https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml' },
   { source: 'Gulf News', cat: 'uae', url: 'https://gulfnews.com/feed' },
-  { source: 'Khaleej Times', cat: 'uae', url: 'https://www.khaleejtimes.com/stories.rss' },
-  { source: 'Gulf Business', cat: 'uae', url: 'https://gulfbusiness.com/feed/' },
-  { source: 'Arabian Business', cat: 'uae', url: 'https://www.arabianbusiness.com/feed' },
+  // Google News: Titel enden mit " - <Medium>", das Medium steht in <source>.
+  { source: 'Google News', cat: 'uae', url: 'https://news.google.com/rss/search?q=Dubai+OR+%22Abu+Dhabi%22+OR+UAE+when:1d&hl=en-AE&gl=AE&ceid=AE:en' },
+  { source: 'Google News', cat: 'uae', url: 'https://news.google.com/rss/search?q=UAE+law+OR+visa+OR+%22new+rule%22+OR+residents+when:2d&hl=en-AE&gl=AE&ceid=AE:en' },
+  { source: 'Google News', cat: 'uae', url: 'https://news.google.com/rss/search?q=Dubai+OR+VAE+OR+Emirate+when:1d&hl=de&gl=DE&ceid=DE:de' },
   { source: 'Al Jazeera', cat: 'world', url: 'https://www.aljazeera.com/xml/rss/all.xml' },
   // Welt
   { source: 'BBC', cat: 'world', url: 'https://feeds.bbci.co.uk/news/rss.xml' },
@@ -54,6 +55,10 @@ const FEEDS = [
   { source: 'The Block', cat: 'crypto', url: 'https://www.theblock.co/rss.xml' },
   { source: 'Bitcoin Magazine', cat: 'crypto', url: 'https://bitcoinmagazine.com/.rss/full/' },
   { source: 'U.Today', cat: 'crypto', url: 'https://u.today/rss' },
+  { source: 'Google News', cat: 'crypto', url: 'https://news.google.com/rss/search?q=%22Shiba+Inu%22+OR+SHIB+when:1d&hl=en-AE&gl=AE&ceid=AE:en' },
+  { source: 'Google News', cat: 'crypto', url: 'https://news.google.com/rss/search?q=crypto+regulation+OR+law+OR+bill+OR+ban+when:1d&hl=en-AE&gl=AE&ceid=AE:en' },
+  { source: 'Google News', cat: 'crypto', url: 'https://news.google.com/rss/search?q=Krypto+OR+Bitcoin+Gesetz+OR+Regulierung+OR+BaFin+when:2d&hl=de&gl=DE&ceid=DE:de' },
+  { source: 'Google News', cat: 'markets', url: 'https://news.google.com/rss/search?q=%22Federal+Reserve%22+OR+Powell+OR+FOMC+when:1d&hl=en-AE&gl=AE&ceid=AE:en' },
 ];
 
 const dayInTz = (d) =>
@@ -123,6 +128,7 @@ function parseFeed(xml) {
       summary: (tag(b, 'description') || tag(b, 'summary')).slice(0, 600),
       published: date,
       image: upscale(feedImage(b)),
+      publisher: tag(b, 'source') || null,
     });
   }
   return items;
@@ -136,7 +142,7 @@ async function fetchFeed({ source, cat, url }) {
     signal: AbortSignal.timeout(20000),
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return parseFeed(await res.text()).map((i) => ({ source, cat, feed: url, ...i }));
+  return parseFeed(await res.text()).map(({ publisher, ...i }) => ({ source: publisher || source, via: publisher ? source : undefined, cat, feed: url, ...i }));
 }
 
 async function loadSeen(days) {
