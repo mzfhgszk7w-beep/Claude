@@ -1,5 +1,5 @@
 {
-  "run": "2026-10-26T16:12:57.525Z",
+  "run": "2026-10-26T16:28:19.534Z",
   "feeds": [
     {
       "source": "Handelsblatt",
@@ -32,16 +32,15 @@
     {
       "source": "Handelsblatt",
       "url": "https://www.handelsblatt.com/contentexport/feed/politik",
-      "ok": true,
-      "items": 20,
-      "added": 1
+      "ok": false,
+      "error": "fetch failed"
     },
     {
       "source": "Tagesschau",
       "url": "https://www.tagesschau.de/index~rss2.xml",
       "ok": true,
       "items": 64,
-      "added": 2
+      "added": 5
     },
     {
       "source": "Tagesschau",
@@ -55,21 +54,21 @@
       "url": "https://www.spiegel.de/schlagzeilen/index.rss",
       "ok": true,
       "items": 30,
-      "added": 1
+      "added": 4
     },
     {
       "source": "FAZ",
       "url": "https://www.faz.net/rss/aktuell/",
       "ok": true,
-      "items": 160,
-      "added": 8
+      "items": 158,
+      "added": 3
     },
     {
       "source": "Zeit",
       "url": "https://newsfeed.zeit.de/index",
       "ok": true,
       "items": 15,
-      "added": 10
+      "added": 3
     },
     {
       "source": "n-tv",
@@ -90,27 +89,27 @@
       "url": "https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml",
       "ok": true,
       "items": 100,
-      "added": 2
+      "added": 0
     },
     {
       "source": "Gulf News",
       "url": "https://gulfnews.com/feed",
       "ok": true,
-      "items": 33,
-      "added": 0
+      "items": 30,
+      "added": 1
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Dubai+OR+%22Abu+Dhabi%22+OR+UAE+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 9
+      "added": 1
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=UAE+law+OR+visa+OR+%22new+rule%22+OR+residents+when:2d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 52,
+      "items": 37,
       "added": 1
     },
     {
@@ -125,7 +124,7 @@
       "url": "https://www.aljazeera.com/xml/rss/all.xml",
       "ok": true,
       "items": 25,
-      "added": 4
+      "added": 0
     },
     {
       "source": "BBC",
@@ -138,8 +137,8 @@
       "source": "BBC",
       "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
       "ok": true,
-      "items": 28,
-      "added": 0
+      "items": 27,
+      "added": 1
     },
     {
       "source": "BBC",
@@ -153,13 +152,13 @@
       "url": "https://feeds.skynews.com/feeds/rss/home.xml",
       "ok": true,
       "items": 9,
-      "added": 0
+      "added": 2
     },
     {
       "source": "Sky News",
       "url": "https://feeds.skynews.com/feeds/rss/world.xml",
       "ok": true,
-      "items": 8,
+      "items": 9,
       "added": 0
     },
     {
@@ -167,7 +166,7 @@
       "url": "https://moxie.foxnews.com/google-publisher/latest.xml",
       "ok": true,
       "items": 25,
-      "added": 1
+      "added": 7
     },
     {
       "source": "Fox News",
@@ -188,7 +187,7 @@
       "url": "https://www.france24.com/en/rss",
       "ok": true,
       "items": 24,
-      "added": 0
+      "added": 2
     },
     {
       "source": "DW",
@@ -223,14 +222,14 @@
       "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories",
       "ok": true,
       "items": 10,
-      "added": 2
+      "added": 1
     },
     {
       "source": "CoinDesk",
       "url": "https://www.coindesk.com/arc/outboundfeeds/rss/",
       "ok": true,
       "items": 25,
-      "added": 2
+      "added": 0
     },
     {
       "source": "Cointelegraph",
@@ -244,14 +243,14 @@
       "url": "https://decrypt.co/feed",
       "ok": true,
       "items": 40,
-      "added": 1
+      "added": 0
     },
     {
       "source": "The Block",
       "url": "https://www.theblock.co/rss.xml",
       "ok": true,
       "items": 19,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Bitcoin Magazine",
@@ -278,15 +277,15 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=crypto+regulation+OR+law+OR+bill+OR+ban+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 33,
-      "added": 1
+      "items": 58,
+      "added": 2
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Krypto+OR+Bitcoin+Gesetz+OR+Regulierung+OR+BaFin+when:2d&hl=de&gl=DE&ceid=DE:de",
       "ok": true,
       "items": 49,
-      "added": 4
+      "added": 1
     },
     {
       "source": "Google News",
