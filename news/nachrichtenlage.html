@@ -80,6 +80,22 @@ a { color: inherit; }
 .why { font-size: 14px; color: var(--ink-2); }
 .why b { color: var(--ink); font-weight: 600; }
 
+.pic { margin: 0; display: grid; gap: 4px; min-width: 0; }
+.pic img { width: 100%; max-width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; background: var(--rule); border-radius: 3px; }
+.pic figcaption { font-size: 11px; color: var(--ink-2); letter-spacing: .02em; }
+.lead.has-img { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: start; gap: 12px 28px; }
+.lead.has-img > :not(.pic) { grid-column: 1; }
+.lead.has-img .pic { grid-row: 1 / span 4; grid-column: 2; }
+.lead .pic img { aspect-ratio: 4 / 3; }
+.story.has-img { grid-template-columns: minmax(0, 1fr) 132px; gap: 6px 16px; align-items: start; }
+.story.has-img > :not(.pic) { grid-column: 1; }
+.story.has-img .pic { grid-column: 2; grid-row: 1 / span 4; }
+.story .pic img { aspect-ratio: 1 / 1; }
+@media (max-width: 760px) {
+  .lead.has-img { grid-template-columns: minmax(0, 1fr); }
+  .lead.has-img .pic { grid-row: auto; grid-column: 1; order: -1; }
+  .story.has-img { grid-template-columns: minmax(0, 1fr) 96px; }
+}
 .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; }
 .status { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; }
 .status.ok { color: var(--ok); background: var(--ok-bg); }
@@ -100,9 +116,9 @@ a { color: inherit; }
 
 <div class="wrap">
   <header class="mast">
-    <div class="mast-top"><span id="today">Dubai</span><span>Handelsblatt · BBC · Sky News · Fox News · Al Jazeera</span></div>
+    <div class="mast-top"><span id="today">Dubai</span><span>Deutschland · VAE · Welt · Märkte · Krypto</span></div>
     <h1>Nachrichtenlage</h1>
-    <div class="sub">Stündlich 11–02 Uhr, Abendausgabe 23 Uhr (Dubai). Jede Meldung gegen mindestens zwei Quellen geprüft.</div>
+    <div class="sub">Stündlich 11–02 Uhr, Abendausgabe 23 Uhr (Dubai). Rund 40 Quellen, jede Meldung gegen unabhängige Quellen geprüft.</div>
   </header>
 
   <nav class="editions" aria-label="Ausgaben">
@@ -136,10 +152,24 @@ a { color: inherit; }
   let editions = [];
   let selDay = null, selId = null, userPicked = false;
 
-  function safeUrl(u) { try { const x = new URL(u); return /^https?:$/.test(x.protocol) ? x.href : null; } catch { return null; } }
+  function safeUrl(u) { try { const x = new URL(u, location.href); return /^https?:$/.test(x.protocol) ? x.href : null; } catch { return null; } }
+
+  function picNode(img, alt) {
+    const url = img && safeUrl(img.url);
+    if (!url) return null;
+    const f = el("figure", "pic");
+    const i = el("img");
+    i.src = url; i.alt = alt || ""; i.loading = "lazy"; i.decoding = "async";
+    i.addEventListener("error", () => f.remove());
+    f.append(i);
+    if (img.credit) f.append(el("figcaption", null, "Bild: " + img.credit));
+    return f;
+  }
 
   function storyNode(s, lead) {
     const n = el("article", lead ? "lead" : "story");
+    const pic = picNode(s.image, s.title);
+    if (pic) { n.classList.add("has-img"); n.append(pic); }
     const meta = el("div", "meta");
     const st = s.status || "unbestätigt";
     meta.append(el("span", "status " + (STATUS[st] || "warn"), st));

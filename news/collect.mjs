@@ -9,20 +9,51 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DATA_DIR = join(ROOT, 'data', 'news');
 const TZ = 'Asia/Dubai';
 
+// cat: de | uae | world | markets | crypto | business — hilft der Redaktion beim Einordnen.
 const FEEDS = [
-  { source: 'Handelsblatt', url: 'https://www.handelsblatt.com/contentexport/feed/schlagzeilen' },
-  { source: 'Handelsblatt', url: 'https://www.handelsblatt.com/contentexport/feed/top-themen' },
-  { source: 'Handelsblatt', url: 'https://www.handelsblatt.com/contentexport/feed/finanzen' },
-  { source: 'Handelsblatt', url: 'https://www.handelsblatt.com/contentexport/feed/unternehmen' },
-  { source: 'Handelsblatt', url: 'https://www.handelsblatt.com/contentexport/feed/politik' },
-  { source: 'BBC', url: 'https://feeds.bbci.co.uk/news/rss.xml' },
-  { source: 'BBC', url: 'https://feeds.bbci.co.uk/news/world/rss.xml' },
-  { source: 'BBC', url: 'https://feeds.bbci.co.uk/news/business/rss.xml' },
-  { source: 'Sky News', url: 'https://feeds.skynews.com/feeds/rss/home.xml' },
-  { source: 'Sky News', url: 'https://feeds.skynews.com/feeds/rss/world.xml' },
-  { source: 'Fox News', url: 'https://moxie.foxnews.com/google-publisher/latest.xml' },
-  { source: 'Fox News', url: 'https://moxie.foxnews.com/google-publisher/world.xml' },
-  { source: 'Al Jazeera', url: 'https://www.aljazeera.com/xml/rss/all.xml' },
+  // Deutschland
+  { source: 'Handelsblatt', cat: 'de', url: 'https://www.handelsblatt.com/contentexport/feed/schlagzeilen' },
+  { source: 'Handelsblatt', cat: 'de', url: 'https://www.handelsblatt.com/contentexport/feed/top-themen' },
+  { source: 'Handelsblatt', cat: 'markets', url: 'https://www.handelsblatt.com/contentexport/feed/finanzen' },
+  { source: 'Handelsblatt', cat: 'business', url: 'https://www.handelsblatt.com/contentexport/feed/unternehmen' },
+  { source: 'Handelsblatt', cat: 'de', url: 'https://www.handelsblatt.com/contentexport/feed/politik' },
+  { source: 'Tagesschau', cat: 'de', url: 'https://www.tagesschau.de/index~rss2.xml' },
+  { source: 'Tagesschau', cat: 'business', url: 'https://www.tagesschau.de/wirtschaft/index~rss2.xml' },
+  { source: 'Spiegel', cat: 'de', url: 'https://www.spiegel.de/schlagzeilen/index.rss' },
+  { source: 'FAZ', cat: 'de', url: 'https://www.faz.net/rss/aktuell/' },
+  { source: 'Zeit', cat: 'de', url: 'https://newsfeed.zeit.de/index' },
+  { source: 'n-tv', cat: 'de', url: 'https://www.n-tv.de/rss' },
+  { source: 'DW', cat: 'de', url: 'https://rss.dw.com/xml/rss-de-all' },
+  // VAE & Golf
+  { source: 'The National', cat: 'uae', url: 'https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml' },
+  { source: 'Gulf News', cat: 'uae', url: 'https://gulfnews.com/feed' },
+  { source: 'Khaleej Times', cat: 'uae', url: 'https://www.khaleejtimes.com/stories.rss' },
+  { source: 'Gulf Business', cat: 'uae', url: 'https://gulfbusiness.com/feed/' },
+  { source: 'Arabian Business', cat: 'uae', url: 'https://www.arabianbusiness.com/feed' },
+  { source: 'Al Jazeera', cat: 'world', url: 'https://www.aljazeera.com/xml/rss/all.xml' },
+  // Welt
+  { source: 'BBC', cat: 'world', url: 'https://feeds.bbci.co.uk/news/rss.xml' },
+  { source: 'BBC', cat: 'world', url: 'https://feeds.bbci.co.uk/news/world/rss.xml' },
+  { source: 'BBC', cat: 'business', url: 'https://feeds.bbci.co.uk/news/business/rss.xml' },
+  { source: 'Sky News', cat: 'world', url: 'https://feeds.skynews.com/feeds/rss/home.xml' },
+  { source: 'Sky News', cat: 'world', url: 'https://feeds.skynews.com/feeds/rss/world.xml' },
+  { source: 'Fox News', cat: 'world', url: 'https://moxie.foxnews.com/google-publisher/latest.xml' },
+  { source: 'Fox News', cat: 'world', url: 'https://moxie.foxnews.com/google-publisher/world.xml' },
+  { source: 'Guardian', cat: 'world', url: 'https://www.theguardian.com/world/rss' },
+  { source: 'France 24', cat: 'world', url: 'https://www.france24.com/en/rss' },
+  { source: 'DW', cat: 'world', url: 'https://rss.dw.com/rdf/rss-en-all' },
+  // Märkte & Fed
+  { source: 'Federal Reserve', cat: 'markets', url: 'https://www.federalreserve.gov/feeds/press_all.xml' },
+  { source: 'CNBC', cat: 'markets', url: 'https://www.cnbc.com/id/20910258/device/rss/rss.html' },
+  { source: 'CNBC', cat: 'markets', url: 'https://www.cnbc.com/id/10000664/device/rss/rss.html' },
+  { source: 'MarketWatch', cat: 'markets', url: 'https://feeds.content.dowjones.io/public/rss/mw_topstories' },
+  // Krypto
+  { source: 'CoinDesk', cat: 'crypto', url: 'https://www.coindesk.com/arc/outboundfeeds/rss/' },
+  { source: 'Cointelegraph', cat: 'crypto', url: 'https://cointelegraph.com/rss' },
+  { source: 'Decrypt', cat: 'crypto', url: 'https://decrypt.co/feed' },
+  { source: 'The Block', cat: 'crypto', url: 'https://www.theblock.co/rss.xml' },
+  { source: 'Bitcoin Magazine', cat: 'crypto', url: 'https://bitcoinmagazine.com/.rss/full/' },
+  { source: 'U.Today', cat: 'crypto', url: 'https://u.today/rss' },
 ];
 
 const dayInTz = (d) =>
@@ -44,6 +75,38 @@ const tag = (block, name) => {
   return m ? decode(m[1]) : '';
 };
 
+const unent = (u) => u.replace(/&amp;/g, '&').trim();
+
+// Bild aus dem Feed-Eintrag: media:content/thumbnail, enclosure oder erstes <img> im Text.
+function feedImage(b) {
+  const pats = [
+    /<media:content[^>]*url="([^"]+)"[^>]*(?:medium="image"|type="image)/i,
+    /<media:content[^>]*(?:medium="image"|type="image)[^>]*url="([^"]+)"/i,
+    /<media:thumbnail[^>]*url="([^"]+)"/i,
+    /<enclosure[^>]*type="image[^"]*"[^>]*url="([^"]+)"/i,
+    /<enclosure[^>]*url="([^"]+\.(?:jpe?g|png|webp)[^"]*)"/i,
+    /<media:content[^>]*url="([^"]+\.(?:jpe?g|png|webp)[^"]*)"/i,
+    /<img[^>]*src="(https?:[^"]+)"/i,
+  ];
+  const x = b.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
+  for (const p of pats) { const m = x.match(p); if (m) return unent(m[1]); }
+  return null;
+}
+
+// BBC liefert 240px-Vorschauen; größere Variante anfordern.
+const upscale = (u) => (u ? u.replace(/ichef\.bbci\.co\.uk\/(ace\/standard|news)\/240\//, 'ichef.bbci.co.uk/$1/800/') : u);
+
+async function ogImage(url) {
+  try {
+    const res = await fetch(url, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(10000) });
+    if (!res.ok) return null;
+    const html = (await res.text()).slice(0, 300000);
+    const m = html.match(/<meta[^>]+(?:property|name)=["'](?:og:image|twitter:image)["'][^>]*content=["']([^"']+)["']/i)
+      || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]*(?:property|name)=["'](?:og:image|twitter:image)["']/i);
+    return m ? unent(m[1]) : null;
+  } catch { return null; }
+}
+
 function parseFeed(xml) {
   const items = [];
   for (const m of xml.matchAll(/<(item|entry)[\s>][\s\S]*?<\/\1>/gi)) {
@@ -59,18 +122,21 @@ function parseFeed(xml) {
       link: link.split('#')[0],
       summary: (tag(b, 'description') || tag(b, 'summary')).slice(0, 600),
       published: date,
+      image: upscale(feedImage(b)),
     });
   }
   return items;
 }
 
-async function fetchFeed({ source, url }) {
+const UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
+
+async function fetchFeed({ source, cat, url }) {
   const res = await fetch(url, {
-    headers: { 'User-Agent': 'Mozilla/5.0 (news-collector; +https://github.com)' },
+    headers: { 'User-Agent': UA, Accept: 'application/rss+xml, application/xml, text/xml, */*' },
     signal: AbortSignal.timeout(20000),
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return parseFeed(await res.text()).map((i) => ({ source, feed: url, ...i }));
+  return parseFeed(await res.text()).map((i) => ({ source, cat, feed: url, ...i }));
 }
 
 async function loadSeen(days) {
@@ -111,10 +177,16 @@ results.forEach((r, i) => {
   status.push({ source, url, ok: true, items: r.value.length, added });
 });
 
+// Fehlende Bilder über og:image der Artikelseite nachladen (begrenzt, parallel).
+const missing = fresh.filter((i) => !i.image).slice(0, 80);
+for (let k = 0; k < missing.length; k += 10) {
+  await Promise.all(missing.slice(k, k + 10).map(async (i) => { i.image = await ogImage(i.link); }));
+}
+
 if (fresh.length) {
   await appendFile(join(DATA_DIR, `${today}.jsonl`), fresh.map((i) => JSON.stringify(i)).join('\n') + '\n');
 }
 await writeFile(join(DATA_DIR, 'status.json'), JSON.stringify({ run: now.toISOString(), feeds: status }, null, 2) + '\n');
 
 for (const s of status) console.log(s.ok ? `ok   ${s.source} ${s.url} items=${s.items} new=${s.added}` : `FAIL ${s.source} ${s.url} ${s.error}`);
-console.log(`total new: ${fresh.length} -> ${today}.jsonl`);
+console.log(`total new: ${fresh.length} (with image: ${fresh.filter((i) => i.image).length}) -> ${today}.jsonl`);
