@@ -20,7 +20,9 @@ Cybersecurity- und Tech-Meldungen von Gewicht.
 - Bilder: Branch `news-images` (nur Bilder der letzten 3 Stunden, 720px JPEG).
   `index.json` dort: `{ "<Artikel-Link>": { "file": "<hash>.jpg", "source": "...", "title": "..." } }`.
 - Vorher immer `git pull` auf dem Default-Branch, damit die neuesten Daten da sind, und die Bilder holen:
-  `git fetch --depth=1 origin news-images && rm -rf /tmp/img && mkdir /tmp/img && git --work-tree=/tmp/img checkout FETCH_HEAD -- . && git reset -q`
+  `git fetch --depth=1 origin news-images && rm -rf .news-img && mkdir .news-img && git --work-tree=.news-img checkout FETCH_HEAD -- . && git reset -q`
+  (im Repo-Verzeichnis ausführen; `.news-img/` ist in `.gitignore`. Das Artifact-Tool lädt nur Dateien aus dem
+  Arbeitsverzeichnis hoch, nicht aus `/tmp`.)
 
 ## Ausgabeziel
 
@@ -94,9 +96,11 @@ Krypto-Kurse nur nennen, wenn eine aktuelle Quelle den Wert nennt, nie schätzen
 - Bild finden: Für jede Quelle einer Meldung im `index.json` nach dem Artikel-Link suchen. Hat das eigene Medium
   kein Bild, das Bild eines **anderen Mediums zum selben Ereignis** nehmen (über die Rohdaten den passenden
   Link finden). Das Bild muss inhaltlich zur Meldung passen. Kein Bild ist besser als ein falsches.
+- Spam meiden: Google-News-Treffer von openPR, Presale-Werbung, "price prediction", Gewinnspiel-/Code-Seiten
+  (Coin Gabbar u. ä.) sind keine Nachrichten und keine Quellen.
 - Hochladen: zuerst einmal `Artifact` `action: "read"` mit der Artifact-URL (nötig, bevor auf das Artifact
   geschrieben werden darf), dann `Artifact` publish mit `url`, `asset: true` und
-  `file_paths: ["/tmp/img/<hash>.jpg", ...]` (bis 25 pro Aufruf). Die zurückgegebene `url` jedes Bildes
+  `file_paths: ["<repo>/.news-img/<hash>.jpg", ...]` (absolute Pfade) (bis 25 pro Aufruf). Die zurückgegebene `url` jedes Bildes
   exakt so in `image.url` eintragen, `image.credit` = Name des Mediums.
 - Die Seite NIE neu veröffentlichen (kein publish ohne `asset: true`).
 

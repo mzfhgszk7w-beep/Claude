@@ -43,6 +43,9 @@ async function grab(file, item) {
   const res = await fetch(item.image, { headers: { 'User-Agent': UA, Referer: item.link }, signal: AbortSignal.timeout(15000) });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const buf = Buffer.from(await res.arrayBuffer());
+  // Mini-Vorschaubilder (z. B. 140px) sehen auf der Seite unscharf aus.
+  const { width = 0 } = await sharp(buf).metadata();
+  if (width < 400) throw new Error(`too small: ${width}px`);
   await sharp(buf).rotate().resize({ width: 720, withoutEnlargement: true }).jpeg({ quality: 70, mozjpeg: true }).toFile(join(IMG_DIR, file));
 }
 
