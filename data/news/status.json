@@ -1,96 +1,269 @@
 {
-  "run": "2026-10-26T01:22:57.516Z",
+  "run": "2026-10-26T01:49:21.610Z",
   "feeds": [
     {
       "source": "Handelsblatt",
       "url": "https://www.handelsblatt.com/contentexport/feed/schlagzeilen",
       "ok": true,
       "items": 50,
-      "added": 50
+      "added": 0
     },
     {
       "source": "Handelsblatt",
       "url": "https://www.handelsblatt.com/contentexport/feed/top-themen",
       "ok": true,
       "items": 24,
-      "added": 2
+      "added": 0
     },
     {
       "source": "Handelsblatt",
       "url": "https://www.handelsblatt.com/contentexport/feed/finanzen",
       "ok": true,
       "items": 20,
-      "added": 15
+      "added": 0
     },
     {
       "source": "Handelsblatt",
       "url": "https://www.handelsblatt.com/contentexport/feed/unternehmen",
       "ok": true,
       "items": 20,
-      "added": 11
+      "added": 0
     },
     {
       "source": "Handelsblatt",
       "url": "https://www.handelsblatt.com/contentexport/feed/politik",
       "ok": true,
       "items": 20,
-      "added": 4
+      "added": 0
     },
     {
-      "source": "BBC",
-      "url": "https://feeds.bbci.co.uk/news/rss.xml",
+      "source": "Tagesschau",
+      "url": "https://www.tagesschau.de/index~rss2.xml",
       "ok": true,
-      "items": 39,
-      "added": 38
+      "items": 68,
+      "added": 68
     },
     {
-      "source": "BBC",
-      "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+      "source": "Tagesschau",
+      "url": "https://www.tagesschau.de/wirtschaft/index~rss2.xml",
       "ok": true,
-      "items": 32,
-      "added": 25
+      "items": 37,
+      "added": 32
     },
     {
-      "source": "BBC",
-      "url": "https://feeds.bbci.co.uk/news/business/rss.xml",
+      "source": "Spiegel",
+      "url": "https://www.spiegel.de/schlagzeilen/index.rss",
       "ok": true,
-      "items": 56,
-      "added": 52
+      "items": 30,
+      "added": 30
     },
     {
-      "source": "Sky News",
-      "url": "https://feeds.skynews.com/feeds/rss/home.xml",
+      "source": "FAZ",
+      "url": "https://www.faz.net/rss/aktuell/",
       "ok": true,
-      "items": 10,
-      "added": 10
+      "items": 162,
+      "added": 162
     },
     {
-      "source": "Sky News",
-      "url": "https://feeds.skynews.com/feeds/rss/world.xml",
+      "source": "Zeit",
+      "url": "https://newsfeed.zeit.de/index",
       "ok": true,
-      "items": 8,
-      "added": 3
+      "items": 15,
+      "added": 15
     },
     {
-      "source": "Fox News",
-      "url": "https://moxie.foxnews.com/google-publisher/latest.xml",
+      "source": "n-tv",
+      "url": "https://www.n-tv.de/rss",
       "ok": true,
-      "items": 25,
-      "added": 25
+      "items": 50,
+      "added": 50
     },
     {
-      "source": "Fox News",
-      "url": "https://moxie.foxnews.com/google-publisher/world.xml",
+      "source": "DW",
+      "url": "https://rss.dw.com/xml/rss-de-all",
       "ok": true,
-      "items": 25,
-      "added": 22
+      "items": 73,
+      "added": 73
+    },
+    {
+      "source": "The National",
+      "url": "https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml",
+      "ok": true,
+      "items": 87,
+      "added": 87
+    },
+    {
+      "source": "Gulf News",
+      "url": "https://gulfnews.com/feed",
+      "ok": true,
+      "items": 16,
+      "added": 16
+    },
+    {
+      "source": "Khaleej Times",
+      "url": "https://www.khaleejtimes.com/stories.rss",
+      "ok": true,
+      "items": 0,
+      "added": 0
+    },
+    {
+      "source": "Gulf Business",
+      "url": "https://gulfbusiness.com/feed/",
+      "ok": false,
+      "error": "HTTP 403"
+    },
+    {
+      "source": "Arabian Business",
+      "url": "https://www.arabianbusiness.com/feed",
+      "ok": false,
+      "error": "HTTP 405"
     },
     {
       "source": "Al Jazeera",
       "url": "https://www.aljazeera.com/xml/rss/all.xml",
       "ok": true,
       "items": 25,
+      "added": 2
+    },
+    {
+      "source": "BBC",
+      "url": "https://feeds.bbci.co.uk/news/rss.xml",
+      "ok": true,
+      "items": 39,
+      "added": 2
+    },
+    {
+      "source": "BBC",
+      "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+      "ok": true,
+      "items": 32,
+      "added": 0
+    },
+    {
+      "source": "BBC",
+      "url": "https://feeds.bbci.co.uk/news/business/rss.xml",
+      "ok": true,
+      "items": 55,
+      "added": 0
+    },
+    {
+      "source": "Sky News",
+      "url": "https://feeds.skynews.com/feeds/rss/home.xml",
+      "ok": true,
+      "items": 10,
+      "added": 0
+    },
+    {
+      "source": "Sky News",
+      "url": "https://feeds.skynews.com/feeds/rss/world.xml",
+      "ok": true,
+      "items": 8,
+      "added": 0
+    },
+    {
+      "source": "Fox News",
+      "url": "https://moxie.foxnews.com/google-publisher/latest.xml",
+      "ok": true,
+      "items": 25,
+      "added": 1
+    },
+    {
+      "source": "Fox News",
+      "url": "https://moxie.foxnews.com/google-publisher/world.xml",
+      "ok": true,
+      "items": 25,
+      "added": 0
+    },
+    {
+      "source": "Guardian",
+      "url": "https://www.theguardian.com/world/rss",
+      "ok": true,
+      "items": 45,
+      "added": 45
+    },
+    {
+      "source": "France 24",
+      "url": "https://www.france24.com/en/rss",
+      "ok": true,
+      "items": 24,
+      "added": 23
+    },
+    {
+      "source": "DW",
+      "url": "https://rss.dw.com/rdf/rss-en-all",
+      "ok": true,
+      "items": 129,
+      "added": 129
+    },
+    {
+      "source": "Federal Reserve",
+      "url": "https://www.federalreserve.gov/feeds/press_all.xml",
+      "ok": true,
+      "items": 20,
+      "added": 20
+    },
+    {
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/id/20910258/device/rss/rss.html",
+      "ok": true,
+      "items": 30,
+      "added": 30
+    },
+    {
+      "source": "CNBC",
+      "url": "https://www.cnbc.com/id/10000664/device/rss/rss.html",
+      "ok": true,
+      "items": 30,
+      "added": 29
+    },
+    {
+      "source": "MarketWatch",
+      "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories",
+      "ok": true,
+      "items": 10,
+      "added": 10
+    },
+    {
+      "source": "CoinDesk",
+      "url": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+      "ok": true,
+      "items": 25,
       "added": 25
+    },
+    {
+      "source": "Cointelegraph",
+      "url": "https://cointelegraph.com/rss",
+      "ok": true,
+      "items": 30,
+      "added": 30
+    },
+    {
+      "source": "Decrypt",
+      "url": "https://decrypt.co/feed",
+      "ok": true,
+      "items": 60,
+      "added": 60
+    },
+    {
+      "source": "The Block",
+      "url": "https://www.theblock.co/rss.xml",
+      "ok": true,
+      "items": 19,
+      "added": 19
+    },
+    {
+      "source": "Bitcoin Magazine",
+      "url": "https://bitcoinmagazine.com/.rss/full/",
+      "ok": true,
+      "items": 10,
+      "added": 10
+    },
+    {
+      "source": "U.Today",
+      "url": "https://u.today/rss",
+      "ok": true,
+      "items": 92,
+      "added": 92
     }
   ]
 }
