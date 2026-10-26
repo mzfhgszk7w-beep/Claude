@@ -58,7 +58,7 @@ const FEEDS = [
   { source: 'Google News', cat: 'crypto', url: 'https://news.google.com/rss/search?q=%22Shiba+Inu%22+OR+SHIB+when:1d&hl=en-AE&gl=AE&ceid=AE:en' },
   { source: 'Google News', cat: 'crypto', url: 'https://news.google.com/rss/search?q=crypto+regulation+OR+law+OR+bill+OR+ban+when:1d&hl=en-AE&gl=AE&ceid=AE:en' },
   { source: 'Google News', cat: 'crypto', url: 'https://news.google.com/rss/search?q=Krypto+OR+Bitcoin+Gesetz+OR+Regulierung+OR+BaFin+when:2d&hl=de&gl=DE&ceid=DE:de' },
-  { source: 'Google News', cat: 'markets', url: 'https://news.google.com/rss/search?q=%22Federal+Reserve%22+OR+Powell+OR+FOMC+when:1d&hl=en-AE&gl=AE&ceid=AE:en' },
+  { source: 'Google News', cat: 'markets', url: 'https://news.google.com/rss/search?q=%22Federal+Reserve%22+OR+FOMC+OR+%22Fed+chair%22+OR+Warsh+when:1d&hl=en-AE&gl=AE&ceid=AE:en' },
 ];
 
 const dayInTz = (d) =>

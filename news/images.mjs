@@ -12,7 +12,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DATA_DIR = join(ROOT, 'data', 'news');
 const IMG_DIR = process.argv[2];
 const WINDOW_MS = 3 * 3600 * 1000;
-const MAX_NEW = 150;
+const MAX_NEW = 400;
 const UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
 
 const dayInTz = (d) =>
