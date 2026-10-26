@@ -1,0 +1,234 @@
+<title>Nachrichtenlage Dubai</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: Masthead mit Ausgaben-Leiste, darunter Aufmacher + Ressorts in zwei Spalten; Abendausgabe als eigenes Band. */
+:root {
+  --paper: #f2f4f6;
+  --sheet: #ffffff;
+  --ink: #141a22;
+  --ink-2: #4a5563;
+  --rule: #d5dbe2;
+  --accent: #0d5b78;
+  --accent-ink: #ffffff;
+  --night: #16202c;
+  --night-ink: #e9eef4;
+  --ok: #1d7a46;
+  --ok-bg: #e2f3e8;
+  --warn: #8a5a00;
+  --warn-bg: #fbefd4;
+  --bad: #a3262a;
+  --bad-bg: #f8e1e1;
+  --f-display: "Newsreader", Georgia, "Times New Roman", serif;
+  --f-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0f141a; --sheet: #171e26; --ink: #e8edf2; --ink-2: #a2adba; --rule: #2b3642;
+    --accent: #5fb3d3; --accent-ink: #08131a; --night: #0a0f14; --night-ink: #e9eef4;
+    --ok: #7fd3a0; --ok-bg: #173325; --warn: #f0c46a; --warn-bg: #3a2c10; --bad: #f19a9c; --bad-bg: #3b1a1b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0f141a; --sheet: #171e26; --ink: #e8edf2; --ink-2: #a2adba; --rule: #2b3642;
+  --accent: #5fb3d3; --accent-ink: #08131a; --night: #0a0f14; --night-ink: #e9eef4;
+  --ok: #7fd3a0; --ok-bg: #173325; --warn: #f0c46a; --warn-bg: #3a2c10; --bad: #f19a9c; --bad-bg: #3b1a1b;
+  color-scheme: dark;
+}
+body { background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.5; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 48px; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.mast { display: grid; gap: 6px; padding-block: 8px 14px; border-bottom: 3px solid var(--ink); }
+.mast-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-family: var(--f-mono); font-size: 12px; color: var(--ink-2); letter-spacing: .04em; text-transform: uppercase; }
+.mast h1 { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: clamp(34px, 6vw, 58px); line-height: 1; letter-spacing: -.01em; }
+.mast .sub { color: var(--ink-2); font-size: 15px; }
+
+.editions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding-block: 12px; border-bottom: 1px solid var(--rule); }
+.editions label { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); margin-right: 4px; }
+.editions select { font: inherit; font-size: 14px; padding: 4px 8px; border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); border-radius: 4px; }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.chip { font-family: var(--f-mono); font-size: 13px; padding: 4px 8px; border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); border-radius: 4px; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.chip.evening { font-family: var(--f-body); font-weight: 700; }
+
+.edition-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; padding-block: 18px 6px; }
+.edition-head h2 { margin: 0; font-family: var(--f-display); font-size: 22px; font-weight: 600; }
+.stats { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.stats b { color: var(--ink); }
+
+.evening-band { background: var(--night); color: var(--night-ink); border-radius: 6px; padding: 22px 22px 18px; margin-block: 10px 6px; display: grid; gap: 10px; }
+.evening-band .kicker { font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; opacity: .75; }
+.evening-band p { margin: 0; font-family: var(--f-display); font-size: 19px; line-height: 1.45; max-width: 68ch; }
+
+.lead { display: grid; gap: 10px; padding-block: 16px 22px; border-bottom: 1px solid var(--rule); }
+.lead h3 { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: clamp(26px, 4vw, 40px); line-height: 1.12; text-wrap: balance; max-width: 26ch; }
+.lead .summary { font-size: 18px; max-width: 68ch; margin: 0; }
+
+.sections { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
+@media (max-width: 760px) { .sections { grid-template-columns: minmax(0, 1fr); } }
+.section { min-width: 0; padding-top: 18px; }
+.section > h4 { margin: 0 0 4px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 4px; }
+.story { display: grid; gap: 6px; padding-block: 14px; border-bottom: 1px solid var(--rule); min-width: 0; }
+.story:last-child { border-bottom: 0; }
+.story h5 { margin: 0; font-family: var(--f-display); font-size: 20px; font-weight: 600; line-height: 1.25; text-wrap: balance; }
+.story p { margin: 0; max-width: 68ch; }
+.why { font-size: 14px; color: var(--ink-2); }
+.why b { color: var(--ink); font-weight: 600; }
+
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; }
+.status { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; }
+.status.ok { color: var(--ok); background: var(--ok-bg); }
+.status.warn { color: var(--warn); background: var(--warn-bg); }
+.status.bad { color: var(--bad); background: var(--bad-bg); }
+.src { color: var(--ink-2); text-decoration: none; border-bottom: 1px dotted var(--ink-2); }
+.src:hover { color: var(--accent); border-color: var(--accent); }
+
+.outlook { margin-top: 26px; padding: 18px 20px; background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; display: grid; gap: 8px; }
+.outlook h4 { margin: 0; font-family: var(--f-display); font-size: 20px; }
+.outlook ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+
+.empty { padding-block: 48px; display: grid; gap: 10px; max-width: 60ch; }
+.empty h2 { margin: 0; font-family: var(--f-display); font-size: 28px; }
+.empty p { margin: 0; color: var(--ink-2); }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--ink-2); padding-top: 28px; border-top: 1px solid var(--rule); margin-top: 28px; }
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div class="mast-top"><span id="today">Dubai</span><span>Handelsblatt · BBC · Sky News · Fox News · Al Jazeera</span></div>
+    <h1>Nachrichtenlage</h1>
+    <div class="sub">Stündlich 11–02 Uhr, Abendausgabe 23 Uhr (Dubai). Jede Meldung gegen mindestens zwei Quellen geprüft.</div>
+  </header>
+
+  <nav class="editions" aria-label="Ausgaben">
+    <label for="day">Tag</label>
+    <select id="day"></select>
+    <div class="chips" id="chips"></div>
+  </nav>
+
+  <main id="main">
+    <section class="empty">
+      <h2>Die erste Ausgabe erscheint um 11:00 Uhr Dubai-Zeit</h2>
+      <p>Ab dann kommt jede volle Stunde bis 02:00 Uhr eine neue Ausgabe dazu, um 23:00 Uhr die Abendausgabe. Frühere Ausgaben findest du oben über Tag und Uhrzeit.</p>
+    </section>
+  </main>
+
+  <footer class="legend">
+    <span><span class="status ok">bestätigt</span> mind. 2 unabhängige Quellen</span>
+    <span><span class="status warn">unbestätigt</span> nur eine Quelle</span>
+    <span><span class="status bad">widersprüchlich</span> Quellen berichten abweichend</span>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+  const STATUS = { "bestätigt": "ok", "unbestätigt": "warn", "widersprüchlich": "bad" };
+  const fmtDay = (d) => new Date(d + "T12:00:00+04:00").toLocaleDateString("de-DE", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "Asia/Dubai" });
+  $("#today").textContent = new Date().toLocaleDateString("de-DE", { weekday: "long", day: "numeric", month: "long", timeZone: "Asia/Dubai" }) + " · Dubai";
+
+  let editions = [];
+  let selDay = null, selId = null, userPicked = false;
+
+  function safeUrl(u) { try { const x = new URL(u); return /^https?:$/.test(x.protocol) ? x.href : null; } catch { return null; } }
+
+  function storyNode(s, lead) {
+    const n = el("article", lead ? "lead" : "story");
+    const meta = el("div", "meta");
+    const st = s.status || "unbestätigt";
+    meta.append(el("span", "status " + (STATUS[st] || "warn"), st));
+    for (const src of s.sources || []) {
+      const url = safeUrl(src.url);
+      if (url) { const a = el("a", "src", src.name); a.href = url; a.target = "_blank"; a.rel = "noopener"; meta.append(a); }
+      else meta.append(el("span", "src", src.name));
+    }
+    n.append(meta, el(lead ? "h3" : "h5", null, s.title));
+    if (s.summary) n.append(el("p", lead ? "summary" : null, s.summary));
+    if (s.why) { const w = el("p", "why"); w.append(el("b", null, "Einordnung: "), document.createTextNode(s.why)); n.append(w); }
+    return n;
+  }
+
+  function renderEdition(e) {
+    const main = $("#main");
+    main.replaceChildren();
+    const head = el("div", "edition-head");
+    head.append(el("h2", null, e.kind === "evening" ? "Abendausgabe · " + fmtDay(e.date) : "Ausgabe " + e.hour + " Uhr · " + fmtDay(e.date)));
+    const stats = el("div", "stats");
+    const s = e.stats || {};
+    for (const [k, v] of [["Meldungen", s.stories], ["Rohmeldungen gesichtet", s.raw], ["bestätigt", s.confirmed]]) {
+      if (v == null) continue;
+      const sp = el("span"); sp.append(el("b", null, String(v)), document.createTextNode(" " + k)); stats.append(sp);
+    }
+    head.append(stats);
+    main.append(head);
+
+    if (e.kind === "evening" && e.intro) {
+      const band = el("section", "evening-band");
+      band.append(el("div", "kicker", "Der Tag in Kürze"), el("p", null, e.intro));
+      main.append(band);
+    }
+    if (e.lead) main.append(storyNode(e.lead, true));
+
+    const grid = el("div", "sections");
+    for (const sec of e.sections || []) {
+      if (!sec.stories || !sec.stories.length) continue;
+      const box = el("section", "section");
+      box.append(el("h4", null, sec.name));
+      for (const st of sec.stories) box.append(storyNode(st, false));
+      grid.append(box);
+    }
+    main.append(grid);
+
+    if (e.outlook && e.outlook.length) {
+      const o = el("section", "outlook");
+      o.append(el("h4", null, "Was morgen wichtig wird"));
+      const ul = el("ul");
+      for (const item of e.outlook) ul.append(el("li", null, item));
+      o.append(ul);
+      main.append(o);
+    }
+  }
+
+  function renderNav() {
+    const days = [...new Set(editions.map((e) => e.date))].sort().reverse();
+    const daySel = $("#day");
+    daySel.replaceChildren(...days.map((d) => { const o = el("option", null, fmtDay(d)); o.value = d; return o; }));
+    if (!days.includes(selDay)) selDay = days[0] || null;
+    daySel.value = selDay || "";
+    const ofDay = editions.filter((e) => e.date === selDay).sort((a, b) => (a.createdAt < b.createdAt ? -1 : 1));
+    if (!userPicked || !ofDay.some((e) => e.id === selId)) selId = ofDay.length ? ofDay[ofDay.length - 1].id : null;
+    const chips = $("#chips");
+    chips.replaceChildren(...ofDay.map((e) => {
+      const b = el("button", "chip" + (e.kind === "evening" ? " evening" : ""), e.kind === "evening" ? "Abend" : e.hour);
+      b.type = "button";
+      b.setAttribute("aria-pressed", String(e.id === selId));
+      b.addEventListener("click", () => { selId = e.id; userPicked = true; render(); });
+      return b;
+    }));
+  }
+
+  function render() {
+    if (!editions.length) return;
+    renderNav();
+    const e = editions.find((x) => x.id === selId);
+    if (e) renderEdition(e);
+  }
+
+  $("#day").addEventListener("change", (ev) => { selDay = ev.target.value; userPicked = false; render(); });
+
+  (async () => {
+    const db = await window.claude?.use?.("db");
+    if (!db) return;
+    db.collection("editions").orderBy("createdAt", "desc").limit(400).onSnapshot((snap) => {
+      editions = snap.docs.map((d) => ({ id: d.id, ...d.data() })).filter((e) => e.date && e.createdAt);
+      render();
+    }, () => {});
+  })();
+})();
+</script>

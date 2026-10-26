@@ -66,3 +66,12 @@ public/
 | POST | `/PasswordVault/API/Auth/Logoff` | end session |
 
 Docs: <https://docs.cyberark.com/pam-self-hosted/latest/en/content/webservices/systemdetails.htm>
+
+## Nachrichtenlage (news/)
+
+Separates Projekt im selben Repo: stündliche Nachrichtenausgabe.
+
+- `news/collect.mjs` + `.github/workflows/news-collect.yml`: sammelt alle 20 Min RSS
+  (Handelsblatt, BBC, Sky News, Fox News, Al Jazeera) nach `data/news/`.
+- `news/EDITOR.md`: Redaktionsanleitung für die geplanten Claude-Läufe (stündlich 11–02 Uhr, Abend 23 Uhr, Dubai).
+- `news/nachrichtenlage.html`: Quelltext der Artifact-Seite.
