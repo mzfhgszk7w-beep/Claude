@@ -1,5 +1,5 @@
 {
-  "run": "2026-10-27T16:58:39.795Z",
+  "run": "2026-10-27T16:59:16.342Z",
   "feeds": [
     {
       "source": "Handelsblatt",
@@ -13,7 +13,7 @@
       "url": "https://www.handelsblatt.com/contentexport/feed/top-themen",
       "ok": true,
       "items": 24,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Handelsblatt",
@@ -41,7 +41,7 @@
       "url": "https://www.tagesschau.de/index~rss2.xml",
       "ok": true,
       "items": 70,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Tagesschau",
@@ -68,14 +68,14 @@
       "url": "https://newsfeed.zeit.de/index",
       "ok": true,
       "items": 15,
-      "added": 3
+      "added": 0
     },
     {
       "source": "n-tv",
       "url": "https://www.n-tv.de/rss",
       "ok": true,
       "items": 50,
-      "added": 1
+      "added": 0
     },
     {
       "source": "DW",
@@ -96,28 +96,28 @@
       "url": "https://gulfnews.com/feed",
       "ok": true,
       "items": 40,
-      "added": 2
+      "added": 0
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Dubai+OR+%22Abu+Dhabi%22+OR+UAE+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 6
+      "added": 0
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=UAE+law+OR+visa+OR+%22new+rule%22+OR+residents+when:2d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 82,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Dubai+OR+VAE+OR+Emirate+when:1d&hl=de&gl=DE&ceid=DE:de",
       "ok": true,
       "items": 37,
-      "added": 3
+      "added": 0
     },
     {
       "source": "Al Jazeera",
@@ -166,7 +166,7 @@
       "url": "https://moxie.foxnews.com/google-publisher/latest.xml",
       "ok": true,
       "items": 25,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Fox News",
@@ -194,7 +194,7 @@
       "url": "https://rss.dw.com/rdf/rss-en-all",
       "ok": true,
       "items": 130,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Federal Reserve",
@@ -222,7 +222,7 @@
       "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories",
       "ok": true,
       "items": 10,
-      "added": 1
+      "added": 0
     },
     {
       "source": "CoinDesk",
@@ -236,21 +236,21 @@
       "url": "https://cointelegraph.com/rss",
       "ok": true,
       "items": 30,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Decrypt",
       "url": "https://decrypt.co/feed",
       "ok": true,
       "items": 36,
-      "added": 2
+      "added": 0
     },
     {
       "source": "The Block",
       "url": "https://www.theblock.co/rss.xml",
       "ok": true,
       "items": 20,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Bitcoin Magazine",
@@ -264,7 +264,7 @@
       "url": "https://u.today/rss",
       "ok": true,
       "items": 92,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Google News",
@@ -278,21 +278,21 @@
       "url": "https://news.google.com/rss/search?q=crypto+regulation+OR+law+OR+bill+OR+ban+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 27,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Krypto+OR+Bitcoin+Gesetz+OR+Regulierung+OR+BaFin+when:2d&hl=de&gl=DE&ceid=DE:de",
       "ok": true,
       "items": 51,
-      "added": 4
+      "added": 0
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=%22Federal+Reserve%22+OR+FOMC+OR+%22Fed+chair%22+OR+Warsh+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 93,
-      "added": 4
+      "added": 0
     }
   ]
 }
