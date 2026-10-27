@@ -1,5 +1,5 @@
 {
-  "run": "2026-10-27T12:06:43.408Z",
+  "run": "2026-10-27T12:21:58.502Z",
   "feeds": [
     {
       "source": "Handelsblatt",
@@ -13,7 +13,7 @@
       "url": "https://www.handelsblatt.com/contentexport/feed/top-themen",
       "ok": true,
       "items": 24,
-      "added": 3
+      "added": 0
     },
     {
       "source": "Handelsblatt",
@@ -40,14 +40,14 @@
       "source": "Tagesschau",
       "url": "https://www.tagesschau.de/index~rss2.xml",
       "ok": true,
-      "items": 66,
-      "added": 0
+      "items": 68,
+      "added": 2
     },
     {
       "source": "Tagesschau",
       "url": "https://www.tagesschau.de/wirtschaft/index~rss2.xml",
       "ok": true,
-      "items": 27,
+      "items": 28,
       "added": 0
     },
     {
@@ -62,21 +62,21 @@
       "url": "https://www.faz.net/rss/aktuell/",
       "ok": true,
       "items": 159,
-      "added": 2
+      "added": 6
     },
     {
       "source": "Zeit",
       "url": "https://newsfeed.zeit.de/index",
       "ok": true,
       "items": 15,
-      "added": 5
+      "added": 6
     },
     {
       "source": "n-tv",
       "url": "https://www.n-tv.de/rss",
       "ok": true,
       "items": 50,
-      "added": 8
+      "added": 1
     },
     {
       "source": "DW",
@@ -90,49 +90,49 @@
       "url": "https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml",
       "ok": true,
       "items": 100,
-      "added": 2
+      "added": 0
     },
     {
       "source": "Gulf News",
       "url": "https://gulfnews.com/feed",
       "ok": true,
-      "items": 47,
-      "added": 1
+      "items": 51,
+      "added": 5
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Dubai+OR+%22Abu+Dhabi%22+OR+UAE+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 5
+      "added": 6
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=UAE+law+OR+visa+OR+%22new+rule%22+OR+residents+when:2d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 55,
-      "added": 3
+      "items": 57,
+      "added": 2
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Dubai+OR+VAE+OR+Emirate+when:1d&hl=de&gl=DE&ceid=DE:de",
       "ok": true,
-      "items": 38,
-      "added": 0
+      "items": 41,
+      "added": 3
     },
     {
       "source": "Al Jazeera",
       "url": "https://www.aljazeera.com/xml/rss/all.xml",
       "ok": true,
       "items": 25,
-      "added": 0
+      "added": 1
     },
     {
       "source": "BBC",
       "url": "https://feeds.bbci.co.uk/news/rss.xml",
       "ok": true,
-      "items": 33,
-      "added": 0
+      "items": 34,
+      "added": 2
     },
     {
       "source": "BBC",
@@ -146,7 +146,7 @@
       "url": "https://feeds.bbci.co.uk/news/business/rss.xml",
       "ok": true,
       "items": 47,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Sky News",
@@ -167,7 +167,7 @@
       "url": "https://moxie.foxnews.com/google-publisher/latest.xml",
       "ok": true,
       "items": 25,
-      "added": 2
+      "added": 0
     },
     {
       "source": "Fox News",
@@ -188,14 +188,14 @@
       "url": "https://www.france24.com/en/rss",
       "ok": true,
       "items": 24,
-      "added": 3
+      "added": 0
     },
     {
       "source": "DW",
       "url": "https://rss.dw.com/rdf/rss-en-all",
       "ok": true,
       "items": 131,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Federal Reserve",
@@ -209,7 +209,7 @@
       "url": "https://www.cnbc.com/id/20910258/device/rss/rss.html",
       "ok": true,
       "items": 30,
-      "added": 0
+      "added": 1
     },
     {
       "source": "CNBC",
@@ -223,14 +223,14 @@
       "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories",
       "ok": true,
       "items": 10,
-      "added": 1
+      "added": 0
     },
     {
       "source": "CoinDesk",
       "url": "https://www.coindesk.com/arc/outboundfeeds/rss/",
       "ok": true,
       "items": 25,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Cointelegraph",
@@ -243,7 +243,7 @@
       "source": "Decrypt",
       "url": "https://decrypt.co/feed",
       "ok": true,
-      "items": 59,
+      "items": 39,
       "added": 0
     },
     {
@@ -251,7 +251,7 @@
       "url": "https://www.theblock.co/rss.xml",
       "ok": true,
       "items": 20,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Bitcoin Magazine",
@@ -271,29 +271,29 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=%22Shiba+Inu%22+OR+SHIB+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 58,
+      "items": 60,
       "added": 2
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=crypto+regulation+OR+law+OR+bill+OR+ban+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 51,
-      "added": 1
+      "items": 31,
+      "added": 0
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Krypto+OR+Bitcoin+Gesetz+OR+Regulierung+OR+BaFin+when:2d&hl=de&gl=DE&ceid=DE:de",
       "ok": true,
-      "items": 52,
-      "added": 1
+      "items": 23,
+      "added": 0
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=%22Federal+Reserve%22+OR+FOMC+OR+%22Fed+chair%22+OR+Warsh+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 2
+      "added": 5
     }
   ]
 }
