@@ -1,5 +1,5 @@
 {
-  "run": "2026-10-27T22:38:03.056Z",
+  "run": "2026-10-27T22:53:13.010Z",
   "feeds": [
     {
       "source": "Handelsblatt",
@@ -68,7 +68,7 @@
       "url": "https://newsfeed.zeit.de/index",
       "ok": true,
       "items": 15,
-      "added": 0
+      "added": 1
     },
     {
       "source": "n-tv",
@@ -116,15 +116,15 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Dubai+OR+VAE+OR+Emirate+when:1d&hl=de&gl=DE&ceid=DE:de",
       "ok": true,
-      "items": 39,
-      "added": 1
+      "items": 51,
+      "added": 2
     },
     {
       "source": "Al Jazeera",
       "url": "https://www.aljazeera.com/xml/rss/all.xml",
       "ok": true,
       "items": 25,
-      "added": 0
+      "added": 1
     },
     {
       "source": "BBC",
@@ -145,7 +145,7 @@
       "url": "https://feeds.bbci.co.uk/news/business/rss.xml",
       "ok": true,
       "items": 49,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Sky News",
@@ -166,7 +166,7 @@
       "url": "https://moxie.foxnews.com/google-publisher/latest.xml",
       "ok": true,
       "items": 25,
-      "added": 0
+      "added": 3
     },
     {
       "source": "Fox News",
@@ -180,7 +180,7 @@
       "url": "https://www.theguardian.com/world/rss",
       "ok": true,
       "items": 45,
-      "added": 0
+      "added": 3
     },
     {
       "source": "France 24",
@@ -270,21 +270,21 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=%22Shiba+Inu%22+OR+SHIB+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 58,
+      "items": 57,
       "added": 0
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=crypto+regulation+OR+law+OR+bill+OR+ban+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 52,
+      "items": 29,
       "added": 0
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Krypto+OR+Bitcoin+Gesetz+OR+Regulierung+OR+BaFin+when:2d&hl=de&gl=DE&ceid=DE:de",
       "ok": true,
-      "items": 22,
+      "items": 50,
       "added": 0
     },
     {
@@ -292,7 +292,7 @@
       "url": "https://news.google.com/rss/search?q=%22Federal+Reserve%22+OR+FOMC+OR+%22Fed+chair%22+OR+Warsh+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 0
+      "added": 3
     }
   ]
 }
