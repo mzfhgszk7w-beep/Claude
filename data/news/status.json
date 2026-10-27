@@ -1,12 +1,12 @@
 {
-  "run": "2026-10-27T18:47:16.742Z",
+  "run": "2026-10-27T19:02:30.456Z",
   "feeds": [
     {
       "source": "Handelsblatt",
       "url": "https://www.handelsblatt.com/contentexport/feed/schlagzeilen",
       "ok": true,
       "items": 50,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Handelsblatt",
@@ -40,8 +40,8 @@
       "source": "Tagesschau",
       "url": "https://www.tagesschau.de/index~rss2.xml",
       "ok": true,
-      "items": 73,
-      "added": 0
+      "items": 74,
+      "added": 1
     },
     {
       "source": "Tagesschau",
@@ -55,7 +55,7 @@
       "url": "https://www.spiegel.de/schlagzeilen/index.rss",
       "ok": true,
       "items": 30,
-      "added": 1
+      "added": 0
     },
     {
       "source": "FAZ",
@@ -68,7 +68,7 @@
       "url": "https://newsfeed.zeit.de/index",
       "ok": true,
       "items": 15,
-      "added": 4
+      "added": 5
     },
     {
       "source": "n-tv",
@@ -89,13 +89,13 @@
       "url": "https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml",
       "ok": true,
       "items": 100,
-      "added": 4
+      "added": 0
     },
     {
       "source": "Gulf News",
       "url": "https://gulfnews.com/feed",
       "ok": true,
-      "items": 26,
+      "items": 23,
       "added": 1
     },
     {
@@ -103,7 +103,7 @@
       "url": "https://news.google.com/rss/search?q=Dubai+OR+%22Abu+Dhabi%22+OR+UAE+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 13
+      "added": 6
     },
     {
       "source": "Google News",
@@ -116,7 +116,7 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Dubai+OR+VAE+OR+Emirate+when:1d&hl=de&gl=DE&ceid=DE:de",
       "ok": true,
-      "items": 52,
+      "items": 42,
       "added": 0
     },
     {
@@ -124,20 +124,20 @@
       "url": "https://www.aljazeera.com/xml/rss/all.xml",
       "ok": true,
       "items": 25,
-      "added": 4
+      "added": 0
     },
     {
       "source": "BBC",
       "url": "https://feeds.bbci.co.uk/news/rss.xml",
       "ok": true,
       "items": 30,
-      "added": 0
+      "added": 2
     },
     {
       "source": "BBC",
       "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
       "ok": true,
-      "items": 23,
+      "items": 22,
       "added": 0
     },
     {
@@ -180,7 +180,7 @@
       "url": "https://www.theguardian.com/world/rss",
       "ok": true,
       "items": 45,
-      "added": 1
+      "added": 0
     },
     {
       "source": "France 24",
@@ -243,21 +243,21 @@
       "url": "https://decrypt.co/feed",
       "ok": true,
       "items": 35,
-      "added": 1
+      "added": 0
     },
     {
       "source": "The Block",
       "url": "https://www.theblock.co/rss.xml",
       "ok": true,
       "items": 20,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Bitcoin Magazine",
       "url": "https://bitcoinmagazine.com/.rss/full/",
       "ok": true,
       "items": 10,
-      "added": 0
+      "added": 1
     },
     {
       "source": "U.Today",
@@ -270,29 +270,29 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=%22Shiba+Inu%22+OR+SHIB+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 56,
+      "items": 55,
       "added": 0
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=crypto+regulation+OR+law+OR+bill+OR+ban+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 32,
+      "items": 52,
       "added": 1
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Krypto+OR+Bitcoin+Gesetz+OR+Regulierung+OR+BaFin+when:2d&hl=de&gl=DE&ceid=DE:de",
       "ok": true,
-      "items": 23,
+      "items": 51,
       "added": 0
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=%22Federal+Reserve%22+OR+FOMC+OR+%22Fed+chair%22+OR+Warsh+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 100,
-      "added": 7
+      "items": 86,
+      "added": 5
     }
   ]
 }
