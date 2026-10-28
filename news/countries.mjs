@@ -1,0 +1,43 @@
+// Länder für das Länder-Menü der HTML-Ausgabe: ISO-Code → Name, Flagge, Kontinent.
+// „Naher Osten & Golf“ ist bewusst eine eigene Gruppe (Leser lebt in Dubai).
+export const CONTINENTS = ['Europa', 'Naher Osten & Golf', 'Asien', 'Afrika', 'Nordamerika', 'Südamerika', 'Ozeanien'];
+
+const C = (name, flag, continent) => ({ name, flag, continent });
+export const COUNTRIES = {
+  EU: C('Europäische Union', '🇪🇺', 'Europa'),
+  DE: C('Deutschland', '🇩🇪', 'Europa'), AT: C('Österreich', '🇦🇹', 'Europa'), CH: C('Schweiz', '🇨🇭', 'Europa'),
+  FR: C('Frankreich', '🇫🇷', 'Europa'), GB: C('Großbritannien', '🇬🇧', 'Europa'), IT: C('Italien', '🇮🇹', 'Europa'),
+  ES: C('Spanien', '🇪🇸', 'Europa'), PT: C('Portugal', '🇵🇹', 'Europa'), NL: C('Niederlande', '🇳🇱', 'Europa'),
+  BE: C('Belgien', '🇧🇪', 'Europa'), PL: C('Polen', '🇵🇱', 'Europa'), CZ: C('Tschechien', '🇨🇿', 'Europa'),
+  RO: C('Rumänien', '🇷🇴', 'Europa'), BG: C('Bulgarien', '🇧🇬', 'Europa'), RS: C('Serbien', '🇷🇸', 'Europa'),
+  HU: C('Ungarn', '🇭🇺', 'Europa'), GR: C('Griechenland', '🇬🇷', 'Europa'), SE: C('Schweden', '🇸🇪', 'Europa'),
+  NO: C('Norwegen', '🇳🇴', 'Europa'), DK: C('Dänemark', '🇩🇰', 'Europa'), FI: C('Finnland', '🇫🇮', 'Europa'),
+  IE: C('Irland', '🇮🇪', 'Europa'), UA: C('Ukraine', '🇺🇦', 'Europa'), RU: C('Russland', '🇷🇺', 'Europa'),
+  BY: C('Belarus', '🇧🇾', 'Europa'), TR: C('Türkei', '🇹🇷', 'Europa'), AL: C('Albanien', '🇦🇱', 'Europa'),
+  AE: C('VAE', '🇦🇪', 'Naher Osten & Golf'), SA: C('Saudi-Arabien', '🇸🇦', 'Naher Osten & Golf'),
+  QA: C('Katar', '🇶🇦', 'Naher Osten & Golf'), KW: C('Kuwait', '🇰🇼', 'Naher Osten & Golf'),
+  BH: C('Bahrain', '🇧🇭', 'Naher Osten & Golf'), OM: C('Oman', '🇴🇲', 'Naher Osten & Golf'),
+  IR: C('Iran', '🇮🇷', 'Naher Osten & Golf'), IQ: C('Irak', '🇮🇶', 'Naher Osten & Golf'),
+  IL: C('Israel', '🇮🇱', 'Naher Osten & Golf'), PS: C('Palästinensische Gebiete', '🇵🇸', 'Naher Osten & Golf'),
+  LB: C('Libanon', '🇱🇧', 'Naher Osten & Golf'), SY: C('Syrien', '🇸🇾', 'Naher Osten & Golf'),
+  JO: C('Jordanien', '🇯🇴', 'Naher Osten & Golf'), YE: C('Jemen', '🇾🇪', 'Naher Osten & Golf'),
+  EG: C('Ägypten', '🇪🇬', 'Naher Osten & Golf'),
+  CN: C('China', '🇨🇳', 'Asien'), JP: C('Japan', '🇯🇵', 'Asien'), KR: C('Südkorea', '🇰🇷', 'Asien'),
+  KP: C('Nordkorea', '🇰🇵', 'Asien'), IN: C('Indien', '🇮🇳', 'Asien'), PK: C('Pakistan', '🇵🇰', 'Asien'),
+  AF: C('Afghanistan', '🇦🇫', 'Asien'), ID: C('Indonesien', '🇮🇩', 'Asien'), TH: C('Thailand', '🇹🇭', 'Asien'),
+  VN: C('Vietnam', '🇻🇳', 'Asien'), PH: C('Philippinen', '🇵🇭', 'Asien'), MY: C('Malaysia', '🇲🇾', 'Asien'),
+  SG: C('Singapur', '🇸🇬', 'Asien'), KH: C('Kambodscha', '🇰🇭', 'Asien'), TW: C('Taiwan', '🇹🇼', 'Asien'),
+  HK: C('Hongkong', '🇭🇰', 'Asien'), BD: C('Bangladesch', '🇧🇩', 'Asien'), KZ: C('Kasachstan', '🇰🇿', 'Asien'),
+  AZ: C('Aserbaidschan', '🇦🇿', 'Asien'),
+  NG: C('Nigeria', '🇳🇬', 'Afrika'), ZA: C('Südafrika', '🇿🇦', 'Afrika'), KE: C('Kenia', '🇰🇪', 'Afrika'),
+  ET: C('Äthiopien', '🇪🇹', 'Afrika'), MA: C('Marokko', '🇲🇦', 'Afrika'), DZ: C('Algerien', '🇩🇿', 'Afrika'),
+  TN: C('Tunesien', '🇹🇳', 'Afrika'), LY: C('Libyen', '🇱🇾', 'Afrika'), SD: C('Sudan', '🇸🇩', 'Afrika'),
+  CD: C('DR Kongo', '🇨🇩', 'Afrika'), UG: C('Uganda', '🇺🇬', 'Afrika'), GH: C('Ghana', '🇬🇭', 'Afrika'),
+  SN: C('Senegal', '🇸🇳', 'Afrika'), GA: C('Gabun', '🇬🇦', 'Afrika'), SO: C('Somalia', '🇸🇴', 'Afrika'),
+  US: C('USA', '🇺🇸', 'Nordamerika'), CA: C('Kanada', '🇨🇦', 'Nordamerika'), MX: C('Mexiko', '🇲🇽', 'Nordamerika'),
+  CU: C('Kuba', '🇨🇺', 'Nordamerika'),
+  BR: C('Brasilien', '🇧🇷', 'Südamerika'), AR: C('Argentinien', '🇦🇷', 'Südamerika'), VE: C('Venezuela', '🇻🇪', 'Südamerika'),
+  CO: C('Kolumbien', '🇨🇴', 'Südamerika'), CL: C('Chile', '🇨🇱', 'Südamerika'), PE: C('Peru', '🇵🇪', 'Südamerika'),
+  EC: C('Ecuador', '🇪🇨', 'Südamerika'), BO: C('Bolivien', '🇧🇴', 'Südamerika'),
+  AU: C('Australien', '🇦🇺', 'Ozeanien'), NZ: C('Neuseeland', '🇳🇿', 'Ozeanien'),
+};
