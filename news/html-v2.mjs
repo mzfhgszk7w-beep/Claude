@@ -148,13 +148,15 @@ for (const [code, list] of byCountry) {
 }
 
 const drawer = CONTINENTS.map((cont) => {
-  const codes = [...byCountry.keys()].filter((k) => COUNTRIES[k].continent === cont)
+  const codes = Object.keys(COUNTRIES).filter((k) => COUNTRIES[k].continent === cont);
+  const withNews = codes.filter((k) => byCountry.has(k))
     .sort((a, b) => byCountry.get(b).length - byCountry.get(a).length || COUNTRIES[a].name.localeCompare(COUNTRIES[b].name, 'de'));
-  if (!codes.length) return '';
-  const n = codes.reduce((a, k) => a + byCountry.get(k).length, 0);
+  const without = codes.filter((k) => !byCountry.has(k)).sort((a, b) => COUNTRIES[a].name.localeCompare(COUNTRIES[b].name, 'de'));
+  const n = withNews.reduce((a, k) => a + byCountry.get(k).length, 0);
   const open = cont === 'Europa' || cont === GULF ? ' open' : '';
-  return `<details${open}><summary>${esc(cont)} <span class="n">${n}</span></summary><ul>${codes.map((k) =>
-    `<li><a href="#${cid(k)}">${COUNTRIES[k].flag} ${esc(COUNTRIES[k].name)} <span class="n">${byCountry.get(k).length}</span></a></li>`).join('')}</ul></details>`;
+  return `<details${open}><summary><span>${esc(cont)}</span><span class="n">${n ? `${n} Meldungen · ` : ''}${codes.length} Länder</span></summary><ul>${
+    withNews.map((k) => `<li><a href="#${cid(k)}">${COUNTRIES[k].flag} ${esc(COUNTRIES[k].name)} <span class="n">${byCountry.get(k).length}</span></a></li>`).join('')
+  }${without.map((k) => `<li><span class="none">${COUNTRIES[k].flag} ${esc(COUNTRIES[k].name)} <span class="n">–</span></span></li>`).join('')}</ul></details>`;
 }).join('');
 
 // :target zeigt die gewählte Seite. Die Sprungmarken liegen ganz oben, damit nichts nach unten scrollt.
@@ -180,9 +182,10 @@ body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.55 -apple-system,
 a{color:inherit}
 .anchor{position:absolute;top:0;left:0}
 .wrap{max-width:780px;margin:0 auto;padding:0 max(18px,env(safe-area-inset-left)) 48px max(18px,env(safe-area-inset-right))}
-header{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding:22px 0 14px}
-h1{margin:0;font:700 34px/1 Georgia,"Times New Roman",serif;color:var(--acc)}
-.date{color:var(--mute);font-size:13px;letter-spacing:.08em;text-transform:uppercase;text-align:right}
+header{padding:18px 0 14px;text-align:center;border-bottom:3px double var(--rule)}
+.dateline{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;color:var(--mute);font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding-bottom:10px;border-bottom:1px solid var(--rule);margin-bottom:12px}
+.tagline{color:var(--mute);font:italic 15px/1.4 Georgia,serif;margin-top:6px}
+h1{margin:0;font:700 clamp(34px,10vw,52px)/1 Georgia,"Times New Roman",serif;color:var(--acc);letter-spacing:-.01em}
 nav{position:sticky;top:0;z-index:2;background:var(--bg);border-bottom:1px solid var(--rule);display:flex;gap:20px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
 nav::-webkit-scrollbar{display:none}
 nav a{text-decoration:none;font-weight:600;padding:12px 0;border-bottom:3px solid transparent}
@@ -221,12 +224,13 @@ h3{font:700 21px/1.25 Georgia,"Times New Roman",serif;margin:2px 0 8px}
 .drawer .x{text-decoration:none;font-size:22px;color:var(--mute);padding:4px 8px}
 .drawer p{margin:10px 18px 4px;font-size:13px;color:var(--mute)}
 details{border-bottom:1px solid var(--rule)}
-summary{list-style:none;cursor:pointer;padding:14px 18px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+summary{list-style:none;cursor:pointer;padding:14px 18px;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:10px}
 summary::-webkit-details-marker{display:none}
 summary::after{content:"›";color:var(--mute);font-size:20px;margin-left:12px;transition:transform .2s}
 details[open] summary::after{transform:rotate(90deg)}
 details ul{list-style:none;margin:0;padding:0 0 8px}
-details li a{display:flex;justify-content:space-between;text-decoration:none;padding:10px 18px 10px 30px}
+details li a,details li .none{display:flex;justify-content:space-between;text-decoration:none;padding:9px 18px 9px 30px}
+details li .none{color:var(--mute);opacity:.55}
 .n{color:var(--mute);font-weight:600;font-size:13px;margin-left:auto;padding-left:10px}
 footer{color:var(--mute);font-size:13px;margin-top:30px;line-height:1.6}
 @media (prefers-reduced-motion:reduce){.drawer,.scrim{transition:none}}
@@ -236,11 +240,12 @@ ${imgCss.join('\n')}
 <body>${['top', 'laender', ...pages.slice(1).map((x) => x.id)].map((id) => `<span class="anchor" id="${id}"></span>`).join('')}
 <a class="scrim" href="#top" aria-label="Menü schließen"></a>
 <aside class="drawer"><div class="dh"><b>🌍 Länder</b><a class="x" href="#top" aria-label="Schließen">✕</a></div>
-<p>Kontinent antippen, dann Land wählen. Außerhalb von Europa und Golf nur Top-Stories.</p>${drawer}</aside>
+<p>Kontinent antippen, dann Land wählen. Länder mit Meldungen stehen oben, ausgegraute Länder hatten seit dem letzten Briefing keine geprüfte Meldung. Außerhalb von Europa und Golf nur Top-Stories.</p>${drawer}</aside>
 <div class="wrap">
-<header><h1>Nachrichtenlage</h1><div class="date">${esc(fmtDay(ed.date))}</div></header>
+<header><div class="dateline"><span>${esc(fmtDay(ed.date))}</span><span>${heading}</span></div>
+<h1>Nachrichtenlage</h1><div class="tagline">Geprüfte Nachrichten aus Deutschland, den VAE und der Welt</div></header>
 <nav><a href="#laender" class="t-laender">🌍 Länder</a><a href="#top" class="t-top">Top Stories</a>${topicIds.map((t) => `<a href="#${t}" class="t-${t}">${esc(TOPIC_SHORT[t])}</a>`).join('')}</nav>
-<div class="meta"><span>${heading}</span><span><b>${st.stories ?? all.length}</b> Meldungen</span><span><b>${st.confirmed ?? all.filter((s) => s.status === 'bestätigt').length}</b> bestätigt</span><span><b>${byCountry.size}</b> Länder</span></div>
+<div class="meta"><span><b>${st.stories ?? all.length}</b> Meldungen</span><span><b>${st.confirmed ?? all.filter((s) => s.status === 'bestätigt').length}</b> bestätigt</span><span><b>${byCountry.size}</b> Länder</span></div>
 ${pages.map((x) => `<section class="page p-${x.id}">${x.body}</section>`).join('\n')}
 <footer>● Bestätigt: mind. 2 unabhängige, anerkannte Medien berichten übereinstimmend · ● Unbestätigt: nur eine anerkannte Quelle · ● Widersprüchlich: Quellen weichen in Kernfakten ab.<br>
 Keine Vermutungen, nur berichtete Fakten. Briefings um 8:00, 16:30 und 21:00 Uhr (deutsche Zeit). Bilder: jeweilige Medien.</footer>
