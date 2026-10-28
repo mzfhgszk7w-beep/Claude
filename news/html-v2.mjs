@@ -243,7 +243,7 @@ ${imgCss.join('\n')}
 <p>Kontinent antippen, dann Land wählen. Länder mit Meldungen stehen oben, ausgegraute Länder hatten seit dem letzten Briefing keine geprüfte Meldung. Außerhalb von Europa und Golf nur Top-Stories.</p>${drawer}</aside>
 <div class="wrap">
 <header><div class="dateline"><span>${esc(fmtDay(ed.date))}</span><span>${heading}</span></div>
-<h1>Nachrichtenlage</h1><div class="tagline">Geprüfte Nachrichten aus Deutschland, den VAE und der Welt</div></header>
+<h1>Nachrichtenlage</h1><div class="tagline">Geprüfte Nachrichten aus aller Welt</div></header>
 <nav><a href="#laender" class="t-laender">🌍 Länder</a><a href="#top" class="t-top">Top Stories</a>${topicIds.map((t) => `<a href="#${t}" class="t-${t}">${esc(TOPIC_SHORT[t])}</a>`).join('')}</nav>
 <div class="meta"><span><b>${st.stories ?? all.length}</b> Meldungen</span><span><b>${st.confirmed ?? all.filter((s) => s.status === 'bestätigt').length}</b> bestätigt</span><span><b>${byCountry.size}</b> Länder</span></div>
 ${pages.map((x) => `<section class="page p-${x.id}">${x.body}</section>`).join('\n')}
