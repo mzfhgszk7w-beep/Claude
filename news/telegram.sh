@@ -29,7 +29,7 @@ for chat in "${chats[@]}"; do
     "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
     --data-urlencode "chat_id=${chat}" \
     --data-urlencode "text=${text}" \
-    --data-urlencode "disable_web_page_preview=true") || code=000
+    --data-urlencode "disable_web_page_preview=${TELEGRAM_NO_PREVIEW:-false}") || code=000
 
   if [[ "$code" == "200" ]]; then
     echo "telegram: gesendet an $chat"

@@ -137,25 +137,33 @@ Krypto-Kurse nur nennen, wenn eine aktuelle Quelle den Wert nennt, nie schätzen
 
 ## Telegram-Bericht
 
-Nach dem Schreiben der Ausgabe den Kurzbericht an Telegram schicken:
+Nach dem Schreiben der Ausgabe:
+
+1. Die geschriebene Ausgabe als JSON-Datei speichern (dasselbe Objekt wie beim `set`) und daraus eine
+   Telegraph-Seite bauen: `node news/telegraph.mjs <ausgabe.json>`. Ausgabe ist die URL der Seite
+   (Instant View in Telegram, ohne Konto lesbar, Bilder direkt von den Nachrichtenseiten).
+2. Kurzbericht an Telegram schicken. Nur EINE URL im Text, nämlich die Telegraph-Seite, damit Telegram
+   dafür die Vorschau mit Instant View zeigt. Den claude.ai-Link NICHT in Telegram posten (Mitglieder können
+   ihn nicht öffnen).
 
 ```bash
 bash news/telegram.sh <<'MSG'
-Nachrichtenlage 16:00 Uhr (Dubai)
+📰 Nachrichtenlage 19:00 Uhr (Dubai)
 
-1. <Schlagzeile> (<Status>)
-2. <Schlagzeile> (<Status>)
-3. <Schlagzeile> (<Status>)
+1. <Schlagzeile> ✅
+2. <Schlagzeile> ✅
+3. <Schlagzeile> ⚠️
 
-22 Meldungen, 19 bestätigt
-https://claude.ai/artifact/RWKMSmyA63Z6uRavNQnqkK
+18 Meldungen, 15 bestätigt
+👉 Ganze Ausgabe mit Bildern: <Telegraph-URL>
 MSG
 ```
 
-- Stündlich: die 3 wichtigsten Schlagzeilen, Deutschland/VAE bevorzugt. Abendausgabe: `intro` als Text plus die
-  5 wichtigsten Schlagzeilen und die `outlook`-Punkte.
-- Das Skript sendet nur, wenn `TELEGRAM_BOT_TOKEN` gesetzt ist (Chat-ID optional, sonst aus der letzten Nachricht an den Bot); sonst tut es nichts.
-  Seine Ausgabe (gesendet/Fehler) im Abschlussbericht nennen.
+- Stündlich: die 3 wichtigsten Schlagzeilen, Deutschland/VAE bevorzugt. Abendausgabe: Titel „🌙 Abendausgabe“,
+  `intro` als Text, die 5 wichtigsten Schlagzeilen und der Link.
+- Status-Zeichen: ✅ bestätigt, ⚠️ unbestätigt, ❗ widersprüchlich.
+- Schlägt `telegraph.mjs` fehl: Kurzbericht ohne Link senden und den Fehler im Abschlussbericht nennen.
+- Das Skript sendet nur, wenn `TELEGRAM_BOT_TOKEN` gesetzt ist. Seine Ausgabe im Abschlussbericht nennen.
 
 ## Grenzen
 
