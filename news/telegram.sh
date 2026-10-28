@@ -19,14 +19,21 @@ if [[ -z "${TELEGRAM_CHAT_ID:-}" ]]; then
 fi
 
 text=$(cat)
-code=$(curl -sS -m 20 -o /tmp/telegram-resp.json -w '%{http_code}' \
-  "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-  --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
-  --data-urlencode "text=${text}" \
-  --data-urlencode "disable_web_page_preview=true") || code=000
 
-if [[ "$code" == "200" ]]; then
-  echo "telegram: gesendet"
-else
-  echo "telegram: Fehler HTTP $code $(head -c 300 /tmp/telegram-resp.json 2>/dev/null)" >&2
-fi
+# TELEGRAM_CHAT_ID darf mehrere IDs enthalten, durch Komma getrennt (z. B. Kanal und Privatchat).
+IFS=',' read -ra chats <<< "$TELEGRAM_CHAT_ID"
+for chat in "${chats[@]}"; do
+  chat=${chat// /}
+  [[ -z "$chat" ]] && continue
+  code=$(curl -sS -m 20 -o /tmp/telegram-resp.json -w '%{http_code}' \
+    "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+    --data-urlencode "chat_id=${chat}" \
+    --data-urlencode "text=${text}" \
+    --data-urlencode "disable_web_page_preview=true") || code=000
+
+  if [[ "$code" == "200" ]]; then
+    echo "telegram: gesendet an $chat"
+  else
+    echo "telegram: Fehler an $chat HTTP $code $(head -c 300 /tmp/telegram-resp.json 2>/dev/null)" >&2
+  fi
+done
