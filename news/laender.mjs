@@ -41,9 +41,9 @@ const ALIAS = { US: ['usa', 'us-', 'amerikan', 'american', 'washington', 'trump'
   AE: ['vae', 'uae', 'emirat', 'dubai', 'abu dhabi'], DE: ['deutsch', 'german', 'bundes', 'berlin', 'merz'], EU: ['eu-', 'eu ', 'brüssel', 'brussels', 'europäische'],
   PS: ['gaza', 'westjordan', 'west bank', 'palästin', 'palestin'], CN: ['chines', 'peking', 'beijing'], RU: ['russ', 'moskau', 'moscow', 'kreml', 'kremlin'],
   NL: ['niederländ', 'dutch', 'holland'], CH: ['schweizer', 'swiss'], KR: ['südkorea', 'south korea', 'seoul'], KP: ['nordkorea', 'north korea', 'pjöngjang', 'pyongyang'],
-  CY: ['nikosia', 'nicosia', 'limassol', 'larnaka', 'larnaca', 'paphos', 'famagusta'],
+  SA: ['saudi'], CY: ['nikosia', 'nicosia', 'limassol', 'larnaka', 'larnaca', 'paphos', 'famagusta'],
   CD: ['kongo', 'congo', 'kinshasa'], CG: ['kongo', 'congo', 'brazzaville'], CZ: ['tschech', 'czech'], VA: ['vatikan', 'vatican', 'papst', 'pope'] };
-const stem = (n) => n.toLowerCase().replace(/[^a-zäöüéèçíóáñ ]/g, '').slice(0, Math.max(4, n.length - 2));
+const stem = (n) => { const x = n.toLowerCase().replace(/[^a-zäöüéèçíóáñ -]/g, ''); return x.slice(0, Math.max(4, x.length - 2)); };
 const KEYS = Object.fromEntries(Object.entries(COUNTRIES).map(([k, c]) => [k, [stem(c.name), stem(EN.of(k) || c.name), ...(ALIAS[k] || [])]]));
 const mentions = (code, title) => { const t = ' ' + title.toLowerCase() + ' '; return KEYS[code].some((k) => t.includes(k)); };
 // Syndizierte Füllmeldungen („Cyprus Daily Life“), Börsen-Tipps, Werbung.
