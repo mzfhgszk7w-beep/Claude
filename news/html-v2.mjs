@@ -6,7 +6,7 @@
 // Ausgabe-Format (neu): { kind, date, hour, stats, lead, stories: [ { title, summary, status, sources,
 //   topic, country, top } ] }. topic = Schlüssel aus TOPICS, country = ISO-Code aus countries.mjs oder "".
 // Altes Format mit `sections` wird weiter gelesen (Ressortname wird zum Thema).
-// Optional `briefs: { "<ISO>": [ { title, source, url, sources, status } ] }` aus news/laender.mjs: kurze
+// Optional `briefs: { "<ISO>": [ { title, source, url, also, status } ] }` aus news/laender.mjs: kurze
 // Ländermeldungen (nur Schlagzeile + Quelle) unter den ausführlichen Meldungen jedes Landes.
 //
 // Bilder: bevorzugt eingebettet aus dem Bilder-Checkout `.news-img/` (letzte 3 Stunden), sonst als Link auf
@@ -150,7 +150,7 @@ for (const code of Object.keys(briefs)) {
 const countOf = (code) => byCountry.get(code).length + (briefs[code] || []).length;
 function brief(b) {
   const [cls, label] = STATUS[b.status] || STATUS['unbestätigt'];
-  const more = (b.sources || []).filter((x) => x.name !== b.source).map((x) => `<a href="${esc(x.url)}">${esc(x.name)}</a>`);
+  const more = (b.also || []).map(esc);
   return `<li><span class="st ${cls}" title="${label}">●</span> <a class="bt" href="${esc(b.url)}">${esc(b.title)}</a>
 <span class="bs">${esc(b.source)}${more.length ? ` · auch: ${more.join(', ')}` : ''}</span></li>`;
 }

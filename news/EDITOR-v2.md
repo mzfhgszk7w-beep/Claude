@@ -172,7 +172,8 @@ Zusätzlich zu den geprüften Meldungen bekommt jedes Land kurze Meldungen (Schl
 `data/news/laender/` (Google News je Land, gesammelt von `news/laender-collect.mjs`). Die Auswahl und der Status
 (✅ mind. 2 anerkannte oder 3 verschiedene Medien, sonst ⚠️) kommen aus dem Skript, NICHT aus eigener Recherche. Deine Aufgabe ist nur übersetzen und aussortieren:
 
-1. `node news/laender.mjs pick 24 > /tmp/laender.json` (Meldung auf stderr: wie viele zu übersetzen sind).
+1. `node news/laender.mjs pick 24 /tmp/laender.json` → schreibt die Kandidaten (mit Links) nach `/tmp/laender.json` und
+   gibt eine kompakte Liste aus: `id | Land | Sprache | Anzahl Medien | Titel`. Nur diese Liste lesen, nicht die JSON-Datei.
 2. Die Liste durchgehen und `/tmp/laender-de.json` schreiben: `{ "<id>": "deutscher Titel", ... }` mit **jedem Eintrag,
    der bleiben soll** (fehlende ids fallen weg). Dabei:
    - Nicht deutsche Titel ins Deutsche übersetzen: sachlich, knapp, wie eine deutsche Nachrichtenschlagzeile,

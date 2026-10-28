@@ -1,13 +1,14 @@
 // Länderseiten ohne Claude-Aufwand: wählt aus den Rohdaten von laender-collect.mjs je Land die wichtigsten
 // Meldungen der letzten 24 Stunden aus und hängt sie (auf Deutsch) an eine Ausgabe an.
 //
-//   node news/laender.mjs pick [stunden] > laender.json
+//   node news/laender.mjs pick <stunden> <laender.json>
 //       Je Land bis zu 5 Ereignisse. Gleiche Ereignisse verschiedener Medien werden zusammengefasst;
 //       Status nach Regel: mind. 2 anerkannte Medien oder mind. 3 verschiedene Medien = bestätigt, sonst unbestätigt.
-//       Felder: id, country, title, lang ("de" oder "en"), source, url, sources, status.
+//       Schreibt die Kandidaten nach laender.json (id, country, title, lang, source, url, sources, status) und gibt
+//       für die Redaktion eine kompakte Liste ohne Links aus: „id | Land | Sprache | Anzahl Medien | Titel“.
 //   node news/laender.mjs merge <ausgabe.json> <laender.json> <uebersetzung.json>
 //       uebersetzung.json = { "<id>": "deutscher Titel" } für jeden Eintrag, der bleiben soll (Claude übersetzt
-//       und sortiert Doppelte/Unsinn aus). Schreibt `briefs: { "<ISO>": [ { title, source, url, sources, status } ] }`
+//       und sortiert Doppelte/Unsinn aus). Schreibt `briefs: { "<ISO>": [ { title, source, url, also, status } ] }`
 //       in die Ausgabe. Einträge ohne Titel in uebersetzung.json fallen weg: In der Ausgabe steht nichts auf Englisch.
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -106,8 +107,8 @@ function pick(hours) {
 const [, , cmd, a, b, c] = process.argv;
 if (cmd === 'pick') {
   const list = pick(Number(a) || 24);
-  // Eine Zeile pro Eintrag: kompakt für die Redaktion, trotzdem gültiges JSON.
-  console.log('[\n' + list.map((x) => JSON.stringify(x)).join(',\n') + '\n]');
+  writeFileSync(b, JSON.stringify(list));
+  for (const x of list) console.log(`${x.id} | ${COUNTRIES[x.country].name} | ${x.lang} | ${x.sources.length} | ${x.title}`);
   const n = new Set(list.map((x) => x.country)).size;
   console.error(`laender: ${list.length} Meldungen aus ${n} Ländern, ${list.filter((x) => x.lang !== 'de').length} zu übersetzen`);
 } else if (cmd === 'merge') {
@@ -120,13 +121,14 @@ if (cmd === 'pick') {
     const title = tr[x.id];
     if (!title) { dropped++; continue; }
     if ((briefs[x.country] ||= []).length >= 5) { dropped++; continue; }
-    briefs[x.country].push({ title, source: x.source, url: x.url, sources: x.sources, status: x.status });
+    // Nur der Link des Hauptmediums; die übrigen Medien als Name (Google-News-Links sind sehr lang).
+    briefs[x.country].push({ title, source: x.source, url: x.url, also: x.sources.map((s) => s.name).filter((n) => n !== x.source), status: x.status });
   }
   ed.briefs = briefs;
   ed.stats = { ...(ed.stats || {}), countries: new Set([...Object.keys(briefs), ...(ed.stories || []).map((s) => s.country).filter(Boolean)]).size };
   writeFileSync(a, JSON.stringify(raw, null, 1));
   console.log(`merge: ${Object.values(briefs).flat().length} Ländermeldungen aus ${Object.keys(briefs).length} Ländern, ${dropped} aussortiert oder ohne Übersetzung`);
 } else {
-  console.error('Aufruf: node news/laender.mjs pick [stunden] | merge <ausgabe.json> <laender.json> <uebersetzung.json>');
+  console.error('Aufruf: node news/laender.mjs pick <stunden> <laender.json> | merge <ausgabe.json> <laender.json> <uebersetzung.json>');
   process.exit(1);
 }
