@@ -137,32 +137,40 @@ Krypto-Kurse nur nennen, wenn eine aktuelle Quelle den Wert nennt, nie schätzen
 
 ## Telegram-Bericht
 
-Nach dem Schreiben der Ausgabe:
+Jeder Bericht ist EINE Telegram-Nachricht: die HTML-Datei (Zeitungsdesign) als Dokument, darunter der
+Kurztext mit Top-Story und Telegraph-Link. Ablauf nach dem Schreiben der Ausgabe:
 
-1. Die geschriebene Ausgabe als JSON-Datei speichern (dasselbe Objekt wie beim `set`) und daraus eine
-   Telegraph-Seite bauen: `node news/telegraph.mjs <ausgabe.json>`. Ausgabe ist die URL der Seite
-   (Instant View in Telegram, ohne Konto lesbar, Bilder direkt von den Nachrichtenseiten).
-2. Kurzbericht an Telegram schicken. Nur EINE URL im Text, nämlich die Telegraph-Seite, damit Telegram
-   dafür die Vorschau mit Instant View zeigt. Den claude.ai-Link NICHT in Telegram posten (Mitglieder können
-   ihn nicht öffnen).
+1. Die geschriebene Ausgabe als JSON-Datei speichern (dasselbe Objekt wie beim `set`), z. B. `/tmp/ausgabe.json`.
+2. Telegraph-Seite: `node news/telegraph.mjs /tmp/ausgabe.json` → gibt die URL aus (Instant View in Telegram).
+3. HTML-Datei: `node news/html.mjs /tmp/ausgabe.json /tmp/Nachrichtenlage-HH-00.html .news-img`
+   (bettet die Bilder aus `.news-img/` ein; bei der Abendausgabe Dateiname `Nachrichtenlage-Abend.html`).
+4. Senden an Kanal und Privatchat:
 
 ```bash
-bash news/telegram.sh <<'MSG'
+TELEGRAM_CHAT_ID=-1003977342508,7077870551 TELEGRAM_DOCUMENT=/tmp/Nachrichtenlage-19-00.html bash news/telegram.sh <<'MSG'
 📰 Nachrichtenlage 19:00 Uhr (Dubai)
 
+⭐ Top-Story: <Titel des Aufmachers>
+<1–2 Sätze Kern des Aufmachers> ✅
+
+Außerdem:
 1. <Schlagzeile> ✅
 2. <Schlagzeile> ✅
 3. <Schlagzeile> ⚠️
 
-18 Meldungen, 15 bestätigt
-👉 Ganze Ausgabe mit Bildern: <Telegraph-URL>
+22 Meldungen, 19 bestätigt
+⚡ Schnell lesen: <Telegraph-URL>
+📎 Datei oben: ganze Ausgabe im Zeitungsdesign
 MSG
 ```
 
-- Stündlich: die 3 wichtigsten Schlagzeilen, Deutschland/VAE bevorzugt. Abendausgabe: Titel „🌙 Abendausgabe“,
-  `intro` als Text, die 5 wichtigsten Schlagzeilen und der Link.
+- Der Text ist eine Bildunterschrift und darf höchstens 1024 Zeichen lang sein. Top-Story-Text kurz halten.
+- „Außerdem“: die 3 nächstwichtigen Meldungen, Deutschland/VAE bevorzugt. Abendausgabe: Titel
+  „🌙 Abendausgabe“, statt Top-Story-Text das `intro` (gekürzt), dann 5 Schlagzeilen.
 - Status-Zeichen: ✅ bestätigt, ⚠️ unbestätigt, ❗ widersprüchlich.
-- Schlägt `telegraph.mjs` fehl: Kurzbericht ohne Link senden und den Fehler im Abschlussbericht nennen.
+- Den claude.ai-Link NICHT in Telegram posten (Mitglieder können ihn nicht öffnen).
+- Schlägt Telegraph fehl: Zeile „⚡ Schnell lesen“ weglassen. Schlägt HTML fehl: ohne `TELEGRAM_DOCUMENT`
+  senden. Fehler im Abschlussbericht nennen.
 - Das Skript sendet nur, wenn `TELEGRAM_BOT_TOKEN` gesetzt ist. Seine Ausgabe im Abschlussbericht nennen.
 
 ## Grenzen

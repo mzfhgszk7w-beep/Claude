@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Schickt eine Nachricht an Telegram. Text kommt über stdin.
+# Mit TELEGRAM_DOCUMENT=<datei> wird die Datei als Dokument gesendet und der Text zur Bildunterschrift.
 # Braucht TELEGRAM_BOT_TOKEN und TELEGRAM_CHAT_ID in der Umgebung und api.telegram.org als erlaubte Domain.
 set -euo pipefail
 
@@ -25,11 +26,21 @@ IFS=',' read -ra chats <<< "$TELEGRAM_CHAT_ID"
 for chat in "${chats[@]}"; do
   chat=${chat// /}
   [[ -z "$chat" ]] && continue
-  code=$(curl -sS -m 20 -o /tmp/telegram-resp.json -w '%{http_code}' \
-    "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-    --data-urlencode "chat_id=${chat}" \
-    --data-urlencode "text=${text}" \
-    --data-urlencode "disable_web_page_preview=${TELEGRAM_NO_PREVIEW:-false}") || code=000
+  if [[ -n "${TELEGRAM_DOCUMENT:-}" ]]; then
+    # Mit Datei: als Dokument senden, Text als Bildunterschrift (Telegram erlaubt max. 1024 Zeichen).
+    printf '%s' "${text:0:1024}" > /tmp/telegram-caption.txt
+    code=$(curl -sS -m 60 -o /tmp/telegram-resp.json -w '%{http_code}' \
+      "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendDocument" \
+      -F "chat_id=${chat}" \
+      -F "caption=</tmp/telegram-caption.txt" \
+      -F "document=@${TELEGRAM_DOCUMENT};type=text/html;filename=${TELEGRAM_DOCUMENT_NAME:-$(basename "$TELEGRAM_DOCUMENT")}") || code=000
+  else
+    code=$(curl -sS -m 20 -o /tmp/telegram-resp.json -w '%{http_code}' \
+      "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+      --data-urlencode "chat_id=${chat}" \
+      --data-urlencode "text=${text}" \
+      --data-urlencode "disable_web_page_preview=${TELEGRAM_NO_PREVIEW:-false}") || code=000
+  fi
 
   if [[ "$code" == "200" ]]; then
     echo "telegram: gesendet an $chat"
