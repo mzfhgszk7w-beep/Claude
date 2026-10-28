@@ -182,7 +182,9 @@ Zusätzlich zu den geprüften Meldungen bekommt jedes Land kurze Meldungen (Schl
    - Pro Land jedes Ereignis nur einmal: Mehrere Einträge zum selben Ereignis → nur den mit den meisten Quellen behalten.
    - Weglassen: Clickbait, Werbung, Börsen-Tipps, Meinungsbeiträge ohne Nachricht, Meldungen, in denen das Land nur
      nebenbei vorkommt.
-   - Höchstens 5 je Land, die wichtigsten zuerst (Reihenfolge der Liste beibehalten).
+   - Möglichst viele verschiedene Themen je Land (Politik, Wirtschaft, Gesellschaft, Sport, Kultur, Unglücke, Justiz).
+     Kleinere oder regionale Medien sind in Ordnung. Behalten: bis zu 8 je Land, Deutschland und VAE bis 25, Zypern bis 20
+     (Reihenfolge der Liste beibehalten). Lieber eine echte Meldung eines kleinen Mediums als eine Lücke.
    Ausgabe der Datei möglichst kompakt (eine Zeile pro Eintrag).
 3. Nach dem Schreiben der Ausgabe-JSON: `node news/laender.mjs merge /tmp/ausgabe.json /tmp/laender.json /tmp/laender-de.json`
    (fügt `briefs` hinzu; Einträge ohne deutschen Titel fallen weg). Erst danach `html-v2.mjs` aufrufen.

@@ -16,8 +16,8 @@ const MAX_PER_RUN = 70;
 const UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
 const EN = new Intl.DisplayNames('en', { type: 'region' });
 // Suchbegriffe, wo der Ländername allein mehrdeutig oder ungebräuchlich ist.
-const QUERY_DE = { EU: 'Europäische Union', PS: 'Gaza OR Westjordanland', CD: 'Kongo Kinshasa', CG: 'Kongo Brazzaville', GB: 'Großbritannien OR Grossbritannien', US: 'USA', AE: 'VAE OR Emirate' };
-const QUERY_EN = { EU: 'European Union', PS: 'Gaza OR "West Bank"', CD: 'DR Congo', CG: 'Congo-Brazzaville', US: 'United States', AE: 'UAE' };
+const QUERY_DE = { EU: 'Europäische Union', PS: 'Gaza OR Westjordanland', CD: 'Kongo Kinshasa', CG: 'Kongo Brazzaville', GB: 'Großbritannien OR Grossbritannien', US: 'USA', AE: 'VAE OR Emirate OR Dubai OR "Abu Dhabi"' };
+const QUERY_EN = { EU: 'European Union', PS: 'Gaza OR "West Bank"', CD: 'DR Congo', CG: 'Congo-Brazzaville', US: 'United States', AE: 'UAE OR Dubai OR "Abu Dhabi"' };
 // Keine Nachrichten: Pressemitteilungs-Portale, Kurs-Prognosen, Werbung.
 const SPAM = /openpr|presseportal|einpresswire|prnewswire|globenewswire|coingabbar|price prediction|kursprognose|presale/i;
 
@@ -65,7 +65,8 @@ for (let k = 0; k < due.length; k += 5) {
   await Promise.all(due.slice(k, k + 5).map(async (code) => {
     try {
       const de = await search(QUERY_DE[code] || `"${COUNTRIES[code].name}"`, 'de');
-      const en = de.length < 8 ? await search(QUERY_EN[code] || `"${EN.of(code)}"`, 'en') : [];
+      // Englisch zusätzlich, wenn es auf Deutsch wenig gibt; für Deutschland, VAE und Zypern immer (mehr Themen).
+      const en = de.length < 20 || ['DE', 'AE', 'CY'].includes(code) ? await search(QUERY_EN[code] || `"${EN.of(code)}"`, 'en') : [];
       for (const i of [...de, ...en]) {
         if (seen.has(i.link)) continue;
         seen.add(i.link);

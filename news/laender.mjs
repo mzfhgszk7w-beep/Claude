@@ -2,7 +2,7 @@
 // Meldungen der letzten 24 Stunden aus und hängt sie (auf Deutsch) an eine Ausgabe an.
 //
 //   node news/laender.mjs pick <stunden> <laender.json>
-//       Je Land bis zu 5 Ereignisse. Gleiche Ereignisse verschiedener Medien werden zusammengefasst;
+//       Je Land bis zu 2 × keep() Ereignisse (keep: 8, Deutschland/VAE 25, Zypern 20). Gleiche Ereignisse verschiedener Medien werden zusammengefasst;
 //       Status nach Regel: mind. 2 anerkannte Medien oder mind. 3 verschiedene Medien = bestätigt, sonst unbestätigt.
 //       Schreibt die Kandidaten nach laender.json (id, country, title, lang, source, url, sources, status) und gibt
 //       für die Redaktion eine kompakte Liste ohne Links aus: „id | Land | Sprache | Anzahl Medien | Titel“.
@@ -17,7 +17,10 @@ import { COUNTRIES } from './countries.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DIR = join(ROOT, 'data', 'news', 'laender');
-const PER_COUNTRY = 7; // Kandidaten; die Redaktion behält höchstens 5 je Land
+// Wie viele Meldungen je Land in die Ausgabe kommen (Deutschland, VAE, Zypern ausführlich), und doppelt so viele
+// Kandidaten, aus denen die Redaktion Doppelte und Unsinn aussortiert.
+const KEEP = { DE: 25, AE: 25, CY: 20 };
+const keep = (code) => KEEP[code] || 8;
 
 // Anerkannte Medien (wie in EDITOR-v2.md), so wie Google News sie als Quelle nennt.
 const RECOGNIZED = /reuters|associated press|\bap news\b|\bafp\b|\bdpa\b|bloomberg|financial times|wall street journal|new york times|washington post|\bbbc\b|guardian|economist|sky news|\bcnn\b|cnbc|\bnpr\b|tagesschau|\bard\b|\bzdf\b|deutschlandfunk|spiegel|frankfurter allgemeine|\bfaz\b|süddeutsche|zeit online|\bdie zeit\b|handelsblatt|\bwelt\b|n-tv|deutsche welle|\bdw\b|\bnzz\b|neue zürcher|\borf\b|le monde|france 24|al jazeera|al arabiya|the national|gulf news|khaleej times|arab news|times of israel|haaretz|\bnhk\b|kyodo|south china morning post|\bscmp\b|yonhap|times of india|the hindu|\babc\b|coindesk|the block|tagesspiegel|stern|focus online|rnd|br24|ndr|wdr|mdr|swr|srf|kurier|der standard|krone/i;
@@ -38,6 +41,7 @@ const ALIAS = { US: ['usa', 'us-', 'amerikan', 'american', 'washington', 'trump'
   AE: ['vae', 'uae', 'emirat', 'dubai', 'abu dhabi'], DE: ['deutsch', 'german', 'bundes', 'berlin', 'merz'], EU: ['eu-', 'eu ', 'brüssel', 'brussels', 'europäische'],
   PS: ['gaza', 'westjordan', 'west bank', 'palästin', 'palestin'], CN: ['chines', 'peking', 'beijing'], RU: ['russ', 'moskau', 'moscow', 'kreml', 'kremlin'],
   NL: ['niederländ', 'dutch', 'holland'], CH: ['schweizer', 'swiss'], KR: ['südkorea', 'south korea', 'seoul'], KP: ['nordkorea', 'north korea', 'pjöngjang', 'pyongyang'],
+  CY: ['nikosia', 'nicosia', 'limassol', 'larnaka', 'larnaca', 'paphos', 'famagusta'],
   CD: ['kongo', 'congo', 'kinshasa'], CG: ['kongo', 'congo', 'brazzaville'], CZ: ['tschech', 'czech'], VA: ['vatikan', 'vatican', 'papst', 'pope'] };
 const stem = (n) => n.toLowerCase().replace(/[^a-zäöüéèçíóáñ ]/g, '').slice(0, Math.max(4, n.length - 2));
 const KEYS = Object.fromEntries(Object.entries(COUNTRIES).map(([k, c]) => [k, [stem(c.name), stem(EN.of(k) || c.name), ...(ALIAS[k] || [])]]));
@@ -91,7 +95,7 @@ function pick(hours) {
     };
     clusters.sort((a, b) => score(b) - score(a)
       || Math.max(...b.map((x) => Date.parse(x.published || x.collected))) - Math.max(...a.map((x) => Date.parse(x.published || x.collected))));
-    clusters.slice(0, PER_COUNTRY).forEach((cl, k) => {
+    clusters.slice(0, keep(code) * 2).forEach((cl, k) => {
       const rank = (x) => (x.lang === 'de' ? 2 : 0) + (RECOGNIZED.test(x.source) ? 1 : 0);
       const best = [...cl].sort((a, b) => rank(b) - rank(a))[0];
       const sources = [];
@@ -120,7 +124,7 @@ if (cmd === 'pick') {
   for (const x of JSON.parse(readFileSync(b, 'utf8'))) {
     const title = tr[x.id];
     if (!title) { dropped++; continue; }
-    if ((briefs[x.country] ||= []).length >= 5) { dropped++; continue; }
+    if ((briefs[x.country] ||= []).length >= keep(x.country)) { dropped++; continue; }
     // Nur der Link des Hauptmediums; die übrigen Medien als Name (Google-News-Links sind sehr lang).
     briefs[x.country].push({ title, source: x.source, url: x.url, also: x.sources.map((s) => s.name).filter((n) => n !== x.source), status: x.status });
   }
