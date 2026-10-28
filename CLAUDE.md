@@ -40,11 +40,17 @@ dem Nutzer vereinbart wurde und welche Fallstricke es gibt.
 - **Telegraph (`news/telegraph.mjs`):** zusätzlich zur HTML-Datei, für Instant View ohne Konto.
 - **Empfänger:** immer BEIDE: Kanal „Nexor News“ `-1003977342508` und Privatchat `7077870551`
   (`TELEGRAM_CHAT_ID=-1003977342508,7077870551`). Bot: `@Nexornewsbot`.
-- **Tests nur an den Privatchat `7077870551`**, nie an den Kanal.
+- **Tests nur an den Privatchat `7077870551`**, nie an den Kanal. Das Tagesbriefing geht vorerst NUR an den
+  Privatchat, bis der Nutzer das v2-Format freigibt; danach wieder an beide.
 - Den claude.ai-Artifact-Link nicht in Telegram posten: Die Seite ist privat, Kanal-Mitglieder können sie
   nicht öffnen. Sie bleibt das Archiv des Nutzers: https://claude.ai/artifact/RWKMSmyA63Z6uRavNQnqkK
 
 ## Aufbau
+
+- **Länderseiten (seit 29.10.2026):** `news/laender-collect.mjs` (im Loop) fragt Google News je Land ab (DE, bei wenig
+  Treffern EN), max. 70 Länder pro Runde → `data/news/laender/YYYY-MM-DD.jsonl`. `news/laender.mjs pick` wählt je Land
+  bis zu 5 Ereignisse (Status nach Regel), Claude übersetzt nur die Titel, `merge` hängt `briefs` an. Nutzer will
+  NICHTS auf Englisch. Verbrauch eines Sonnet-Laufs (80 Meldungen): ~3 % der 5-h-Sitzung, <1 % Woche (Max-Plan).
 
 - `news/loop.sh` + GitHub Action: sammelt alle 15 Min Feeds nach `data/news/YYYY-MM-DD.jsonl`, Bilder der
   letzten 25 h (max. 700) auf den Branch `news-images`. Ein Action-Lauf dauert ~6 h, der stündliche Cron startet nur
