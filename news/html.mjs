@@ -63,7 +63,7 @@ ${src ? `<p class="src">Quellen: ${src}</p>` : ''}
 
 const sections = (ed.sections || []).filter((x) => x.stories && x.stories.length);
 const st = ed.stats || {};
-const heading = { morning: 'Morgenbriefing', afternoon: 'Nachmittagsbriefing', evening: 'Abendbriefing' }[ed.kind] || `Ausgabe ${esc(ed.hour)} Uhr`;
+const heading = { morning: 'Morgenbriefing', afternoon: 'Tagesbriefing', evening: 'Abendbriefing' }[ed.kind] || `Ausgabe ${esc(ed.hour)} Uhr`;
 
 const outlook = ed.outlook && ed.outlook.length
   ? `<div class="outlook"><h3>Was morgen wichtig wird</h3><ul>${ed.outlook.map((o) => `<li>${esc(o)}</li>`).join('')}</ul></div>` : '';
@@ -131,7 +131,7 @@ ${imgCss.join('\n')}
 <div class="meta"><span>${heading}</span><span><b>${st.stories ?? '?'}</b> Meldungen</span><span><b>${st.confirmed ?? '?'}</b> bestätigt</span></div>
 ${pages.map((x) => `<section class="page p-${x.id}">${x.body}</section>`).join('\n')}
 <footer>● Bestätigt: mind. 2 unabhängige Quellen · ● Unbestätigt: nur eine Quelle · ● Widersprüchlich: Quellen weichen ab.<br>
-Rund 45 Quellen aus Deutschland, den VAE und weltweit. Briefing täglich um 8:00 Uhr (deutsche Zeit). Bilder: jeweilige Medien.</footer>
+Rund 45 Quellen aus Deutschland, den VAE und weltweit. Briefing täglich um 16:00 Uhr (deutsche Zeit). Bilder: jeweilige Medien.</footer>
 </div></body></html>`;
 
 writeFileSync(outFile, html);

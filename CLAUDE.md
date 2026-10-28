@@ -19,8 +19,9 @@ dem Nutzer vereinbart wurde und welche Fallstricke es gibt.
 - **Faktencheck streng:** mehrere Quellen vergleichen, bei nur einer Quelle WebSearch deutsch + englisch,
   wichtige mit `mode: "extended"`. Primärquelle oder Reaktionen Dritter zählen als Bestätigung
   (Lehre aus dem Audi-US-Werk: zuerst fälschlich „unbestätigt“, war längst bestätigt).
-- **Seit 29.10.2026 nur EIN Briefing täglich um 8:00 Berlin, Modell Sonnet** (Wunsch des Nutzers: Max-Plan schonen,
-  kein Echtgeld; Budget für Extra-Kosten max. 5 USD/Monat). Nachmittags-Trigger deaktiviert, nicht gelöscht.
+- **Seit 29.10.2026 nur EIN Tagesbriefing täglich um 16:00 Berlin (Start 15:50), Modell Sonnet, ganze Welt,
+  letzte 24 h, Format v2 (`news/EDITOR-v2.md`, `news/html-v2.mjs`)** (Wunsch des Nutzers: Max-Plan schonen, kein
+  Echtgeld; Budget für Extra-Kosten max. 5 USD/Monat). Zweiter Trigger deaktiviert, nicht gelöscht.
 - **Zeitplan (deutsche Zeit, Europe/Berlin):** drei Briefings: 8:00 Morgen, 16:30 Nachmittag, 21:00 Abend
   (Start jeweils 10 Min vorher). Früher stündlich, auf Wunsch des Nutzers umgestellt (zu viele Wiederholungen).
 - **Keine Wiederholungen:** jedes Briefing deckt die Zeit seit dem vorigen ab, höchstens ein Viertel aus dem
@@ -31,10 +32,10 @@ dem Nutzer vereinbart wurde und welche Fallstricke es gibt.
 - **HTML-Datei (`news/html.mjs`):** dunkles Zeitungsdesign, Tabs oben. Jeder Tab ist eine eigene „Seite“
   (CSS `:target`, kein JavaScript), Antippen darf NICHT nach unten scrollen. „Top Stories“ = Aufmacher +
   wichtigste Meldung je Ressort. Bilder als data:-URI eingebettet. Vom Nutzer auf dem iPhone abgenommen.
-- **Entwurf v2 (`news/html-v2.mjs`, `news/countries.mjs`), noch NICHT freigegeben:** Themen-Tabs (Politik,
+- **Version 2 (`news/html-v2.mjs`, `news/countries.mjs`), seit 29.10.2026 aktiv für das Tagesbriefing:** Themen-Tabs (Politik,
   Wirtschaft, Finanzen, Krypto, Tech, Panorama, Sport …) und ein Länder-Menü, das von links hereinfährt
-  (Kontinent → Land → Top-Stories; Europa/Deutschland und Golf ausführlich). Erst nach Freigabe des Nutzers
-  nach `news/html.mjs` übernehmen und Ausgabe-Format auf `stories` mit `topic`/`country`/`top` umstellen.
+  (Kontinent → Land → Top-Stories; Europa/Deutschland und Golf ausführlich). Ausgabe-Format `stories` mit
+  `topic`/`country`/`top`; `telegraph.mjs` kann beide Formate.
 - **Vorschauen** immer per Telegram an den Privatchat schicken: Die Claude-App zeigt HTML-Dateien nur als Code.
 - **Telegraph (`news/telegraph.mjs`):** zusätzlich zur HTML-Datei, für Instant View ohne Konto.
 - **Empfänger:** immer BEIDE: Kanal „Nexor News“ `-1003977342508` und Privatchat `7077870551`
@@ -49,7 +50,7 @@ dem Nutzer vereinbart wurde und welche Fallstricke es gibt.
   letzten 25 h (max. 700) auf den Branch `news-images`. Ein Action-Lauf dauert ~6 h, der stündliche Cron startet nur
   den nächsten.
 - Geplante Aufgaben (claude-code-remote Trigger): „Tagesbriefing“ `trig_01UBZwzBLNHgoVkisNNGUb6o`
-  (07:50 Berlin, Sonnet; früher auch 20:50), „Nachmittagsbriefing“ `trig_01W5931tfnpH5qHesTX7qito` (16:20 Berlin, DEAKTIVIERT).
+  (15:50 Berlin, Sonnet), „Nachmittagsbriefing“ `trig_01W5931tfnpH5qHesTX7qito` (16:20 Berlin, DEAKTIVIERT).
   Beide mit Push-Benachrichtigung und gleichem Auftrag; das Briefing ergibt sich aus der Uhrzeit.
   Sie schreiben die Ausgabe in die Artifact-Datenbank (Collection `editions`) und senden an Telegram.
 - `news/telegram.sh`: sendet an mehrere Chat-IDs; mit `TELEGRAM_DOCUMENT=<datei>` als Dokument mit

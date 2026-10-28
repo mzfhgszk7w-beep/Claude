@@ -121,10 +121,10 @@ ${src ? `<p class="src">Quellen: ${src}</p>` : ''}
 // --- Seiten ---
 const all = lead ? [lead, ...stories] : stories;
 const st = ed.stats || {};
-const heading = { morning: 'Morgenbriefing', afternoon: 'Nachmittagsbriefing', evening: 'Abendbriefing' }[ed.kind] || `Ausgabe ${esc(ed.hour)} Uhr`;
+const heading = { morning: 'Morgenbriefing', afternoon: 'Tagesbriefing', evening: 'Abendbriefing' }[ed.kind] || `Ausgabe ${esc(ed.hour)} Uhr`;
 const topicIds = Object.keys(TOPICS).filter((t) => stories.some((s) => s.topic === t));
 const outlook = ed.outlook && ed.outlook.length
-  ? `<div class="outlook"><h3>Was morgen wichtig wird</h3><ul>${ed.outlook.map((o) => `<li>${esc(o)}</li>`).join('')}</ul></div>` : '';
+  ? `<div class="outlook"><h3>${ed.kind === 'afternoon' ? 'Was als Nächstes wichtig wird' : 'Was morgen wichtig wird'}</h3><ul>${ed.outlook.map((o) => `<li>${esc(o)}</li>`).join('')}</ul></div>` : '';
 
 const topStories = stories.filter((s) => s.top);
 const pages = [
@@ -240,7 +240,7 @@ ${imgCss.join('\n')}
 <body>${['top', 'laender', ...pages.slice(1).map((x) => x.id)].map((id) => `<span class="anchor" id="${id}"></span>`).join('')}
 <a class="scrim" href="#top" aria-label="Menü schließen"></a>
 <aside class="drawer"><div class="dh"><b>🌍 Länder</b><a class="x" href="#top" aria-label="Schließen">✕</a></div>
-<p>Kontinent antippen, dann Land wählen. Länder mit Meldungen stehen oben, ausgegraute Länder hatten seit dem letzten Briefing keine geprüfte Meldung. Außerhalb von Europa und Golf nur Top-Stories.</p>${drawer}</aside>
+<p>Kontinent antippen, dann Land wählen. Länder mit Meldungen stehen oben, ausgegraute Länder hatten in den letzten 24 Stunden keine geprüfte Meldung. Außerhalb von Europa und Golf nur Top-Stories.</p>${drawer}</aside>
 <div class="wrap">
 <header><div class="dateline"><span>${esc(fmtDay(ed.date))}</span><span>${heading}</span></div>
 <h1>Nachrichtenlage</h1><div class="tagline">Geprüfte Nachrichten aus aller Welt</div></header>
@@ -248,7 +248,7 @@ ${imgCss.join('\n')}
 <div class="meta"><span><b>${st.stories ?? all.length}</b> Meldungen</span><span><b>${st.confirmed ?? all.filter((s) => s.status === 'bestätigt').length}</b> bestätigt</span><span><b>${byCountry.size}</b> Länder</span></div>
 ${pages.map((x) => `<section class="page p-${x.id}">${x.body}</section>`).join('\n')}
 <footer>● Bestätigt: mind. 2 unabhängige, anerkannte Medien berichten übereinstimmend · ● Unbestätigt: nur eine anerkannte Quelle · ● Widersprüchlich: Quellen weichen in Kernfakten ab.<br>
-Keine Vermutungen, nur berichtete Fakten. Briefing täglich um 8:00 Uhr (deutsche Zeit). Bilder: jeweilige Medien.</footer>
+Keine Vermutungen, nur berichtete Fakten. Briefing täglich um 16:00 Uhr (deutsche Zeit). Bilder: jeweilige Medien.</footer>
 </div></body></html>`;
 
 writeFileSync(outFile, html);

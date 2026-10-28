@@ -105,10 +105,10 @@ Krypto-Kurse nur nennen, wenn eine aktuelle Quelle den Wert nennt, nie schätzen
   exakt so in `image.url` eintragen, `image.credit` = Name des Mediums.
 - Die Seite NIE neu veröffentlichen (kein publish ohne `asset: true`).
 
-## Briefings (seit 29.10.2026: nur EIN Briefing täglich um 8:00 deutscher Zeit)
+## Briefings (seit 29.10.2026: nur EIN Tagesbriefing um 16:00 deutscher Zeit)
 
-Eine Ausgabe am Tag, das Morgenbriefing (`<date>-morgen`, `morning`, `08:00`). Es deckt **die letzten 24 Stunden**
-ab (seit 8:00 Uhr des Vortags). „Voriges Briefing“ = das jüngste vorhandene Dokument in `editions`.
+Eine Ausgabe am Tag, das Tagesbriefing (`<date>-mittag`, `afternoon`, `16:00`). Es deckt **die letzten 24 Stunden**
+ab (seit 16:00 Uhr des Vortags). „Voriges Briefing“ = das jüngste vorhandene Dokument in `editions`.
 Nachmittags- und Abendbriefing sind abgeschaltet; die Regeln dazu bleiben für den Fall, dass der Nutzer sie zurückwill.
 
 1. Meldungen laden, deren `collected` nach dem vorigen Briefing liegt (heutige und gestrige Datei prüfen).

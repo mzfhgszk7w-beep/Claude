@@ -7,6 +7,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
+import { COUNTRIES } from './countries.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DATA_DIR = join(ROOT, 'data', 'news');
@@ -34,7 +35,8 @@ const MARK = { 'bestätigt': '✅ bestätigt', 'unbestätigt': '⚠️ unbestät
 const fmtDay = (d) => new Date(d + 'T12:00:00+04:00').toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Dubai' });
 
 function storyNodes(s, lead) {
-  const out = [{ tag: lead ? 'h3' : 'h4', children: [s.title] }];
+  const c = COUNTRIES[s.country];
+  const out = [{ tag: lead ? 'h3' : 'h4', children: [(c ? c.flag + ' ' : '') + s.title] }];
   const img = findImage(s);
   if (img) out.push({ tag: 'figure', children: [{ tag: 'img', attrs: { src: img.src } }, { tag: 'figcaption', children: ['Bild: ' + img.credit] }] });
   out.push({ tag: 'p', children: [{ tag: 'strong', children: [MARK[s.status] || MARK['unbestätigt']] }] });
@@ -52,20 +54,25 @@ function storyNodes(s, lead) {
 const content = [];
 const st = ed.stats || {};
 content.push({ tag: 'p', children: [{ tag: 'em', children: [
-  `${fmtDay(ed.date)} · ${st.stories ?? '?'} Meldungen, ${st.confirmed ?? '?'} bestätigt · Deutschland · VAE · Welt · Märkte · Krypto`,
+  `${fmtDay(ed.date)} · ${st.stories ?? '?'} Meldungen, ${st.confirmed ?? '?'} bestätigt${st.countries ? ` · ${st.countries} Länder` : ''}`,
 ] }] });
 if (ed.kind === 'evening' && ed.intro) content.push({ tag: 'blockquote', children: [ed.intro] });
 if (ed.lead) content.push(...storyNodes(ed.lead, true));
-for (const sec of ed.sections || []) {
+// Version 2: `stories` mit `topic` statt `sections`. Gruppiert nach Thema, Reihenfolge wie in html-v2.mjs.
+const TOPICS = { pol: 'Politik & Konflikte', wirt: 'Wirtschaft & Unternehmen', fin: 'Finanzen & Märkte', krypto: 'Krypto',
+  tech: 'Technologie & Cyber', wiss: 'Wissenschaft & Gesundheit', umwelt: 'Klima & Umwelt', ges: 'Gesellschaft & Panorama', sport: 'Sport' };
+const sections = ed.sections || (ed.stories ? Object.entries(TOPICS).map(([k, name]) => ({ name, stories: ed.stories.filter((x) => x.topic === k) }))
+  .concat([{ name: 'Weitere Meldungen', stories: ed.stories.filter((x) => !TOPICS[x.topic]) }]) : []);
+for (const sec of sections) {
   if (!sec.stories || !sec.stories.length) continue;
   content.push({ tag: 'hr' }, { tag: 'h3', children: [sec.name] });
   for (const s of sec.stories) content.push(...storyNodes(s, false));
 }
 if (ed.outlook && ed.outlook.length) {
-  content.push({ tag: 'hr' }, { tag: 'h3', children: ['Was morgen wichtig wird'] }, { tag: 'ul', children: ed.outlook.map((o) => ({ tag: 'li', children: [o] })) });
+  content.push({ tag: 'hr' }, { tag: 'h3', children: [ed.kind === 'afternoon' ? 'Was als Nächstes wichtig wird' : 'Was morgen wichtig wird'] }, { tag: 'ul', children: ed.outlook.map((o) => ({ tag: 'li', children: [o] })) });
 }
 content.push({ tag: 'hr' }, { tag: 'p', children: [{ tag: 'em', children: [
-  '✅ mind. 2 unabhängige Quellen · ⚠️ nur eine Quelle · ❗ Quellen widersprechen sich. Rund 45 Quellen, Briefing täglich um 8:00 Uhr (deutsche Zeit). ',
+  '✅ mind. 2 unabhängige Quellen · ⚠️ nur eine Quelle · ❗ Quellen widersprechen sich. Briefing täglich um 16:00 Uhr (deutsche Zeit). ',
   { tag: 'a', attrs: { href: SITE }, children: ['Archiv'] },
 ] }] });
 
@@ -81,7 +88,7 @@ function call(method, params) {
 // Telegraph-Seiten dürfen höchstens 64 KB groß sein; notfalls Meldungen von hinten kürzen.
 while (Buffer.byteLength(JSON.stringify(content)) > 62000) content.splice(content.length - 3, 1);
 
-const NAME = { morning: 'Morgenbriefing', afternoon: 'Nachmittagsbriefing', evening: 'Abendbriefing' };
+const NAME = { morning: 'Morgenbriefing', afternoon: 'Tagesbriefing', evening: 'Abendbriefing' };
 const title = `Nachrichtenlage ${NAME[ed.kind] || ed.hour + ' Uhr'} · ${fmtDay(ed.date)}`;
 const acc = call('createAccount', { short_name: 'NexorNews', author_name: 'Nexor News' });
 const page = call('createPage', { access_token: acc.access_token, title, author_name: 'Nexor News', content });
