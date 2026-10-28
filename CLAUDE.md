@@ -19,6 +19,7 @@ dem Nutzer vereinbart wurde und welche Fallstricke es gibt.
 - **Faktencheck streng:** mehrere Quellen vergleichen, bei nur einer Quelle WebSearch deutsch + englisch,
   wichtige mit `mode: "extended"`. Primärquelle oder Reaktionen Dritter zählen als Bestätigung
   (Lehre aus dem Audi-US-Werk: zuerst fälschlich „unbestätigt“, war längst bestätigt).
+- **GESTOPPT (28.10.2026, Wunsch des Nutzers):** beide Trigger deaktiviert, GitHub-Cron entfernt. Nichts senden, nichts sammeln, bis der Nutzer es ausdrücklich wieder will. Budget-Vorgabe: max. 5 USD/Monat.
 - **Zeitplan (deutsche Zeit, Europe/Berlin):** drei Briefings: 8:00 Morgen, 16:30 Nachmittag, 21:00 Abend
   (Start jeweils 10 Min vorher). Früher stündlich, auf Wunsch des Nutzers umgestellt (zu viele Wiederholungen).
 - **Keine Wiederholungen:** jedes Briefing deckt die Zeit seit dem vorigen ab, höchstens ein Viertel aus dem
