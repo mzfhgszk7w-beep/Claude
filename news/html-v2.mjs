@@ -261,7 +261,7 @@ ${imgCss.join('\n')}
 <body>${['top', 'laender', ...pages.slice(1).map((x) => x.id)].map((id) => `<span class="anchor" id="${id}"></span>`).join('')}
 <a class="scrim" href="#top" aria-label="Menü schließen"></a>
 <aside class="drawer"><div class="dh"><b>🌍 Länder</b><a class="x" href="#top" aria-label="Schließen">✕</a></div>
-<p>Kontinent antippen, dann Land wählen. Länder mit Meldungen stehen oben, die Zahl zeigt die Meldungen der letzten 24 Stunden. ● grün: mind. 2 anerkannte Medien, ● gelb: eine Quelle.</p>${drawer}</aside>
+<p>Kontinent antippen, dann Land wählen. Länder mit Meldungen stehen oben, die Zahl zeigt die Meldungen der letzten 24 Stunden. ● grün: mehrere unabhängige Medien berichten, ● gelb: bisher nur eine Quelle.</p>${drawer}</aside>
 <div class="wrap">
 <header><div class="dateline"><span>${esc(fmtDay(ed.date))}</span><span>${heading}</span></div>
 <h1>Nachrichtenlage</h1><div class="tagline">Geprüfte Nachrichten aus aller Welt</div></header>

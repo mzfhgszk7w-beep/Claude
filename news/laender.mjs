@@ -3,12 +3,12 @@
 //
 //   node news/laender.mjs pick [stunden] > laender.json
 //       Je Land bis zu 5 Ereignisse. Gleiche Ereignisse verschiedener Medien werden zusammengefasst;
-//       Status nach Regel: mind. 2 anerkannte Medien = bestätigt, sonst unbestätigt.
+//       Status nach Regel: mind. 2 anerkannte Medien oder mind. 3 verschiedene Medien = bestätigt, sonst unbestätigt.
 //       Felder: id, country, title, lang ("de" oder "en"), source, url, sources, status.
 //   node news/laender.mjs merge <ausgabe.json> <laender.json> <uebersetzung.json>
-//       uebersetzung.json = { "<id>": "deutscher Titel" } für alle Einträge mit lang != "de" (Claude übersetzt).
-//       Schreibt `briefs: { "<ISO>": [ { title, source, url, sources, status } ] }` in die Ausgabe.
-//       Einträge ohne deutschen Titel fallen weg: In der Ausgabe steht nichts auf Englisch.
+//       uebersetzung.json = { "<id>": "deutscher Titel" } für jeden Eintrag, der bleiben soll (Claude übersetzt
+//       und sortiert Doppelte/Unsinn aus). Schreibt `briefs: { "<ISO>": [ { title, source, url, sources, status } ] }`
+//       in die Ausgabe. Einträge ohne Titel in uebersetzung.json fallen weg: In der Ausgabe steht nichts auf Englisch.
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -16,7 +16,7 @@ import { COUNTRIES } from './countries.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DIR = join(ROOT, 'data', 'news', 'laender');
-const PER_COUNTRY = 5;
+const PER_COUNTRY = 7; // Kandidaten; die Redaktion behält höchstens 5 je Land
 
 // Anerkannte Medien (wie in EDITOR-v2.md), so wie Google News sie als Quelle nennt.
 const RECOGNIZED = /reuters|associated press|\bap news\b|\bafp\b|\bdpa\b|bloomberg|financial times|wall street journal|new york times|washington post|\bbbc\b|guardian|economist|sky news|\bcnn\b|cnbc|\bnpr\b|tagesschau|\bard\b|\bzdf\b|deutschlandfunk|spiegel|frankfurter allgemeine|\bfaz\b|süddeutsche|zeit online|\bdie zeit\b|handelsblatt|\bwelt\b|n-tv|deutsche welle|\bdw\b|\bnzz\b|neue zürcher|\borf\b|le monde|france 24|al jazeera|al arabiya|the national|gulf news|khaleej times|arab news|times of israel|haaretz|\bnhk\b|kyodo|south china morning post|\bscmp\b|yonhap|times of india|the hindu|\babc\b|coindesk|the block|tagesspiegel|stern|focus online|rnd|br24|ndr|wdr|mdr|swr|srf|kurier|der standard|krone/i;
@@ -30,9 +30,24 @@ function lang(title) {
   return de > en ? 'de' : 'en';
 }
 
+// Die Meldung muss das Land im Titel nennen (Wortstamm, damit auch „zyprische“, „Cypriot“, „Moroccan“ passen).
+// Sonst landen Treffer, bei denen das Land nur im Text oder im Namen der Zeitung vorkommt („Cyprus Mail“), auf der Seite.
+const EN = new Intl.DisplayNames('en', { type: 'region' });
+const ALIAS = { US: ['usa', 'us-', 'amerikan', 'american', 'washington', 'trump'], GB: ['brit', 'uk ', 'london', 'england', 'schottland', 'scotland'],
+  AE: ['vae', 'uae', 'emirat', 'dubai', 'abu dhabi'], DE: ['deutsch', 'german', 'bundes', 'berlin', 'merz'], EU: ['eu-', 'eu ', 'brüssel', 'brussels', 'europäische'],
+  PS: ['gaza', 'westjordan', 'west bank', 'palästin', 'palestin'], CN: ['chines', 'peking', 'beijing'], RU: ['russ', 'moskau', 'moscow', 'kreml', 'kremlin'],
+  NL: ['niederländ', 'dutch', 'holland'], CH: ['schweizer', 'swiss'], KR: ['südkorea', 'south korea', 'seoul'], KP: ['nordkorea', 'north korea', 'pjöngjang', 'pyongyang'],
+  CD: ['kongo', 'congo', 'kinshasa'], CG: ['kongo', 'congo', 'brazzaville'], CZ: ['tschech', 'czech'], VA: ['vatikan', 'vatican', 'papst', 'pope'] };
+const stem = (n) => n.toLowerCase().replace(/[^a-zäöüéèçíóáñ ]/g, '').slice(0, Math.max(4, n.length - 2));
+const KEYS = Object.fromEntries(Object.entries(COUNTRIES).map(([k, c]) => [k, [stem(c.name), stem(EN.of(k) || c.name), ...(ALIAS[k] || [])]]));
+const mentions = (code, title) => { const t = ' ' + title.toLowerCase() + ' '; return KEYS[code].some((k) => t.includes(k)); };
+// Syndizierte Füllmeldungen („Cyprus Daily Life“), Börsen-Tipps, Werbung.
+const JUNK = /daily life|stocks to watch|aktie\b|-aktie|kursziel|price prediction|poker|horoskop|gewinnspiel|\bodds\b|betting|wetten/i;
+
 const STOP = new Set([...DE_WORDS, ...EN_WORDS, 'news', 'nachrichten', 'live', 'update', 'video', 'jetzt', 'heute', 'today']);
-const tokens = (t) => new Set(t.toLowerCase().split(/[^a-zäöüß0-9]+/).filter((x) => x.length > 3 && !STOP.has(x)));
-const similar = (a, b) => { let n = 0; for (const x of a) if (b.has(x)) n++; return n >= 2 && n / Math.min(a.size, b.size) >= 0.5; };
+// Wortanfänge (6 Zeichen), damit „Zugunglück“/„Zugunglücks“ oder „tödlichen“/„tödliches“ zusammenpassen.
+const tokens = (t) => new Set(t.toLowerCase().split(/[^a-zäöüß0-9]+/).filter((x) => x.length > 3 && !STOP.has(x)).map((x) => x.slice(0, 6)));
+const similar = (a, b) => { let n = 0; for (const x of a) if (b.has(x)) n++; return n >= 2 && n / Math.min(a.size, b.size) >= 0.34; };
 
 function load(hours) {
   const since = Date.now() - hours * 3600 * 1000;
@@ -45,7 +60,11 @@ function load(hours) {
       if (!line.trim()) continue;
       try {
         const i = JSON.parse(line);
-        if (Date.parse(i.published || i.collected) >= since && COUNTRIES[i.country]) items.push(i);
+        if (Date.parse(i.published || i.collected) < since || !COUNTRIES[i.country]) continue;
+        // Medien hängen oft „— Cyprus Mail“ an; das zählt nicht als Nennung des Landes.
+        i.title = i.title.replace(/\s+[—–-]\s+[^—–-]{2,40}$/, (m) => (/(mail|news|times|post|herald|daily|today|zeitung)/i.test(m) ? '' : m));
+        if (i.title.split(/\s+/).length < 5 || JUNK.test(i.title) || !mentions(i.country, i.title)) continue;
+        items.push(i);
       } catch {}
     }
   }
@@ -78,7 +97,7 @@ function pick(hours) {
       for (const x of cl) if (!sources.some((s) => s.name === x.source)) sources.push({ name: x.source, url: x.link });
       const recognized = sources.filter((s) => RECOGNIZED.test(s.name)).length;
       out.push({ id: `${code}-${k + 1}`, country: code, title: best.title, lang: best.lang, source: best.source, url: best.link,
-        sources: sources.slice(0, 4), status: recognized >= 2 ? 'bestätigt' : 'unbestätigt' });
+        sources: sources.slice(0, 4), status: recognized >= 2 || sources.length >= 3 ? 'bestätigt' : 'unbestätigt' });
     });
   }
   return out;
@@ -87,7 +106,8 @@ function pick(hours) {
 const [, , cmd, a, b, c] = process.argv;
 if (cmd === 'pick') {
   const list = pick(Number(a) || 24);
-  console.log(JSON.stringify(list, null, 1));
+  // Eine Zeile pro Eintrag: kompakt für die Redaktion, trotzdem gültiges JSON.
+  console.log('[\n' + list.map((x) => JSON.stringify(x)).join(',\n') + '\n]');
   const n = new Set(list.map((x) => x.country)).size;
   console.error(`laender: ${list.length} Meldungen aus ${n} Ländern, ${list.filter((x) => x.lang !== 'de').length} zu übersetzen`);
 } else if (cmd === 'merge') {
@@ -97,14 +117,15 @@ if (cmd === 'pick') {
   const briefs = {};
   let dropped = 0;
   for (const x of JSON.parse(readFileSync(b, 'utf8'))) {
-    const title = tr[x.id] || (x.lang === 'de' ? x.title : null);
+    const title = tr[x.id];
     if (!title) { dropped++; continue; }
-    (briefs[x.country] ||= []).push({ title, source: x.source, url: x.url, sources: x.sources, status: x.status });
+    if ((briefs[x.country] ||= []).length >= 5) { dropped++; continue; }
+    briefs[x.country].push({ title, source: x.source, url: x.url, sources: x.sources, status: x.status });
   }
   ed.briefs = briefs;
   ed.stats = { ...(ed.stats || {}), countries: new Set([...Object.keys(briefs), ...(ed.stories || []).map((s) => s.country).filter(Boolean)]).size };
   writeFileSync(a, JSON.stringify(raw, null, 1));
-  console.log(`merge: ${Object.values(briefs).flat().length} Ländermeldungen aus ${Object.keys(briefs).length} Ländern, ${dropped} ohne Übersetzung weggelassen`);
+  console.log(`merge: ${Object.values(briefs).flat().length} Ländermeldungen aus ${Object.keys(briefs).length} Ländern, ${dropped} aussortiert oder ohne Übersetzung`);
 } else {
   console.error('Aufruf: node news/laender.mjs pick [stunden] | merge <ausgabe.json> <laender.json> <uebersetzung.json>');
   process.exit(1);

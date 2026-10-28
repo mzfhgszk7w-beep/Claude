@@ -170,15 +170,19 @@ Gesetze, die in Kraft treten). Statusangaben aus dem vorigen Briefing neu prüfe
 
 Zusätzlich zu den geprüften Meldungen bekommt jedes Land kurze Meldungen (Schlagzeile + Medium + Link) aus
 `data/news/laender/` (Google News je Land, gesammelt von `news/laender-collect.mjs`). Die Auswahl und der Status
-(✅ mind. 2 anerkannte Medien, sonst ⚠️) kommen aus dem Skript, NICHT aus eigener Recherche. Nur übersetzen:
+(✅ mind. 2 anerkannte oder 3 verschiedene Medien, sonst ⚠️) kommen aus dem Skript, NICHT aus eigener Recherche. Deine Aufgabe ist nur übersetzen und aussortieren:
 
 1. `node news/laender.mjs pick 24 > /tmp/laender.json` (Meldung auf stderr: wie viele zu übersetzen sind).
-2. Alle Einträge mit `"lang": "en"` (oder sonst nicht deutsch) ins Deutsche übersetzen: sachlich, knapp, wie eine
-   deutsche Nachrichtenschlagzeile, Namen in deutscher Schreibweise, nichts hinzufügen oder weglassen. Auch deutsche
-   Titel prüfen: Ist ein Titel mit `"lang": "de"` in Wahrheit nicht deutsch, ebenfalls übersetzen.
-   Ergebnis als `/tmp/laender-de.json` speichern: `{ "<id>": "deutscher Titel", ... }`.
-   Clickbait, Werbung, Kurs-Prognosen oder offensichtlich falsch zugeordnete Meldungen (Land kommt im Kern nicht vor)
-   NICHT übersetzen: sie fallen dann weg.
+2. Die Liste durchgehen und `/tmp/laender-de.json` schreiben: `{ "<id>": "deutscher Titel", ... }` mit **jedem Eintrag,
+   der bleiben soll** (fehlende ids fallen weg). Dabei:
+   - Nicht deutsche Titel ins Deutsche übersetzen: sachlich, knapp, wie eine deutsche Nachrichtenschlagzeile,
+     Namen in deutscher Schreibweise, nichts hinzufügen oder weglassen. Deutsche Titel unverändert übernehmen
+     (nur Zusätze wie „(S+)“ oder „- Panorama - SZ“ entfernen).
+   - Pro Land jedes Ereignis nur einmal: Mehrere Einträge zum selben Ereignis → nur den mit den meisten Quellen behalten.
+   - Weglassen: Clickbait, Werbung, Börsen-Tipps, Meinungsbeiträge ohne Nachricht, Meldungen, in denen das Land nur
+     nebenbei vorkommt.
+   - Höchstens 5 je Land, die wichtigsten zuerst (Reihenfolge der Liste beibehalten).
+   Ausgabe der Datei möglichst kompakt (eine Zeile pro Eintrag).
 3. Nach dem Schreiben der Ausgabe-JSON: `node news/laender.mjs merge /tmp/ausgabe.json /tmp/laender.json /tmp/laender-de.json`
    (fügt `briefs` hinzu; Einträge ohne deutschen Titel fallen weg). Erst danach `html-v2.mjs` aufrufen.
    `briefs` NICHT in die Artifact-Datenbank schreiben (zu groß), nur in die HTML-Datei.
