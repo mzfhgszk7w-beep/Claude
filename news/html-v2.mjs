@@ -248,7 +248,7 @@ ${imgCss.join('\n')}
 <div class="meta"><span><b>${st.stories ?? all.length}</b> Meldungen</span><span><b>${st.confirmed ?? all.filter((s) => s.status === 'bestätigt').length}</b> bestätigt</span><span><b>${byCountry.size}</b> Länder</span></div>
 ${pages.map((x) => `<section class="page p-${x.id}">${x.body}</section>`).join('\n')}
 <footer>● Bestätigt: mind. 2 unabhängige, anerkannte Medien berichten übereinstimmend · ● Unbestätigt: nur eine anerkannte Quelle · ● Widersprüchlich: Quellen weichen in Kernfakten ab.<br>
-Keine Vermutungen, nur berichtete Fakten. Briefings um 8:00, 16:30 und 21:00 Uhr (deutsche Zeit). Bilder: jeweilige Medien.</footer>
+Keine Vermutungen, nur berichtete Fakten. Briefing täglich um 8:00 Uhr (deutsche Zeit). Bilder: jeweilige Medien.</footer>
 </div></body></html>`;
 
 writeFileSync(outFile, html);

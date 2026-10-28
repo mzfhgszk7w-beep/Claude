@@ -11,8 +11,8 @@ import sharp from 'sharp';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DATA_DIR = join(ROOT, 'data', 'news');
 const IMG_DIR = process.argv[2];
-// 13 Stunden: das Morgenbriefing deckt die Nacht seit 21 Uhr ab. Höchstens 700 Bilder (~25 MB).
-const WINDOW_MS = 13 * 3600 * 1000;
+// 25 Stunden: das tägliche Morgenbriefing deckt die letzten 24 Stunden ab. Höchstens 700 Bilder (~25 MB).
+const WINDOW_MS = 25 * 3600 * 1000;
 const MAX_KEEP = 700;
 const MAX_NEW = 400;
 const UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';

@@ -19,7 +19,8 @@ dem Nutzer vereinbart wurde und welche Fallstricke es gibt.
 - **Faktencheck streng:** mehrere Quellen vergleichen, bei nur einer Quelle WebSearch deutsch + englisch,
   wichtige mit `mode: "extended"`. Primärquelle oder Reaktionen Dritter zählen als Bestätigung
   (Lehre aus dem Audi-US-Werk: zuerst fälschlich „unbestätigt“, war längst bestätigt).
-- **GESTOPPT (28.10.2026, Wunsch des Nutzers):** beide Trigger deaktiviert, GitHub-Cron entfernt. Nichts senden, nichts sammeln, bis der Nutzer es ausdrücklich wieder will. Budget-Vorgabe: max. 5 USD/Monat.
+- **Seit 29.10.2026 nur EIN Briefing täglich um 8:00 Berlin, Modell Sonnet** (Wunsch des Nutzers: Max-Plan schonen,
+  kein Echtgeld; Budget für Extra-Kosten max. 5 USD/Monat). Nachmittags-Trigger deaktiviert, nicht gelöscht.
 - **Zeitplan (deutsche Zeit, Europe/Berlin):** drei Briefings: 8:00 Morgen, 16:30 Nachmittag, 21:00 Abend
   (Start jeweils 10 Min vorher). Früher stündlich, auf Wunsch des Nutzers umgestellt (zu viele Wiederholungen).
 - **Keine Wiederholungen:** jedes Briefing deckt die Zeit seit dem vorigen ab, höchstens ein Viertel aus dem
@@ -45,10 +46,10 @@ dem Nutzer vereinbart wurde und welche Fallstricke es gibt.
 ## Aufbau
 
 - `news/loop.sh` + GitHub Action: sammelt alle 15 Min Feeds nach `data/news/YYYY-MM-DD.jsonl`, Bilder der
-  letzten 13 h (max. 700) auf den Branch `news-images`. Ein Action-Lauf dauert ~6 h, der stündliche Cron startet nur
+  letzten 25 h (max. 700) auf den Branch `news-images`. Ein Action-Lauf dauert ~6 h, der stündliche Cron startet nur
   den nächsten.
-- Geplante Aufgaben (claude-code-remote Trigger): „Morgen- & Abendbriefing“ `trig_01UBZwzBLNHgoVkisNNGUb6o`
-  (07:50 und 20:50 Berlin), „Nachmittagsbriefing“ `trig_01W5931tfnpH5qHesTX7qito` (16:20 Berlin).
+- Geplante Aufgaben (claude-code-remote Trigger): „Tagesbriefing“ `trig_01UBZwzBLNHgoVkisNNGUb6o`
+  (07:50 Berlin, Sonnet; früher auch 20:50), „Nachmittagsbriefing“ `trig_01W5931tfnpH5qHesTX7qito` (16:20 Berlin, DEAKTIVIERT).
   Beide mit Push-Benachrichtigung und gleichem Auftrag; das Briefing ergibt sich aus der Uhrzeit.
   Sie schreiben die Ausgabe in die Artifact-Datenbank (Collection `editions`) und senden an Telegram.
 - `news/telegram.sh`: sendet an mehrere Chat-IDs; mit `TELEGRAM_DOCUMENT=<datei>` als Dokument mit

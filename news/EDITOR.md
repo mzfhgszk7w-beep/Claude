@@ -18,7 +18,7 @@ Cybersecurity- und Tech-Meldungen von Gewicht.
   `cat` ist die Feed-Kategorie: `de`, `uae`, `world`, `markets`, `business`, `crypto`.
   Gesammelt alle 15 Minuten per GitHub Action (`.github/workflows/news-collect.yml`), rund 40 Feeds.
 - Feed-Zustand: `data/news/status.json` (welche Feeds zuletzt fehlschlugen).
-- Bilder: Branch `news-images` (Bilder der letzten 13 Stunden, höchstens 700, 640px JPEG).
+- Bilder: Branch `news-images` (Bilder der letzten 25 Stunden, höchstens 700, 640px JPEG).
   `index.json` dort: `{ "<Artikel-Link>": { "file": "<hash>.jpg", "source": "...", "title": "..." } }`.
 - Vorher immer `git pull` auf dem Default-Branch, damit die neuesten Daten da sind, und die Bilder holen:
   `git fetch --depth=1 origin news-images && rm -rf .news-img && mkdir .news-img && git --work-tree=.news-img checkout FETCH_HEAD -- . && git reset -q`
@@ -105,10 +105,11 @@ Krypto-Kurse nur nennen, wenn eine aktuelle Quelle den Wert nennt, nie schätzen
   exakt so in `image.url` eintragen, `image.credit` = Name des Mediums.
 - Die Seite NIE neu veröffentlichen (kein publish ohne `asset: true`).
 
-## Briefings (8:00, 16:30, 21:00 deutscher Zeit)
+## Briefings (seit 29.10.2026: nur EIN Briefing täglich um 8:00 deutscher Zeit)
 
-Drei Ausgaben am Tag. Jede deckt **alles seit dem vorigen Briefing** ab
-(Morgen: seit 21:00 Uhr des Vortags, Nachmittag: seit 8:00, Abend: seit 16:30).
+Eine Ausgabe am Tag, das Morgenbriefing (`<date>-morgen`, `morning`, `08:00`). Es deckt **die letzten 24 Stunden**
+ab (seit 8:00 Uhr des Vortags). „Voriges Briefing“ = das jüngste vorhandene Dokument in `editions`.
+Nachmittags- und Abendbriefing sind abgeschaltet; die Regeln dazu bleiben für den Fall, dass der Nutzer sie zurückwill.
 
 1. Meldungen laden, deren `collected` nach dem vorigen Briefing liegt (heutige und gestrige Datei prüfen).
 2. Gleiche Ereignisse über Quellen hinweg zusammenführen.

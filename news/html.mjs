@@ -131,7 +131,7 @@ ${imgCss.join('\n')}
 <div class="meta"><span>${heading}</span><span><b>${st.stories ?? '?'}</b> Meldungen</span><span><b>${st.confirmed ?? '?'}</b> bestätigt</span></div>
 ${pages.map((x) => `<section class="page p-${x.id}">${x.body}</section>`).join('\n')}
 <footer>● Bestätigt: mind. 2 unabhängige Quellen · ● Unbestätigt: nur eine Quelle · ● Widersprüchlich: Quellen weichen ab.<br>
-Rund 45 Quellen aus Deutschland, den VAE und weltweit. Briefings um 8:00, 16:30 und 21:00 Uhr (deutsche Zeit). Bilder: jeweilige Medien.</footer>
+Rund 45 Quellen aus Deutschland, den VAE und weltweit. Briefing täglich um 8:00 Uhr (deutsche Zeit). Bilder: jeweilige Medien.</footer>
 </div></body></html>`;
 
 writeFileSync(outFile, html);

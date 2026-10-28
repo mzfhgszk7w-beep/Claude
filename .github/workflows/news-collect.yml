@@ -3,6 +3,8 @@ name: News collect
 # Ein Lauf sammelt ~6 Stunden lang alle 15 Minuten (news/loop.sh).
 # Der stündliche Zeitplan sorgt nur dafür, dass immer ein Lauf aktiv oder wartend ist.
 on:
+  schedule:
+    - cron: '7 * * * *'
   workflow_dispatch:
 
 permissions:

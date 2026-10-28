@@ -65,7 +65,7 @@ if (ed.outlook && ed.outlook.length) {
   content.push({ tag: 'hr' }, { tag: 'h3', children: ['Was morgen wichtig wird'] }, { tag: 'ul', children: ed.outlook.map((o) => ({ tag: 'li', children: [o] })) });
 }
 content.push({ tag: 'hr' }, { tag: 'p', children: [{ tag: 'em', children: [
-  '✅ mind. 2 unabhängige Quellen · ⚠️ nur eine Quelle · ❗ Quellen widersprechen sich. Rund 45 Quellen, Briefings um 8:00, 16:30 und 21:00 Uhr (deutsche Zeit). ',
+  '✅ mind. 2 unabhängige Quellen · ⚠️ nur eine Quelle · ❗ Quellen widersprechen sich. Rund 45 Quellen, Briefing täglich um 8:00 Uhr (deutsche Zeit). ',
   { tag: 'a', attrs: { href: SITE }, children: ['Archiv'] },
 ] }] });
 
