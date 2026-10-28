@@ -11,7 +11,9 @@ import sharp from 'sharp';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DATA_DIR = join(ROOT, 'data', 'news');
 const IMG_DIR = process.argv[2];
-const WINDOW_MS = 3 * 3600 * 1000;
+// 13 Stunden: das Morgenbriefing deckt die Nacht seit 21 Uhr ab. Höchstens 700 Bilder (~25 MB).
+const WINDOW_MS = 13 * 3600 * 1000;
+const MAX_KEEP = 700;
 const MAX_NEW = 400;
 const UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
 
@@ -34,7 +36,8 @@ for (const d of [dayInTz(new Date(now)), dayInTz(new Date(now - 86400000))]) {
 }
 
 await mkdir(IMG_DIR, { recursive: true });
-const wanted = new Map(items.map((i) => [`${key(i.link)}.jpg`, i]));
+items.sort((a, b) => (a.collected < b.collected ? 1 : -1));
+const wanted = new Map(items.slice(0, MAX_KEEP).map((i) => [`${key(i.link)}.jpg`, i]));
 for (const f of await readdir(IMG_DIR)) {
   if (f.endsWith('.jpg') && !wanted.has(f)) await unlink(join(IMG_DIR, f));
 }
@@ -46,7 +49,7 @@ async function grab(file, item) {
   // Mini-Vorschaubilder (z. B. 140px) sehen auf der Seite unscharf aus.
   const { width = 0 } = await sharp(buf).metadata();
   if (width < 400) throw new Error(`too small: ${width}px`);
-  await sharp(buf).rotate().resize({ width: 720, withoutEnlargement: true }).jpeg({ quality: 70, mozjpeg: true }).toFile(join(IMG_DIR, file));
+  await sharp(buf).rotate().resize({ width: 640, withoutEnlargement: true }).jpeg({ quality: 65, mozjpeg: true }).toFile(join(IMG_DIR, file));
 }
 
 const todo = [...wanted].filter(([f]) => !existsSync(join(IMG_DIR, f))).slice(0, MAX_NEW);

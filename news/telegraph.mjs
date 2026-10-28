@@ -65,7 +65,7 @@ if (ed.outlook && ed.outlook.length) {
   content.push({ tag: 'hr' }, { tag: 'h3', children: ['Was morgen wichtig wird'] }, { tag: 'ul', children: ed.outlook.map((o) => ({ tag: 'li', children: [o] })) });
 }
 content.push({ tag: 'hr' }, { tag: 'p', children: [{ tag: 'em', children: [
-  '✅ mind. 2 unabhängige Quellen · ⚠️ nur eine Quelle · ❗ Quellen widersprechen sich. Rund 45 Quellen, stündlich 11–02 Uhr, Abendausgabe 23 Uhr (Dubai). ',
+  '✅ mind. 2 unabhängige Quellen · ⚠️ nur eine Quelle · ❗ Quellen widersprechen sich. Rund 45 Quellen, Briefings um 8:00, 16:30 und 21:00 Uhr (deutsche Zeit). ',
   { tag: 'a', attrs: { href: SITE }, children: ['Archiv'] },
 ] }] });
 
@@ -81,9 +81,8 @@ function call(method, params) {
 // Telegraph-Seiten dürfen höchstens 64 KB groß sein; notfalls Meldungen von hinten kürzen.
 while (Buffer.byteLength(JSON.stringify(content)) > 62000) content.splice(content.length - 3, 1);
 
-const title = ed.kind === 'evening'
-  ? `Nachrichtenlage Abendausgabe · ${fmtDay(ed.date)}`
-  : `Nachrichtenlage ${ed.hour} Uhr · ${fmtDay(ed.date)}`;
+const NAME = { morning: 'Morgenbriefing', afternoon: 'Nachmittagsbriefing', evening: 'Abendbriefing' };
+const title = `Nachrichtenlage ${NAME[ed.kind] || ed.hour + ' Uhr'} · ${fmtDay(ed.date)}`;
 const acc = call('createAccount', { short_name: 'NexorNews', author_name: 'Nexor News' });
 const page = call('createPage', { access_token: acc.access_token, title, author_name: 'Nexor News', content });
 console.log(page.url);

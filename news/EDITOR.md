@@ -1,7 +1,8 @@
 # Redaktionsanleitung Nachrichtenlage
 
 Diese Anleitung steuert die geplanten Claude-Läufe, die aus den gesammelten Rohmeldungen
-eine Ausgabe bauen. Sprache der Ausgabe: **Deutsch**. Zeitzone: **Asia/Dubai (UTC+4)**.
+eine Ausgabe bauen. Sprache der Ausgabe: **Deutsch**. Zeitzone für Termine und Dokument-IDs: **Europe/Berlin**
+(deutsche Zeit). Rohdaten-Dateinamen bleiben im Dubai-Datum.
 
 ## Leser
 
@@ -15,9 +16,9 @@ Cybersecurity- und Tech-Meldungen von Gewicht.
 - Rohmeldungen: `data/news/YYYY-MM-DD.jsonl` (Dateiname = Kalenderdatum Dubai), eine JSON-Zeile pro Meldung:
   `{source, cat, feed, title, link, summary, published, image, collected}`.
   `cat` ist die Feed-Kategorie: `de`, `uae`, `world`, `markets`, `business`, `crypto`.
-  Gesammelt alle 20 Minuten per GitHub Action (`.github/workflows/news-collect.yml`), rund 40 Feeds.
+  Gesammelt alle 15 Minuten per GitHub Action (`.github/workflows/news-collect.yml`), rund 40 Feeds.
 - Feed-Zustand: `data/news/status.json` (welche Feeds zuletzt fehlschlugen).
-- Bilder: Branch `news-images` (nur Bilder der letzten 3 Stunden, 720px JPEG).
+- Bilder: Branch `news-images` (Bilder der letzten 13 Stunden, höchstens 700, 640px JPEG).
   `index.json` dort: `{ "<Artikel-Link>": { "file": "<hash>.jpg", "source": "...", "title": "..." } }`.
 - Vorher immer `git pull` auf dem Default-Branch, damit die neuesten Daten da sind, und die Bilder holen:
   `git fetch --depth=1 origin news-images && rm -rf .news-img && mkdir .news-img && git --work-tree=.news-img checkout FETCH_HEAD -- . && git reset -q`
@@ -30,9 +31,9 @@ Artifact-Datenbank der Seite `https://claude.ai/artifact/RWKMSmyA63Z6uRavNQnqkK`
 Collection `editions`, geschrieben mit dem `ArtifactData`-Tool (`set`).
 Die Seite selbst wird **nicht** neu veröffentlicht.
 
-- `date`: der **Nachrichtentag** = Dubai-Datum der Ausgabezeit minus 3 Stunden
-  (die Ausgaben um 00, 01, 02 Uhr gehören noch zum Vortag).
-- Dokument-ID: stündlich `<date>-h<HH>` (z. B. `2026-10-26-h14`, `2026-10-26-h01`), Abend `<date>-abend`.
+- `date`: Kalenderdatum in deutscher Zeit (Europe/Berlin).
+- Dokument-ID: `<date>-morgen` (8:00), `<date>-mittag` (16:30), `<date>-abend` (21:00).
+- `kind`: `morning`, `afternoon` oder `evening`; `hour`: `08:00`, `16:30` oder `21:00`.
 
 ```json
 {
@@ -104,36 +105,35 @@ Krypto-Kurse nur nennen, wenn eine aktuelle Quelle den Wert nennt, nie schätzen
   exakt so in `image.url` eintragen, `image.credit` = Name des Mediums.
 - Die Seite NIE neu veröffentlichen (kein publish ohne `asset: true`).
 
-## Stündliche Ausgabe
+## Briefings (8:00, 16:30, 21:00 deutscher Zeit)
 
-1. Meldungen mit `collected` in den letzten 65 Minuten laden (heutige und gestrige Datei prüfen).
+Drei Ausgaben am Tag. Jede deckt **alles seit dem vorigen Briefing** ab
+(Morgen: seit 21:00 Uhr des Vortags, Nachmittag: seit 8:00, Abend: seit 16:30).
+
+1. Meldungen laden, deren `collected` nach dem vorigen Briefing liegt (heutige und gestrige Datei prüfen).
 2. Gleiche Ereignisse über Quellen hinweg zusammenführen.
-3. Faktencheck wie oben.
+3. Faktencheck wie oben. Keine Annahmen, keine Vermutungen, keine Prognosen: nur, was Quellen berichten.
 4. **Paywall/kurzer Text** (v. a. Handelsblatt, FAZ+, Spiegel+): Nur Titel/Teaser vorhanden → Inhalt per
    `WebSearch` und aus den anderen Feeds füllen und diese als Quellen angeben.
    Nie Inhalte erfinden oder aus dem Titel extrapolieren.
-5. Auswahl: **15–25 Meldungen**, relevanteste zuerst. `lead` = wichtigste Meldung der Stunde, bevorzugt
-   mit Bezug zu Deutschland oder den VAE, wenn gleich wichtig.
-   Keine Wiederholung aus der Vorstunde, außer es gibt neue Entwicklungen (dann im Titel kennzeichnen).
-   Die Vorstunde mit `ArtifactData` `get` auf die vorige Dokument-ID prüfen.
-6. `summary`: 2–4 sachliche Sätze mit den Kernfakten (wer, was, wann, wie viel). `why`: 1 Satz Einordnung,
-   was es für den Leser bedeutet (Deutschland, Leben in den VAE, Geldanlage, Krypto-Bestände, Sicherheit).
-   Wertende Sprache der Quellen nicht übernehmen.
-7. Bilder wie oben.
-8. Dokument mit `ArtifactData` `set` schreiben. Existiert die Dokument-ID schon (Wiederholungslauf),
+5. **Breite statt Wiederholung:** 30–50 Meldungen aus möglichst vielen Ländern und Themen
+   (Politik, Wirtschaft, Finanzen, Krypto, Tech, Wissenschaft, Gesellschaft, Sport).
+   Deutschland und die Golfregion ausführlich, übrige Länder nur ihre wichtigsten Meldungen.
+   Das vorige Briefing mit `ArtifactData` `get` laden: Höchstens ein Viertel der Meldungen darf dort schon
+   gestanden haben, und nur mit **neuem Stand**; dann `"update": true` setzen und das Neue im Text nennen.
+   Unveränderte Themen nicht wiederholen.
+6. `lead` = wichtigste Meldung seit dem vorigen Briefing, bevorzugt mit Bezug zu Deutschland oder den VAE,
+   wenn gleich wichtig.
+7. `summary`: 2–4 sachliche Sätze mit den Kernfakten (wer, was, wann, wie viel). `why` nur, wenn es
+   berichtete Fakten zum Hintergrund gibt, keine eigene Bewertung. Wertende Sprache der Quellen nicht übernehmen.
+8. Bilder wie oben.
+9. Dokument mit `ArtifactData` `set` schreiben. Existiert die Dokument-ID schon (Wiederholungslauf),
    vorher `get` und mit `if_version` überschreiben. `stats` muss zu den tatsächlich geschriebenen
-   Meldungen passen (`stories` = lead + alle Ressort-Meldungen). Fertig, keine weiteren Aktionen.
+   Meldungen passen (`stories` = lead + alle Ressort-Meldungen).
 
-## Abendausgabe (23 Uhr)
-
-- Grundlage: alle Rohmeldungen des Nachrichtentags plus die stündlichen Ausgaben des Tages
-  (`ArtifactData` `query` auf `editions` mit `date == <date>`).
-- **25–40 Meldungen** über alle Ressorts, die den Tag geprägt haben, mit aktuellem Stand
-  (spätere Entwicklungen ersetzen frühere). Gleicher Faktencheck. Statusangaben aus den Stundenausgaben
-  neu prüfen: was inzwischen bestätigt ist, wird hochgestuft.
-- Bilder aus den Stundenausgaben wiederverwenden (dieselbe `image.url`), neue nur bei Bedarf hochladen.
-- `intro` und `outlook` sind Pflicht. `outlook` nennt konkrete Termine von morgen (Fed-Reden,
-  Datenveröffentlichungen, Wahlen, Gesetze, die in Kraft treten).
+**Nur Abend (21:00):** zusätzlich `intro` (3–5 Sätze: der Tag in Kürze) und `outlook` (konkrete Termine von
+morgen: Notenbanken, Datenveröffentlichungen, Wahlen, Gesetze, die in Kraft treten). Statusangaben aus
+Morgen- und Nachmittagsbriefing neu prüfen: was inzwischen bestätigt ist, wird hochgestuft.
 
 ## Telegram-Bericht
 
@@ -142,13 +142,13 @@ Kurztext mit Top-Story und Telegraph-Link. Ablauf nach dem Schreiben der Ausgabe
 
 1. Die geschriebene Ausgabe als JSON-Datei speichern (dasselbe Objekt wie beim `set`), z. B. `/tmp/ausgabe.json`.
 2. Telegraph-Seite: `node news/telegraph.mjs /tmp/ausgabe.json` → gibt die URL aus (Instant View in Telegram).
-3. HTML-Datei: `node news/html.mjs /tmp/ausgabe.json /tmp/Nachrichtenlage-HH-00.html .news-img`
-   (bettet die Bilder aus `.news-img/` ein; bei der Abendausgabe Dateiname `Nachrichtenlage-Abend.html`).
+3. HTML-Datei: `node news/html.mjs /tmp/ausgabe.json /tmp/Nachrichtenlage-<Morgen|Nachmittag|Abend>.html .news-img`
+   (bettet die Bilder aus `.news-img/` ein).
 4. Senden an Kanal und Privatchat:
 
 ```bash
-TELEGRAM_CHAT_ID=-1003977342508,7077870551 TELEGRAM_DOCUMENT=/tmp/Nachrichtenlage-19-00.html bash news/telegram.sh <<'MSG'
-📰 Nachrichtenlage 19:00 Uhr (Dubai)
+TELEGRAM_CHAT_ID=-1003977342508,7077870551 TELEGRAM_DOCUMENT=/tmp/Nachrichtenlage-Morgen.html bash news/telegram.sh <<'MSG'
+☀️ Morgenbriefing · Mittwoch, 29. Oktober
 
 ⭐ Top-Story: <Titel des Aufmachers>
 <1–2 Sätze Kern des Aufmachers> ✅
@@ -157,6 +157,8 @@ Außerdem:
 1. <Schlagzeile> ✅
 2. <Schlagzeile> ✅
 3. <Schlagzeile> ⚠️
+4. <Schlagzeile> ✅
+5. <Schlagzeile> ✅
 
 22 Meldungen, 19 bestätigt
 ⚡ Schnell lesen: <Telegraph-URL>
@@ -165,8 +167,9 @@ MSG
 ```
 
 - Der Text ist eine Bildunterschrift und darf höchstens 1024 Zeichen lang sein. Top-Story-Text kurz halten.
-- „Außerdem“: die 3 nächstwichtigen Meldungen, Deutschland/VAE bevorzugt. Abendausgabe: Titel
-  „🌙 Abendausgabe“, statt Top-Story-Text das `intro` (gekürzt), dann 5 Schlagzeilen.
+- Titel je Briefing: „☀️ Morgenbriefing“, „🕓 Nachmittagsbriefing“, „🌙 Abendbriefing“, dazu Wochentag und Datum.
+- „Außerdem“: die 5 nächstwichtigen Meldungen, Deutschland/VAE bevorzugt, aus verschiedenen Ländern/Themen.
+  Abendbriefing: statt Top-Story-Text das `intro` (gekürzt).
 - Status-Zeichen: ✅ bestätigt, ⚠️ unbestätigt, ❗ widersprüchlich.
 - Den claude.ai-Link NICHT in Telegram posten (Mitglieder können ihn nicht öffnen).
 - Schlägt Telegraph fehl: Zeile „⚡ Schnell lesen“ weglassen. Schlägt HTML fehl: ohne `TELEGRAM_DOCUMENT`

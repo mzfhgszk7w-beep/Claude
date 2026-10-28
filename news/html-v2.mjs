@@ -121,7 +121,7 @@ ${src ? `<p class="src">Quellen: ${src}</p>` : ''}
 // --- Seiten ---
 const all = lead ? [lead, ...stories] : stories;
 const st = ed.stats || {};
-const heading = ed.kind === 'evening' ? 'Abendausgabe' : `Ausgabe ${esc(ed.hour)} Uhr`;
+const heading = { morning: 'Morgenbriefing', afternoon: 'Nachmittagsbriefing', evening: 'Abendbriefing' }[ed.kind] || `Ausgabe ${esc(ed.hour)} Uhr`;
 const topicIds = Object.keys(TOPICS).filter((t) => stories.some((s) => s.topic === t));
 const outlook = ed.outlook && ed.outlook.length
   ? `<div class="outlook"><h3>Was morgen wichtig wird</h3><ul>${ed.outlook.map((o) => `<li>${esc(o)}</li>`).join('')}</ul></div>` : '';
@@ -243,7 +243,7 @@ ${imgCss.join('\n')}
 <div class="meta"><span>${heading}</span><span><b>${st.stories ?? all.length}</b> Meldungen</span><span><b>${st.confirmed ?? all.filter((s) => s.status === 'bestätigt').length}</b> bestätigt</span><span><b>${byCountry.size}</b> Länder</span></div>
 ${pages.map((x) => `<section class="page p-${x.id}">${x.body}</section>`).join('\n')}
 <footer>● Bestätigt: mind. 2 unabhängige, anerkannte Medien berichten übereinstimmend · ● Unbestätigt: nur eine anerkannte Quelle · ● Widersprüchlich: Quellen weichen in Kernfakten ab.<br>
-Keine Vermutungen, nur berichtete Fakten. Stündlich 11–02 Uhr, Abendausgabe 23 Uhr (Dubai). Bilder: jeweilige Medien.</footer>
+Keine Vermutungen, nur berichtete Fakten. Briefings um 8:00, 16:30 und 21:00 Uhr (deutsche Zeit). Bilder: jeweilige Medien.</footer>
 </div></body></html>`;
 
 writeFileSync(outFile, html);
