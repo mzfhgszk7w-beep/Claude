@@ -14,6 +14,7 @@ git config user.email "news-bot@users.noreply.github.com"
 round() {
   git pull -q --rebase || git rebase --abort || true
   node news/collect.mjs | tail -1
+  node news/laender-collect.mjs | tail -1
   git add data/news
   if ! git diff --cached --quiet; then
     git commit -q -m "news: collect $(date -u +%Y-%m-%dT%H:%MZ)"

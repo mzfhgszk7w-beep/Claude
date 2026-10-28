@@ -166,6 +166,25 @@ Eine Ausgabe am Tag. Sie deckt **die letzten 24 Stunden** ab (seit 16:00 Uhr des
 Zusätzlich `outlook` (konkrete Termine der nächsten 24 Stunden: Notenbanken, Datenveröffentlichungen, Wahlen,
 Gesetze, die in Kraft treten). Statusangaben aus dem vorigen Briefing neu prüfen: was inzwischen bestätigt ist, wird hochgestuft.
 
+## Länderseiten (alle Länder, auf Deutsch)
+
+Zusätzlich zu den geprüften Meldungen bekommt jedes Land kurze Meldungen (Schlagzeile + Medium + Link) aus
+`data/news/laender/` (Google News je Land, gesammelt von `news/laender-collect.mjs`). Die Auswahl und der Status
+(✅ mind. 2 anerkannte Medien, sonst ⚠️) kommen aus dem Skript, NICHT aus eigener Recherche. Nur übersetzen:
+
+1. `node news/laender.mjs pick 24 > /tmp/laender.json` (Meldung auf stderr: wie viele zu übersetzen sind).
+2. Alle Einträge mit `"lang": "en"` (oder sonst nicht deutsch) ins Deutsche übersetzen: sachlich, knapp, wie eine
+   deutsche Nachrichtenschlagzeile, Namen in deutscher Schreibweise, nichts hinzufügen oder weglassen. Auch deutsche
+   Titel prüfen: Ist ein Titel mit `"lang": "de"` in Wahrheit nicht deutsch, ebenfalls übersetzen.
+   Ergebnis als `/tmp/laender-de.json` speichern: `{ "<id>": "deutscher Titel", ... }`.
+   Clickbait, Werbung, Kurs-Prognosen oder offensichtlich falsch zugeordnete Meldungen (Land kommt im Kern nicht vor)
+   NICHT übersetzen: sie fallen dann weg.
+3. Nach dem Schreiben der Ausgabe-JSON: `node news/laender.mjs merge /tmp/ausgabe.json /tmp/laender.json /tmp/laender-de.json`
+   (fügt `briefs` hinzu; Einträge ohne deutschen Titel fallen weg). Erst danach `html-v2.mjs` aufrufen.
+   `briefs` NICHT in die Artifact-Datenbank schreiben (zu groß), nur in die HTML-Datei.
+
+In der gesamten Ausgabe steht nichts auf Englisch: Titel, Zusammenfassungen und Länder-Schlagzeilen sind deutsch.
+
 ## Telegram-Bericht
 
 Jeder Bericht ist EINE Telegram-Nachricht: die HTML-Datei (Zeitungsdesign) als Dokument, darunter der

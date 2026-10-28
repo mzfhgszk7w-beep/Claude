@@ -1,5 +1,4 @@
-// ENTWURF (noch nicht freigegeben): neues Layout mit Themen-Tabs und Länder-Menü. Wird von den Läufen
-// erst genutzt, wenn es in news/html.mjs übernommen ist.
+// Layout Version 2 (Tagesbriefing): Themen-Tabs und Länder-Menü.
 // Baut aus einer Ausgabe (JSON wie in `editions`) eine eigenständige HTML-Datei im Zeitungsdesign
 // für den Versand als Telegram-Dokument. Kein JavaScript: Tabs, Länder-Menü und Länderseiten laufen über
 // CSS `:target`, damit es auch in der Telegram-Vorschau auf dem iPhone funktioniert.
@@ -7,6 +6,8 @@
 // Ausgabe-Format (neu): { kind, date, hour, stats, lead, stories: [ { title, summary, status, sources,
 //   topic, country, top } ] }. topic = Schlüssel aus TOPICS, country = ISO-Code aus countries.mjs oder "".
 // Altes Format mit `sections` wird weiter gelesen (Ressortname wird zum Thema).
+// Optional `briefs: { "<ISO>": [ { title, source, url, sources, status } ] }` aus news/laender.mjs: kurze
+// Ländermeldungen (nur Schlagzeile + Quelle) unter den ausführlichen Meldungen jedes Landes.
 //
 // Bilder: bevorzugt eingebettet aus dem Bilder-Checkout `.news-img/` (letzte 3 Stunden), sonst als Link auf
 // das Originalbild der Nachrichtenseite (lädt nur mit Internet).
@@ -141,21 +142,35 @@ for (const s of all) {
   if (!byCountry.has(s.country)) byCountry.set(s.country, []);
   byCountry.get(s.country).push(s);
 }
+const briefs = ed.briefs || {};
+for (const code of Object.keys(briefs)) {
+  if (!COUNTRIES[code] || !briefs[code].length) continue;
+  if (!byCountry.has(code)) byCountry.set(code, []);
+}
+const countOf = (code) => byCountry.get(code).length + (briefs[code] || []).length;
+function brief(b) {
+  const [cls, label] = STATUS[b.status] || STATUS['unbestätigt'];
+  const more = (b.sources || []).filter((x) => x.name !== b.source).map((x) => `<a href="${esc(x.url)}">${esc(x.name)}</a>`);
+  return `<li><span class="st ${cls}" title="${label}">●</span> <a class="bt" href="${esc(b.url)}">${esc(b.title)}</a>
+<span class="bs">${esc(b.source)}${more.length ? ` · auch: ${more.join(', ')}` : ''}</span></li>`;
+}
 for (const [code, list] of byCountry) {
   const c = COUNTRIES[code];
+  const extra = briefs[code] || [];
   pages.push({ id: cid(code), body: `<div class="crumb"><a href="#laender">‹ Länder</a> · ${esc(c.continent)}</div>
-<h2 class="ph-title">${c.flag} ${esc(c.name)}</h2>${list.map((s) => card(s, { showCountry: false })).join('\n')}` });
+<h2 class="ph-title">${c.flag} ${esc(c.name)}</h2>${list.map((s) => card(s, { showCountry: false })).join('\n')}${
+  extra.length ? `<h3 class="bh">${list.length ? 'Weitere Meldungen' : 'Meldungen der letzten 24 Stunden'}</h3><ul class="briefs">${extra.map(brief).join('')}</ul>` : ''}` });
 }
 
 const drawer = CONTINENTS.map((cont) => {
   const codes = Object.keys(COUNTRIES).filter((k) => COUNTRIES[k].continent === cont);
   const withNews = codes.filter((k) => byCountry.has(k))
-    .sort((a, b) => byCountry.get(b).length - byCountry.get(a).length || COUNTRIES[a].name.localeCompare(COUNTRIES[b].name, 'de'));
+    .sort((a, b) => countOf(b) - countOf(a) || COUNTRIES[a].name.localeCompare(COUNTRIES[b].name, 'de'));
   const without = codes.filter((k) => !byCountry.has(k)).sort((a, b) => COUNTRIES[a].name.localeCompare(COUNTRIES[b].name, 'de'));
-  const n = withNews.reduce((a, k) => a + byCountry.get(k).length, 0);
+  const n = withNews.reduce((a, k) => a + countOf(k), 0);
   const open = cont === 'Europa' || cont === GULF ? ' open' : '';
   return `<details${open}><summary><span>${esc(cont)}</span><span class="n">${n ? `${n} Meldungen · ` : ''}${codes.length} Länder</span></summary><ul>${
-    withNews.map((k) => `<li><a href="#${cid(k)}">${COUNTRIES[k].flag} ${esc(COUNTRIES[k].name)} <span class="n">${byCountry.get(k).length}</span></a></li>`).join('')
+    withNews.map((k) => `<li><a href="#${cid(k)}">${COUNTRIES[k].flag} ${esc(COUNTRIES[k].name)} <span class="n">${countOf(k)}</span></a></li>`).join('')
   }${without.map((k) => `<li><span class="none">${COUNTRIES[k].flag} ${esc(COUNTRIES[k].name)} <span class="n">–</span></span></li>`).join('')}</ul></details>`;
 }).join('');
 
@@ -194,6 +209,12 @@ nav a.t-top{color:var(--acc);border-color:var(--acc)}
 .meta b{color:var(--fg)}
 .intro{font:19px/1.5 Georgia,serif;padding:16px 18px;background:var(--card);border-left:3px solid var(--acc);margin:18px 0}
 .ph-title{font:700 26px/1.2 Georgia,serif;margin:18px 0 4px}
+.bh{font:700 18px/1.3 Georgia,serif;margin:22px 0 4px;color:var(--mute)}
+.briefs{list-style:none;margin:0;padding:0}
+.briefs li{padding:12px 0;border-bottom:1px solid var(--rule)}
+.briefs .bt{font-weight:600;text-decoration:none}
+.briefs .bs{display:block;font-size:13px;color:var(--mute);margin-top:2px;padding-left:18px}
+.briefs .bs a{color:var(--mute)}
 .crumb{margin-top:16px;font-size:14px;color:var(--mute)}
 .crumb a{color:var(--acc);text-decoration:none;font-weight:600}
 figure{margin:0;position:relative}
@@ -240,7 +261,7 @@ ${imgCss.join('\n')}
 <body>${['top', 'laender', ...pages.slice(1).map((x) => x.id)].map((id) => `<span class="anchor" id="${id}"></span>`).join('')}
 <a class="scrim" href="#top" aria-label="Menü schließen"></a>
 <aside class="drawer"><div class="dh"><b>🌍 Länder</b><a class="x" href="#top" aria-label="Schließen">✕</a></div>
-<p>Kontinent antippen, dann Land wählen. Länder mit Meldungen stehen oben, ausgegraute Länder hatten in den letzten 24 Stunden keine geprüfte Meldung. Außerhalb von Europa und Golf nur Top-Stories.</p>${drawer}</aside>
+<p>Kontinent antippen, dann Land wählen. Länder mit Meldungen stehen oben, die Zahl zeigt die Meldungen der letzten 24 Stunden. ● grün: mind. 2 anerkannte Medien, ● gelb: eine Quelle.</p>${drawer}</aside>
 <div class="wrap">
 <header><div class="dateline"><span>${esc(fmtDay(ed.date))}</span><span>${heading}</span></div>
 <h1>Nachrichtenlage</h1><div class="tagline">Geprüfte Nachrichten aus aller Welt</div></header>
