@@ -65,8 +65,8 @@ for (let k = 0; k < due.length; k += 5) {
   await Promise.all(due.slice(k, k + 5).map(async (code) => {
     try {
       const de = await search(QUERY_DE[code] || `"${COUNTRIES[code].name}"`, 'de');
-      // Englisch zusätzlich, wenn es auf Deutsch wenig gibt; für Deutschland, VAE und Zypern immer (mehr Themen).
-      const en = de.length < 20 || ['DE', 'AE', 'CY'].includes(code) ? await search(QUERY_EN[code] || `"${EN.of(code)}"`, 'en') : [];
+      // Immer auch englisch: deutsche Treffer drehen sich oft nur um ein Ereignis mit Deutschland-Bezug.
+      const en = await search(QUERY_EN[code] || `"${EN.of(code)}"`, 'en');
       for (const i of [...de, ...en]) {
         if (seen.has(i.link)) continue;
         seen.add(i.link);
