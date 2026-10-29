@@ -168,24 +168,25 @@ Gesetze, die in Kraft treten). Statusangaben aus dem vorigen Briefing neu prüfe
 
 ## Länderseiten (alle Länder, auf Deutsch)
 
-Zusätzlich zu den geprüften Meldungen bekommt jedes Land kurze Meldungen (Schlagzeile + Medium + Link) aus
-`data/news/laender/` (Google News je Land, gesammelt von `news/laender-collect.mjs`). Die Auswahl und der Status
+Zusätzlich zu den geprüften Meldungen bekommt jedes Land kurze Meldungen (Schlagzeile, Anreißer-Text des Mediums,
+Medium, Link) aus `data/news/laender/` (Google News und Bing News je Land, gesammelt von `news/laender-collect.mjs`). Die Auswahl und der Status
 (✅ mind. 2 anerkannte oder 3 verschiedene Medien, sonst ⚠️) kommen aus dem Skript, NICHT aus eigener Recherche. Deine Aufgabe ist nur übersetzen und aussortieren:
 
 1. `node news/laender.mjs pick 24 /tmp/laender.json` → schreibt die Kandidaten (mit Links) nach `/tmp/laender.json` und
-   gibt eine kompakte Liste aus: `id | Land | Sprache | Anzahl Medien | Titel`. Nur diese Liste lesen, nicht die JSON-Datei.
-2. Die Liste durchgehen und `/tmp/laender-de.json` schreiben: `{ "<id>": "deutscher Titel", ... }` mit **jedem Eintrag,
-   der bleiben soll** (fehlende ids fallen weg). Dabei:
-   - Nicht deutsche Titel ins Deutsche übersetzen: sachlich, knapp, wie eine deutsche Nachrichtenschlagzeile,
-     Namen in deutscher Schreibweise, nichts hinzufügen oder weglassen. Deutsche Titel unverändert übernehmen
-     (nur Zusätze wie „(S+)“ oder „- Panorama - SZ“ entfernen).
-   - Pro Land jedes Ereignis nur einmal: Mehrere Einträge zum selben Ereignis → nur den mit den meisten Quellen behalten.
+   gibt eine kompakte Liste aus: `id | Land | Sprache | Anzahl Medien | Titel || Text`. Nur diese Liste lesen, nicht die JSON-Datei.
+2. Die Liste durchgehen und `/tmp/laender-de.json` schreiben: `{ "<id>": ["deutscher Titel", "deutscher Text"], ... }`
+   mit **jedem Eintrag, der bleiben soll** (fehlende ids fallen weg). Hat ein Eintrag keinen Text (kein `||`), nur
+   `"<id>": "deutscher Titel"`. Dabei:
+   - Titel und Text (der Anreißer des Mediums nach `||`) ins Deutsche übersetzen: sachlich, vollständig, nichts
+     hinzufügen, nichts weglassen, keine eigene Bewertung. Deutsche Titel/Texte unverändert übernehmen (nur Zusätze wie
+     „(S+)“, „- Panorama - SZ“ oder abgeschnittenes „…“ am Ende bereinigen). Kein Text erfinden, wo keiner ist.
+   - Pro Land jedes Ereignis nur einmal: mehrere Einträge zum selben Ereignis → den mit Text und den meisten Quellen behalten.
    - Weglassen: Clickbait, Werbung, Börsen-Tipps, Meinungsbeiträge ohne Nachricht, Meldungen, in denen das Land nur
      nebenbei vorkommt.
    - Möglichst viele verschiedene Themen je Land (Politik, Wirtschaft, Gesellschaft, Sport, Kultur, Unglücke, Justiz).
-     Kleinere oder regionale Medien sind in Ordnung. Behalten: bis zu 8 je Land, Deutschland und VAE bis 25, Zypern bis 20
-     (Reihenfolge der Liste beibehalten). Lieber eine echte Meldung eines kleinen Mediums als eine Lücke.
-   Ausgabe der Datei möglichst kompakt (eine Zeile pro Eintrag).
+     Kleinere oder regionale Medien sind in Ordnung. Einträge mit Text bevorzugen. Behalten: bis zu 8 je Land,
+     Deutschland und VAE bis 25, Zypern bis 20 (Reihenfolge der Liste beibehalten).
+   Die Datei in Teilen schreiben (z. B. je Kontinent eine Datei) und am Ende zusammenführen; kompakt, eine Zeile pro Eintrag.
 3. Nach dem Schreiben der Ausgabe-JSON: `node news/laender.mjs merge /tmp/ausgabe.json /tmp/laender.json /tmp/laender-de.json`
    (fügt `briefs` hinzu; Einträge ohne deutschen Titel fallen weg). Erst danach `html-v2.mjs` aufrufen.
    `briefs` NICHT in die Artifact-Datenbank schreiben (zu groß), nur in die HTML-Datei.

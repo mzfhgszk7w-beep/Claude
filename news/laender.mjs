@@ -4,11 +4,12 @@
 //   node news/laender.mjs pick <stunden> <laender.json>
 //       Je Land bis zu 2 × keep() Ereignisse (keep: 8, Deutschland/VAE 25, Zypern 20). Gleiche Ereignisse verschiedener Medien werden zusammengefasst;
 //       Status nach Regel: mind. 2 anerkannte Medien oder mind. 3 verschiedene Medien = bestätigt, sonst unbestätigt.
-//       Schreibt die Kandidaten nach laender.json (id, country, title, lang, source, url, sources, status) und gibt
-//       für die Redaktion eine kompakte Liste ohne Links aus: „id | Land | Sprache | Anzahl Medien | Titel“.
+//       Schreibt die Kandidaten nach laender.json (id, country, title, summary, image, lang, source, url, sources, status)
+//       und gibt für die Redaktion eine kompakte Liste ohne Links aus: „id | Land | Sprache | Anzahl Medien | Titel || Text“.
+//       Der Text ist der Anreißer des Mediums (aus Bing News); fehlt er, gibt es nur die Schlagzeile.
 //   node news/laender.mjs merge <ausgabe.json> <laender.json> <uebersetzung.json>
-//       uebersetzung.json = { "<id>": "deutscher Titel" } für jeden Eintrag, der bleiben soll (Claude übersetzt
-//       und sortiert Doppelte/Unsinn aus). Schreibt `briefs: { "<ISO>": [ { title, source, url, also, status } ] }`
+//       uebersetzung.json = { "<id>": ["deutscher Titel", "deutscher Text"] } (oder nur "Titel") für jeden Eintrag, der bleiben soll (Claude übersetzt
+//       und sortiert Doppelte/Unsinn aus). Schreibt `briefs: { "<ISO>": [ { title, summary, image, source, url, also, status } ] }`
 //       in die Ausgabe. Einträge ohne Titel in uebersetzung.json fallen weg: In der Ausgabe steht nichts auf Englisch.
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -80,7 +81,7 @@ function pick(hours) {
   const byCountry = new Map();
   for (const i of load(hours)) {
     if (!byCountry.has(i.country)) byCountry.set(i.country, []);
-    byCountry.get(i.country).push({ ...i, tok: tokens(i.title), lang: lang(i.title) });
+    byCountry.get(i.country).push({ ...i, tok: tokens(i.title), lang: lang(i.title + ' ' + (i.summary || '')) });
   }
   const out = [];
   for (const [code, items] of byCountry) {
@@ -91,17 +92,19 @@ function pick(hours) {
     }
     const score = (cl) => {
       const srcs = new Set(cl.map((x) => x.source));
-      return srcs.size * 2 + [...srcs].filter((s) => RECOGNIZED.test(s)).length * 3;
+      // Meldungen mit Anreißer-Text (Bing) bevorzugen: der Leser will mehr als die Schlagzeile.
+      return srcs.size * 2 + [...srcs].filter((s) => RECOGNIZED.test(s)).length * 3 + (cl.some((x) => x.summary) ? 4 : 0);
     };
     clusters.sort((a, b) => score(b) - score(a)
       || Math.max(...b.map((x) => Date.parse(x.published || x.collected))) - Math.max(...a.map((x) => Date.parse(x.published || x.collected))));
-    clusters.slice(0, keep(code) * 2).forEach((cl, k) => {
-      const rank = (x) => (x.lang === 'de' ? 2 : 0) + (RECOGNIZED.test(x.source) ? 1 : 0);
+    clusters.slice(0, Math.ceil(keep(code) * 1.5)).forEach((cl, k) => {
+      const rank = (x) => (x.summary ? 4 : 0) + (x.lang === 'de' ? 2 : 0) + (RECOGNIZED.test(x.source) ? 1 : 0);
       const best = [...cl].sort((a, b) => rank(b) - rank(a))[0];
       const sources = [];
       for (const x of cl) if (!sources.some((s) => s.name === x.source)) sources.push({ name: x.source, url: x.link });
       const recognized = sources.filter((s) => RECOGNIZED.test(s.name)).length;
-      out.push({ id: `${code}-${k + 1}`, country: code, title: best.title, lang: best.lang, source: best.source, url: best.link,
+      out.push({ id: `${code}-${k + 1}`, country: code, title: best.title, summary: best.summary || '', image: best.image || null,
+        lang: best.lang, source: best.source, url: best.link,
         sources: sources.slice(0, 4), status: recognized >= 2 || sources.length >= 3 ? 'bestätigt' : 'unbestätigt' });
     });
   }
@@ -112,7 +115,7 @@ const [, , cmd, a, b, c] = process.argv;
 if (cmd === 'pick') {
   const list = pick(Number(a) || 24);
   writeFileSync(b, JSON.stringify(list));
-  for (const x of list) console.log(`${x.id} | ${COUNTRIES[x.country].name} | ${x.lang} | ${x.sources.length} | ${x.title}`);
+  for (const x of list) console.log(`${x.id} | ${COUNTRIES[x.country].name} | ${x.lang} | ${x.sources.length} | ${x.title}${x.summary ? ` || ${x.summary}` : ''}`);
   const n = new Set(list.map((x) => x.country)).size;
   console.error(`laender: ${list.length} Meldungen aus ${n} Ländern, ${list.filter((x) => x.lang !== 'de').length} zu übersetzen`);
 } else if (cmd === 'merge') {
@@ -122,11 +125,13 @@ if (cmd === 'pick') {
   const briefs = {};
   let dropped = 0;
   for (const x of JSON.parse(readFileSync(b, 'utf8'))) {
-    const title = tr[x.id];
+    // Übersetzung: "Titel" oder ["Titel", "Text"]. Ein nicht übersetzter Text bleibt nur, wenn er schon deutsch ist.
+    const t = tr[x.id];
+    const [title, summary] = Array.isArray(t) ? t : [t, x.lang === 'de' ? x.summary : ''];
     if (!title) { dropped++; continue; }
     if ((briefs[x.country] ||= []).length >= keep(x.country)) { dropped++; continue; }
     // Nur der Link des Hauptmediums; die übrigen Medien als Name (Google-News-Links sind sehr lang).
-    briefs[x.country].push({ title, source: x.source, url: x.url, also: x.sources.map((s) => s.name).filter((n) => n !== x.source), status: x.status });
+    briefs[x.country].push({ title, summary: summary || '', image: x.image, source: x.source, url: x.url, also: x.sources.map((s) => s.name).filter((n) => n !== x.source), status: x.status });
   }
   ed.briefs = briefs;
   ed.stats = { ...(ed.stats || {}), countries: new Set([...Object.keys(briefs), ...(ed.stories || []).map((s) => s.country).filter(Boolean)]).size };

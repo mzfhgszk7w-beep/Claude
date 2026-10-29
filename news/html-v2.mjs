@@ -6,7 +6,7 @@
 // Ausgabe-Format (neu): { kind, date, hour, stats, lead, stories: [ { title, summary, status, sources,
 //   topic, country, top } ] }. topic = Schlüssel aus TOPICS, country = ISO-Code aus countries.mjs oder "".
 // Altes Format mit `sections` wird weiter gelesen (Ressortname wird zum Thema).
-// Optional `briefs: { "<ISO>": [ { title, source, url, also, status } ] }` aus news/laender.mjs: kurze
+// Optional `briefs: { "<ISO>": [ { title, summary, image, source, url, also, status } ] }` aus news/laender.mjs: kurze
 // Ländermeldungen (nur Schlagzeile + Quelle) unter den ausführlichen Meldungen jedes Landes.
 //
 // Bilder: bevorzugt eingebettet aus dem Bilder-Checkout `.news-img/` (letzte 3 Stunden), sonst als Link auf
@@ -151,8 +151,10 @@ const countOf = (code) => byCountry.get(code).length + (briefs[code] || []).leng
 function brief(b) {
   const [cls, label] = STATUS[b.status] || STATUS['unbestätigt'];
   const more = (b.also || []).map(esc);
-  return `<li><span class="st ${cls}" title="${label}">●</span> <a class="bt" href="${esc(b.url)}">${esc(b.title)}</a>
-<span class="bs">${esc(b.source)}${more.length ? ` · auch: ${more.join(', ')}` : ''}</span></li>`;
+  // Vorschaubild (Bing) nur als Link: lädt mit Internet, macht die Datei nicht größer.
+  const img = b.image && /^https:\/\/[^"'()\s]+$/.test(b.image) ? `<span class="bimg" style="background-image:url('${esc(b.image)}')"></span>` : '';
+  return `<li>${img}<span class="st ${cls}" title="${label}">●</span> <a class="bt" href="${esc(b.url)}">${esc(b.title)}</a>
+${b.summary ? `<p class="bsum">${esc(b.summary)}</p>` : ''}<span class="bs">${esc(b.source)}${more.length ? ` · auch: ${more.join(', ')}` : ''}</span></li>`;
 }
 for (const [code, list] of byCountry) {
   const c = COUNTRIES[code];
@@ -213,7 +215,10 @@ nav a.t-top{color:var(--acc);border-color:var(--acc)}
 .briefs{list-style:none;margin:0;padding:0}
 .briefs li{padding:12px 0;border-bottom:1px solid var(--rule)}
 .briefs .bt{font-weight:600;text-decoration:none}
-.briefs .bs{display:block;font-size:13px;color:var(--mute);margin-top:2px;padding-left:18px}
+.briefs li{overflow:hidden}
+.briefs .bimg{float:right;width:96px;height:64px;margin:4px 0 6px 12px;border-radius:4px;background:var(--rule) center/cover no-repeat}
+.briefs .bsum{margin:6px 0 0;font-size:15px;line-height:1.5;color:var(--fg);opacity:.85}
+.briefs .bs{display:block;font-size:13px;color:var(--mute);margin-top:4px}
 .briefs .bs a{color:var(--mute)}
 .crumb{margin-top:16px;font-size:14px;color:var(--mute)}
 .crumb a{color:var(--acc);text-decoration:none;font-weight:600}
