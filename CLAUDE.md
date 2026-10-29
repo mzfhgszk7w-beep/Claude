@@ -22,8 +22,7 @@ dem Nutzer vereinbart wurde und welche Fallstricke es gibt.
 - **Seit 29.10.2026 nur EIN Tagesbriefing täglich um 16:00 Berlin (Start 15:50), Modell Sonnet, ganze Welt,
   letzte 24 h, Format v2 (`news/EDITOR-v2.md`, `news/html-v2.mjs`)** (Wunsch des Nutzers: Max-Plan schonen, kein
   Echtgeld; Budget für Extra-Kosten max. 5 USD/Monat). Zweiter Trigger deaktiviert, nicht gelöscht.
-- **Zeitplan (deutsche Zeit, Europe/Berlin):** drei Briefings: 8:00 Morgen, 16:30 Nachmittag, 21:00 Abend
-  (Start jeweils 10 Min vorher). Früher stündlich, auf Wunsch des Nutzers umgestellt (zu viele Wiederholungen).
+- **Zeitplan früher:** stündlich, dann drei Briefings (8:00, 16:30, 21:00); jetzt nur noch das Tagesbriefing um 16:00.
 - **Keine Wiederholungen:** jedes Briefing deckt die Zeit seit dem vorigen ab, höchstens ein Viertel aus dem
   vorigen Briefing und nur mit neuem Stand ("update": true). 30–50 Meldungen, viele Länder und Themen.
 - **Telegram-Format (eine Nachricht pro Ausgabe):** HTML-Datei im Zeitungsdesign als Dokument, darunter
@@ -40,8 +39,8 @@ dem Nutzer vereinbart wurde und welche Fallstricke es gibt.
 - **Telegraph (`news/telegraph.mjs`):** zusätzlich zur HTML-Datei, für Instant View ohne Konto.
 - **Empfänger:** immer BEIDE: Kanal „Nexor News“ `-1003977342508` und Privatchat `7077870551`
   (`TELEGRAM_CHAT_ID=-1003977342508,7077870551`). Bot: `@Nexornewsbot`.
-- **Tests nur an den Privatchat `7077870551`**, nie an den Kanal. Das Tagesbriefing geht vorerst NUR an den
-  Privatchat, bis der Nutzer das v2-Format freigibt; danach wieder an beide.
+- **Tests nur an den Privatchat `7077870551`**, nie an den Kanal. Das v2-Format wurde am 29.10.2026 freigegeben:
+  das Tagesbriefing (16:00) geht an Kanal UND Privatchat.
 - Den claude.ai-Artifact-Link nicht in Telegram posten: Die Seite ist privat, Kanal-Mitglieder können sie
   nicht öffnen. Sie bleibt das Archiv des Nutzers: https://claude.ai/artifact/RWKMSmyA63Z6uRavNQnqkK
 

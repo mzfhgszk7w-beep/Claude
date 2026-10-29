@@ -195,7 +195,7 @@ In der gesamten Ausgabe steht nichts auf Englisch: Titel, Zusammenfassungen und 
 
 ## Telegram-Bericht
 
-Jeder Bericht ist EINE Telegram-Nachricht: die HTML-Datei (Zeitungsdesign) als Dokument, darunter der
+Jeder Bericht ist EINE Telegram-Nachricht an Kanal und Privatchat: die HTML-Datei (Zeitungsdesign) als Dokument, darunter der
 Kurztext mit Top-Story und Telegraph-Link. Ablauf nach dem Schreiben der Ausgabe:
 
 1. Die geschriebene Ausgabe als JSON-Datei speichern (dasselbe Objekt wie beim `set`), z. B. `/tmp/ausgabe.json`.
