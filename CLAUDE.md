@@ -47,10 +47,12 @@ dem Nutzer vereinbart wurde und welche Fallstricke es gibt.
 
 ## Aufbau
 
-- **Länderseiten (seit 29.10.2026):** `news/laender-collect.mjs` (im Loop) fragt Google News je Land ab (DE, bei wenig
-  Treffern EN), max. 70 Länder pro Runde → `data/news/laender/YYYY-MM-DD.jsonl`. `news/laender.mjs pick` wählt je Land
-  bis zu 5 Ereignisse (Status nach Regel), Claude übersetzt nur die Titel, `merge` hängt `briefs` an. Nutzer will
-  NICHTS auf Englisch. Verbrauch eines Sonnet-Laufs (80 Meldungen): ~3 % der 5-h-Sitzung, <1 % Woche (Max-Plan).
+- **Länderseiten (seit 29.10.2026):** `news/laender-collect.mjs` (im Loop) fragt je Land Google News und Bing News ab
+  (DE + EN), max. 50 Länder pro Runde → `data/news/laender/YYYY-MM-DD.jsonl`. Bing liefert den Anreißer-Text des Mediums
+  und ein Vorschaubild (Nutzer will mehr als Schlagzeilen). `news/laender.mjs pick` wählt Kandidaten (8 je Land,
+  DE/VAE 25, Zypern 20; Status nach Regel), Claude übersetzt Titel + Text und sortiert Doppelte aus, `merge` hängt
+  `briefs` an. Nutzer will NICHTS auf Englisch. Verbrauch eines Sonnet-Laufs (80 Meldungen, ohne Länder): ~3 % der
+  5-h-Sitzung, <1 % Woche (Max-Plan).
 
 - `news/loop.sh` + GitHub Action: sammelt alle 15 Min Feeds nach `data/news/YYYY-MM-DD.jsonl`, Bilder der
   letzten 25 h (max. 700) auf den Branch `news-images`. Ein Action-Lauf dauert ~6 h, der stündliche Cron startet nur
