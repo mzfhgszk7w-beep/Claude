@@ -37,10 +37,10 @@ dem Nutzer vereinbart wurde und welche Fallstricke es gibt.
   `topic`/`country`/`top`; `telegraph.mjs` kann beide Formate.
 - **Vorschauen** immer per Telegram an den Privatchat schicken: Die Claude-App zeigt HTML-Dateien nur als Code.
 - **Telegraph (`news/telegraph.mjs`):** zusätzlich zur HTML-Datei, für Instant View ohne Konto.
-- **Empfänger:** immer BEIDE: Kanal „Nexor News“ `-1003977342508` und Privatchat `7077870551`
-  (`TELEGRAM_CHAT_ID=-1003977342508,7077870551`). Bot: `@Nexornewsbot`.
+- **Empfänger (seit 30.10.2026):** NUR der Kanal „Nexor News“ `-1003977342508`, nicht mehr der Privatchat
+  `7077870551` (Wunsch des Nutzers). Bot: `@Nexornewsbot`.
 - **Tests nur an den Privatchat `7077870551`**, nie an den Kanal. Das v2-Format wurde am 29.10.2026 freigegeben:
-  das Tagesbriefing (16:00) geht an Kanal UND Privatchat.
+  das Tagesbriefing (16:00) geht nur an den Kanal.
 - Den claude.ai-Artifact-Link nicht in Telegram posten: Die Seite ist privat, Kanal-Mitglieder können sie
   nicht öffnen. Sie bleibt das Archiv des Nutzers: https://claude.ai/artifact/RWKMSmyA63Z6uRavNQnqkK
 

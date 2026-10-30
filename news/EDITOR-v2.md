@@ -195,17 +195,17 @@ In der gesamten Ausgabe steht nichts auf Englisch: Titel, Zusammenfassungen und 
 
 ## Telegram-Bericht
 
-Jeder Bericht ist EINE Telegram-Nachricht an Kanal und Privatchat: die HTML-Datei (Zeitungsdesign) als Dokument, darunter der
+Jeder Bericht ist EINE Telegram-Nachricht, nur an den Kanal: die HTML-Datei (Zeitungsdesign) als Dokument, darunter der
 Kurztext mit Top-Story und Telegraph-Link. Ablauf nach dem Schreiben der Ausgabe:
 
 1. Die geschriebene Ausgabe als JSON-Datei speichern (dasselbe Objekt wie beim `set`), z. B. `/tmp/ausgabe.json`.
 2. Telegraph-Seite: `node news/telegraph.mjs /tmp/ausgabe.json` → gibt die URL aus (Instant View in Telegram).
 3. HTML-Datei: `node news/html-v2.mjs /tmp/ausgabe.json /tmp/Nachrichtenlage-Tagesbriefing.html .news-img`
    (bettet die Bilder aus `.news-img/` ein).
-4. Senden an Kanal und Privatchat:
+4. Senden an den Kanal (nicht mehr an den Privatchat):
 
 ```bash
-TELEGRAM_CHAT_ID=-1003977342508,7077870551 TELEGRAM_DOCUMENT=/tmp/Nachrichtenlage-Tagesbriefing.html bash news/telegram.sh <<'MSG'
+TELEGRAM_CHAT_ID=-1003977342508 TELEGRAM_DOCUMENT=/tmp/Nachrichtenlage-Tagesbriefing.html bash news/telegram.sh <<'MSG'
 🌍 Tagesbriefing · Mittwoch, 29. Oktober
 
 ⭐ Top-Story: <Titel des Aufmachers>
