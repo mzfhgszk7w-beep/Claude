@@ -1,19 +1,19 @@
 {
-  "run": "2026-11-03T13:36:44.127Z",
+  "run": "2026-11-03T13:52:20.841Z",
   "feeds": [
     {
       "source": "Handelsblatt",
       "url": "https://www.handelsblatt.com/contentexport/feed/schlagzeilen",
       "ok": true,
       "items": 50,
-      "added": 2
+      "added": 5
     },
     {
       "source": "Handelsblatt",
       "url": "https://www.handelsblatt.com/contentexport/feed/top-themen",
       "ok": true,
       "items": 24,
-      "added": 2
+      "added": 0
     },
     {
       "source": "Handelsblatt",
@@ -40,15 +40,15 @@
       "source": "Tagesschau",
       "url": "https://www.tagesschau.de/index~rss2.xml",
       "ok": true,
-      "items": 71,
-      "added": 1
+      "items": 70,
+      "added": 0
     },
     {
       "source": "Tagesschau",
       "url": "https://www.tagesschau.de/wirtschaft/index~rss2.xml",
       "ok": true,
       "items": 22,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Spiegel",
@@ -68,14 +68,14 @@
       "url": "https://newsfeed.zeit.de/index",
       "ok": true,
       "items": 15,
-      "added": 6
+      "added": 5
     },
     {
       "source": "n-tv",
       "url": "https://www.n-tv.de/rss",
       "ok": true,
       "items": 50,
-      "added": 1
+      "added": 0
     },
     {
       "source": "DW",
@@ -96,35 +96,35 @@
       "url": "https://gulfnews.com/feed",
       "ok": true,
       "items": 48,
-      "added": 3
+      "added": 4
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Dubai+OR+%22Abu+Dhabi%22+OR+UAE+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 10
+      "added": 9
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=UAE+law+OR+visa+OR+%22new+rule%22+OR+residents+when:2d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 51,
+      "items": 39,
       "added": 0
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Dubai+OR+VAE+OR+Emirate+when:1d&hl=de&gl=DE&ceid=DE:de",
       "ok": true,
-      "items": 39,
-      "added": 1
+      "items": 34,
+      "added": 0
     },
     {
       "source": "Al Jazeera",
       "url": "https://www.aljazeera.com/xml/rss/all.xml",
       "ok": true,
       "items": 25,
-      "added": 0
+      "added": 1
     },
     {
       "source": "BBC",
@@ -152,13 +152,13 @@
       "url": "https://feeds.skynews.com/feeds/rss/home.xml",
       "ok": true,
       "items": 8,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Sky News",
       "url": "https://feeds.skynews.com/feeds/rss/world.xml",
       "ok": true,
-      "items": 9,
+      "items": 10,
       "added": 0
     },
     {
@@ -180,14 +180,14 @@
       "url": "https://www.theguardian.com/world/rss",
       "ok": true,
       "items": 45,
-      "added": 2
+      "added": 1
     },
     {
       "source": "France 24",
       "url": "https://www.france24.com/en/rss",
       "ok": true,
       "items": 24,
-      "added": 3
+      "added": 1
     },
     {
       "source": "DW",
@@ -278,7 +278,7 @@
       "url": "https://news.google.com/rss/search?q=site:reuters.com+world+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 0
+      "added": 3
     },
     {
       "source": "Google News",
@@ -292,28 +292,28 @@
       "url": "https://news.google.com/rss/search?q=%22Saudi+Arabia%22+OR+Riyadh+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 3
+      "added": 5
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Qatar+OR+Doha+OR+Kuwait+OR+Bahrain+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 10
+      "added": 5
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Oman+OR+Muscat+OR+Iraq+OR+Jordan+OR+Lebanon+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 5
+      "added": 3
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Egypt+OR+Cairo+OR+Yemen+OR+Syria+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 3
+      "added": 1
     },
     {
       "source": "Federal Reserve",
@@ -341,7 +341,7 @@
       "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories",
       "ok": true,
       "items": 10,
-      "added": 2
+      "added": 0
     },
     {
       "source": "CoinDesk",
@@ -355,13 +355,13 @@
       "url": "https://cointelegraph.com/rss",
       "ok": true,
       "items": 30,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Decrypt",
       "url": "https://decrypt.co/feed",
       "ok": true,
-      "items": 38,
+      "items": 37,
       "added": 0
     },
     {
@@ -376,7 +376,7 @@
       "url": "https://bitcoinmagazine.com/.rss/full/",
       "ok": true,
       "items": 10,
-      "added": 0
+      "added": 1
     },
     {
       "source": "U.Today",
@@ -390,7 +390,7 @@
       "url": "https://news.google.com/rss/search?q=%22Shiba+Inu%22+OR+SHIB+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 79,
-      "added": 2
+      "added": 0
     },
     {
       "source": "Google News",
@@ -410,7 +410,7 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=%22Federal+Reserve%22+OR+FOMC+OR+%22Fed+chair%22+OR+Warsh+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 46,
+      "items": 53,
       "added": 0
     }
   ]
