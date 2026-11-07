@@ -1,5 +1,5 @@
 {
-  "run": "2026-11-07T21:37:54.999Z",
+  "run": "2026-11-07T21:53:24.170Z",
   "feeds": [
     {
       "source": "Handelsblatt",
@@ -68,7 +68,7 @@
       "url": "https://newsfeed.zeit.de/index",
       "ok": true,
       "items": 15,
-      "added": 1
+      "added": 3
     },
     {
       "source": "n-tv",
@@ -103,7 +103,7 @@
       "url": "https://news.google.com/rss/search?q=Dubai+OR+%22Abu+Dhabi%22+OR+UAE+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 2
+      "added": 1
     },
     {
       "source": "Google News",
@@ -124,14 +124,14 @@
       "url": "https://www.aljazeera.com/xml/rss/all.xml",
       "ok": true,
       "items": 25,
-      "added": 0
+      "added": 1
     },
     {
       "source": "BBC",
       "url": "https://feeds.bbci.co.uk/news/rss.xml",
       "ok": true,
-      "items": 26,
-      "added": 0
+      "items": 27,
+      "added": 1
     },
     {
       "source": "BBC",
@@ -166,7 +166,7 @@
       "url": "https://moxie.foxnews.com/google-publisher/latest.xml",
       "ok": true,
       "items": 25,
-      "added": 2
+      "added": 4
     },
     {
       "source": "Fox News",
@@ -278,28 +278,28 @@
       "url": "https://news.google.com/rss/search?q=site:reuters.com+world+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 0
+      "added": 3
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=site:apnews.com+world+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 3
+      "added": 2
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=%22Saudi+Arabia%22+OR+Riyadh+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 1
+      "added": 2
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Qatar+OR+Doha+OR+Kuwait+OR+Bahrain+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 3
+      "added": 2
     },
     {
       "source": "Google News",
@@ -313,7 +313,7 @@
       "url": "https://news.google.com/rss/search?q=Egypt+OR+Cairo+OR+Yemen+OR+Syria+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 2
+      "added": 4
     },
     {
       "source": "Federal Reserve",
@@ -410,7 +410,7 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=%22Federal+Reserve%22+OR+FOMC+OR+%22Fed+chair%22+OR+Warsh+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 23,
+      "items": 24,
       "added": 1
     }
   ]
