@@ -1,5 +1,5 @@
 {
-  "run": "2026-11-10T22:58:56.280Z",
+  "run": "2026-11-10T23:14:30.065Z",
   "feeds": [
     {
       "source": "Handelsblatt",
@@ -68,14 +68,14 @@
       "url": "https://newsfeed.zeit.de/index",
       "ok": true,
       "items": 15,
-      "added": 0
+      "added": 3
     },
     {
       "source": "n-tv",
       "url": "https://www.n-tv.de/rss",
       "ok": true,
       "items": 50,
-      "added": 0
+      "added": 3
     },
     {
       "source": "DW",
@@ -95,7 +95,7 @@
       "source": "Gulf News",
       "url": "https://gulfnews.com/feed",
       "ok": true,
-      "items": 11,
+      "items": 12,
       "added": 1
     },
     {
@@ -124,14 +124,14 @@
       "url": "https://www.aljazeera.com/xml/rss/all.xml",
       "ok": true,
       "items": 25,
-      "added": 2
+      "added": 0
     },
     {
       "source": "BBC",
       "url": "https://feeds.bbci.co.uk/news/rss.xml",
       "ok": true,
       "items": 30,
-      "added": 1
+      "added": 0
     },
     {
       "source": "BBC",
@@ -166,7 +166,7 @@
       "url": "https://moxie.foxnews.com/google-publisher/latest.xml",
       "ok": true,
       "items": 25,
-      "added": 2
+      "added": 1
     },
     {
       "source": "Fox News",
@@ -243,7 +243,7 @@
       "url": "https://feeds.bbci.co.uk/news/world/australia/rss.xml",
       "ok": true,
       "items": 17,
-      "added": 1
+      "added": 0
     },
     {
       "source": "France 24",
@@ -292,7 +292,7 @@
       "url": "https://news.google.com/rss/search?q=%22Saudi+Arabia%22+OR+Riyadh+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 1
+      "added": 2
     },
     {
       "source": "Google News",
@@ -306,14 +306,14 @@
       "url": "https://news.google.com/rss/search?q=Oman+OR+Muscat+OR+Iraq+OR+Jordan+OR+Lebanon+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 8
+      "added": 10
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Egypt+OR+Cairo+OR+Yemen+OR+Syria+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 4
+      "added": 1
     },
     {
       "source": "Federal Reserve",
@@ -341,7 +341,7 @@
       "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories",
       "ok": true,
       "items": 10,
-      "added": 1
+      "added": 0
     },
     {
       "source": "CoinDesk",
@@ -362,7 +362,7 @@
       "url": "https://decrypt.co/feed",
       "ok": true,
       "items": 38,
-      "added": 1
+      "added": 0
     },
     {
       "source": "The Block",
@@ -389,14 +389,14 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=%22Shiba+Inu%22+OR+SHIB+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 61,
-      "added": 0
+      "items": 62,
+      "added": 1
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=crypto+regulation+OR+law+OR+bill+OR+ban+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 54,
+      "items": 58,
       "added": 1
     },
     {
@@ -410,8 +410,8 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=%22Federal+Reserve%22+OR+FOMC+OR+%22Fed+chair%22+OR+Warsh+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 64,
-      "added": 2
+      "items": 63,
+      "added": 0
     }
   ]
 }
