@@ -1,5 +1,5 @@
 {
-  "run": "2026-11-12T00:59:57.401Z",
+  "run": "2026-11-12T01:15:28.045Z",
   "feeds": [
     {
       "source": "Handelsblatt",
@@ -89,14 +89,14 @@
       "url": "https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml",
       "ok": true,
       "items": 100,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Gulf News",
       "url": "https://gulfnews.com/feed",
       "ok": true,
       "items": 6,
-      "added": 2
+      "added": 0
     },
     {
       "source": "Google News",
@@ -117,14 +117,14 @@
       "url": "https://news.google.com/rss/search?q=Dubai+OR+VAE+OR+Emirate+when:1d&hl=de&gl=DE&ceid=DE:de",
       "ok": true,
       "items": 58,
-      "added": 2
+      "added": 0
     },
     {
       "source": "Al Jazeera",
       "url": "https://www.aljazeera.com/xml/rss/all.xml",
       "ok": true,
       "items": 25,
-      "added": 0
+      "added": 3
     },
     {
       "source": "BBC",
@@ -137,7 +137,7 @@
       "source": "BBC",
       "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
       "ok": true,
-      "items": 28,
+      "items": 29,
       "added": 0
     },
     {
@@ -166,7 +166,7 @@
       "url": "https://moxie.foxnews.com/google-publisher/latest.xml",
       "ok": true,
       "items": 25,
-      "added": 3
+      "added": 5
     },
     {
       "source": "Fox News",
@@ -194,7 +194,7 @@
       "url": "https://rss.dw.com/rdf/rss-en-all",
       "ok": true,
       "items": 123,
-      "added": 0
+      "added": 1
     },
     {
       "source": "BBC",
@@ -278,14 +278,14 @@
       "url": "https://news.google.com/rss/search?q=site:reuters.com+world+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=site:apnews.com+world+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 4
+      "added": 3
     },
     {
       "source": "Google News",
@@ -341,7 +341,7 @@
       "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories",
       "ok": true,
       "items": 10,
-      "added": 0
+      "added": 1
     },
     {
       "source": "CoinDesk",
@@ -389,7 +389,7 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=%22Shiba+Inu%22+OR+SHIB+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 52,
+      "items": 51,
       "added": 0
     },
     {
@@ -410,8 +410,8 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=%22Federal+Reserve%22+OR+FOMC+OR+%22Fed+chair%22+OR+Warsh+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 71,
-      "added": 2
+      "items": 67,
+      "added": 3
     }
   ]
 }
