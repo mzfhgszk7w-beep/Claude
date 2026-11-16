@@ -1,5 +1,5 @@
 {
-  "run": "2026-11-16T00:42:20.070Z",
+  "run": "2026-11-16T00:57:51.924Z",
   "feeds": [
     {
       "source": "Handelsblatt",
@@ -13,7 +13,7 @@
       "url": "https://www.handelsblatt.com/contentexport/feed/top-themen",
       "ok": true,
       "items": 24,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Handelsblatt",
@@ -41,7 +41,7 @@
       "url": "https://www.tagesschau.de/index~rss2.xml",
       "ok": true,
       "items": 65,
-      "added": 2
+      "added": 0
     },
     {
       "source": "Tagesschau",
@@ -89,14 +89,14 @@
       "url": "https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml",
       "ok": true,
       "items": 84,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Gulf News",
       "url": "https://gulfnews.com/feed",
       "ok": true,
       "items": 7,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Google News",
@@ -116,22 +116,22 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Dubai+OR+VAE+OR+Emirate+when:1d&hl=de&gl=DE&ceid=DE:de",
       "ok": true,
-      "items": 22,
-      "added": 3
+      "items": 21,
+      "added": 1
     },
     {
       "source": "Al Jazeera",
       "url": "https://www.aljazeera.com/xml/rss/all.xml",
       "ok": true,
       "items": 25,
-      "added": 0
+      "added": 1
     },
     {
       "source": "BBC",
       "url": "https://feeds.bbci.co.uk/news/rss.xml",
       "ok": true,
       "items": 33,
-      "added": 0
+      "added": 2
     },
     {
       "source": "BBC",
@@ -180,7 +180,7 @@
       "url": "https://www.theguardian.com/world/rss",
       "ok": true,
       "items": 45,
-      "added": 0
+      "added": 1
     },
     {
       "source": "France 24",
@@ -207,8 +207,8 @@
       "source": "BBC",
       "url": "https://feeds.bbci.co.uk/news/world/asia/rss.xml",
       "ok": true,
-      "items": 17,
-      "added": 0
+      "items": 18,
+      "added": 1
     },
     {
       "source": "BBC",
@@ -285,7 +285,7 @@
       "url": "https://news.google.com/rss/search?q=site:apnews.com+world+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Google News",
@@ -299,21 +299,21 @@
       "url": "https://news.google.com/rss/search?q=Qatar+OR+Doha+OR+Kuwait+OR+Bahrain+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 5
+      "added": 3
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Oman+OR+Muscat+OR+Iraq+OR+Jordan+OR+Lebanon+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 5
+      "added": 6
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Egypt+OR+Cairo+OR+Yemen+OR+Syria+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Federal Reserve",
@@ -390,7 +390,7 @@
       "url": "https://news.google.com/rss/search?q=%22Shiba+Inu%22+OR+SHIB+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 35,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Google News",
@@ -410,8 +410,8 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=%22Federal+Reserve%22+OR+FOMC+OR+%22Fed+chair%22+OR+Warsh+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 38,
-      "added": 0
+      "items": 41,
+      "added": 1
     }
   ]
 }
