@@ -158,6 +158,91 @@ def render(clip, music, label, out, max_s=30.0):
     return dur
 
 
+def wrap(text, width=22):
+    lines, cur = [], ""
+    for w in text.split():
+        if cur and len(cur) + 1 + len(w) > width:
+            lines.append(cur)
+            cur = w
+        else:
+            cur = f"{cur} {w}".strip()
+    if cur:
+        lines.append(cur)
+    return "\n".join(lines)
+
+
+def render_story(clip, music, cards, out, card_s=3.6):
+    """Story-Short: Clip in Einstellungen zerlegen (wechselnder Zoom), verlangsamen,
+    Farbkorrektur, je Einstellung eine Texttafel."""
+    n = len(cards)
+    total = n * card_s
+    src = probe_duration(clip)
+    if src < 2:
+        raise ValueError(f"Clip zu kurz ({src:.1f} s)")
+    seg_src = src / n
+    speed = min(1.0, seg_src / card_s)        # <1 = Zeitlupe, damit der Clip reicht
+    font = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+    parts = []
+    for i, text in enumerate(cards):
+        a = i * seg_src
+        b = a + min(seg_src, card_s * speed)
+        z0, z1 = (1.0, 1.12) if i % 2 == 0 else (1.18, 1.04)
+        z = f"({z0}+({z1}-{z0})*t/{card_s:.2f})"
+        clean = re.sub(r"[^\u0000-\uFFFF]|[\u2600-\u27BF\uFE0F]", "", text).strip()
+        pathlib.Path(f"card{i}.txt").write_text(wrap(clean), encoding="utf-8")
+        f = (f"[0:v]trim={a:.3f}:{b:.3f},setpts=(PTS-STARTPTS)/{speed:.4f},"
+             "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,"
+             f"scale=w='1080*{z}':h='1920*{z}':eval=frame,crop=1080:1920,"
+             "fps=30,eq=contrast=1.08:saturation=1.22:brightness=0.01,vignette=PI/5,"
+             f"trim=0:{card_s:.2f},setpts=PTS-STARTPTS,"
+             f"drawtext=fontfile={font}:textfile=card{i}.txt:fontcolor=white:fontsize=60:"
+             "line_spacing=14:text_align=C:x=(w-text_w)/2:y=h*0.16:box=1:boxcolor=black@0.35:boxborderw=28:"
+             f"alpha='min(1,t/0.35)*min(1,({card_s:.2f}-t)/0.35)',format=yuv420p[v{i}]")
+        parts.append(f)
+    xf, last = [], "v0"
+    for i in range(1, n):  # weiche Uebergaenge
+        off = i * card_s - 0.4 * i
+        xf.append(f"[{last}][v{i}]xfade=transition={'fade' if i % 2 else 'smoothleft'}:"
+                  f"duration=0.4:offset={off:.2f}[x{i}]")
+        last = f"x{i}"
+    total = n * card_s - 0.4 * (n - 1)
+    graph = ";".join(parts + xf)
+    cmd = ["ffmpeg", "-y", "-loglevel", "error", "-i", clip]
+    if music:
+        cmd += ["-stream_loop", "-1", "-i", music]
+    cmd += ["-filter_complex", graph, "-map", f"[{last}]", "-t", f"{total:.2f}"]
+    if music:
+        cmd += ["-map", "1:a:0", "-af",
+                f"afade=t=in:d=0.5,afade=t=out:st={total - 1.5:.2f}:d=1.5,volume=0.9",
+                "-c:a", "aac", "-b:a", "192k"]
+    else:
+        cmd += ["-an"]
+    cmd += ["-c:v", "libx264", "-preset", "medium", "-crf", "20", "-movflags", "+faststart", out]
+    subprocess.run(cmd, check=True)
+    return total
+
+
+def load_stories():
+    url = os.environ.get("STORIES_URL")
+    if not url:
+        return []
+    try:
+        r = requests.get(url, timeout=30)
+        r.raise_for_status()
+        return r.json().get("stories", [])
+    except Exception as e:  # ohne Geschichten weiter im Standardmodus
+        log(f"Hinweis: Geschichten nicht geladen ({e}).")
+        return []
+
+
+def find_story(stories, filename):
+    name = filename.lower()
+    for s in stories:
+        if any(m.lower() in name for m in s.get("match", [])):
+            return s
+    return None
+
+
 def upload(tok, path, title, desc, tags, privacy):
     body = {"snippet": {"title": title, "description": desc, "tags": tags, "categoryId": "19",
                         "defaultLanguage": "en"},
@@ -212,9 +297,21 @@ def main():
         log("Keine neuen Clips. Bitte neue Videos in den Ordner 'clips' laden.")
         return
 
-    clip = todo[0]
+    want = os.environ.get("CLIP", "").strip().lower()
+    if want:
+        hits = [c for c in clips if want in c["name"].lower()]
+        if not hits:
+            sys.exit(f"Kein Clip mit '{want}' im Namen gefunden.")
+        clip = hits[0]
+    else:
+        clip = todo[0]
+    story = find_story(load_stories(), clip["name"])
     title, desc, tags, label = metadata(clip["name"])
-    log(f"Clip: {clip['name']} -> Titel: {title}")
+    if story:
+        title = story.get("title", title)[:100]
+        desc = story.get("description", desc)
+        tags = story.get("tags", tags)
+    log(f"Clip: {clip['name']} -> Titel: {title}" + (" (Story-Modus)" if story else ""))
     ext = pathlib.Path(clip["name"]).suffix.lower()
     drive_download(tok, clip["id"], "in" + ext)
     music = None
@@ -225,7 +322,10 @@ def main():
         log(f"Musik: {song['name']}")
     else:
         log("Hinweis: keine Musik im Ordner 'musik', Video ohne Ton.")
-    dur = render("in" + ext, music, label, "short.mp4", max_s)
+    if story:
+        dur = render_story("in" + ext, music, story["cards"], "short.mp4", story.get("card_seconds", 3.6))
+    else:
+        dur = render("in" + ext, music, label, "short.mp4", max_s)
     log(f"Gerendert: {dur:.1f} s, {os.path.getsize('short.mp4') / 1e6:.1f} MB")
 
     tok = token()  # frischer Token fuer den Upload

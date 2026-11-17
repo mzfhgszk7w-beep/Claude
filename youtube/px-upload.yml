@@ -7,6 +7,10 @@ on:
         type: choice
         options: [private, unlisted, public]
         default: private
+      clip:
+        description: "Bestimmter Clip (Teil des Dateinamens, leer = naechster)"
+        required: false
+        default: ""
       record:
         description: "Clip als erledigt markieren"
         type: boolean
@@ -14,24 +18,30 @@ on:
 permissions:
   contents: write
 concurrency: px-upload
+env:
+  SRC: https://raw.githubusercontent.com/mzfhgszk7w-beep/Claude/claude/determined-brahmagupta-rwjfww/youtube
 jobs:
   upload:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
-      - name: Werkzeuge
+      - name: Werkzeuge und aktuelles Programm
         run: |
           which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
           pip install -q requests
+          mkdir -p youtube
+          curl -fsSL "$SRC/px.py" -o youtube/px.py
       - name: Short erstellen und hochladen
         env:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
           DRIVE_FOLDER_ID: 1Q95EUFwGKl0k0IIxLlwlsBs1hjYzSmNE
+          STORIES_URL: ${{ env.SRC }}/stories.json
           PRIVACY: ${{ inputs.privacy || 'private' }}
           RECORD: ${{ inputs.record || 'false' }}
+          CLIP: ${{ inputs.clip }}
           STATE_FILE: ${{ github.workspace }}/youtube/state.json
         run: |
           mkdir -p work && cd work
