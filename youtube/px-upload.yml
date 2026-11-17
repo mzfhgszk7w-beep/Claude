@@ -1,0 +1,44 @@
+name: P-X Upload
+on:
+  workflow_dispatch:
+    inputs:
+      privacy:
+        description: "Sichtbarkeit"
+        type: choice
+        options: [private, unlisted, public]
+        default: private
+      record:
+        description: "Clip als erledigt markieren"
+        type: boolean
+        default: false
+permissions:
+  contents: write
+concurrency: px-upload
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Werkzeuge
+        run: |
+          which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+          pip install -q requests
+      - name: Short erstellen und hochladen
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          DRIVE_FOLDER_ID: 1Q95EUFwGKl0k0IIxLlwlsBs1hjYzSmNE
+          PRIVACY: ${{ inputs.privacy || 'private' }}
+          RECORD: ${{ inputs.record || 'false' }}
+          STATE_FILE: ${{ github.workspace }}/youtube/state.json
+        run: |
+          mkdir -p work && cd work
+          python3 ../youtube/px.py
+      - name: Stand speichern
+        run: |
+          git config user.name "px-bot"
+          git config user.email "px-bot@users.noreply.github.com"
+          git add youtube/state.json 2>/dev/null || true
+          git diff --cached --quiet || (git commit -m "Upload-Stand" && git push)
