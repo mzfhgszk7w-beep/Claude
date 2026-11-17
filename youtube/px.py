@@ -86,8 +86,10 @@ def drive_download(tok, fid, dest):
 def describe(filename):
     """island-fagradalsfjall-lava-01.mp4 -> ('Fagradalsfjall Lava', 'Iceland', '🇮🇸')"""
     stem = pathlib.Path(filename).stem.lower()
-    words = [w for w in re.split(r"[-_\s.]+", stem) if w and not w.isdigit()
-             and not re.fullmatch(r"(img|dji|mvi|vid|pxl|gx|dsc)\d*", w)]
+    words = [w for w in re.split(r"[-_\s.()]+", stem) if w and not w.isdigit()
+             and w not in ("copy", "kopie", "final", "edit", "export", "hevc", "4k")
+             and not re.fullmatch(r"(img|dji|mvi|vid|pxl|gx|dsc|trim)\d*", w)
+             and not (re.fullmatch(r"[0-9a-f]{4,}", w) and re.search(r"\d", w))]
     country, flag, rest = "", "", []
     for w in words:
         if w in PLACES and not country:
@@ -158,17 +160,24 @@ def render(clip, music, label, out, max_s=30.0):
 
 def upload(tok, path, title, desc, tags, privacy):
     body = {"snippet": {"title": title, "description": desc, "tags": tags, "categoryId": "19",
-                        "defaultLanguage": "en", "defaultAudioLanguage": "zxx"},
+                        "defaultLanguage": "en"},
             "status": {"privacyStatus": privacy, "selfDeclaredMadeForKids": False,
                        "containsSyntheticMedia": False}}
     size = os.path.getsize(path)
-    r = requests.post(f"{API}/upload/youtube/v3/videos",
+
+    def start(b):
+        return requests.post(f"{API}/upload/youtube/v3/videos",
                       params={"uploadType": "resumable", "part": "snippet,status"},
                       headers={"Authorization": f"Bearer {tok}",
                                "Content-Type": "application/json; charset=UTF-8",
                                "X-Upload-Content-Type": "video/mp4",
                                "X-Upload-Content-Length": str(size)},
-                      data=json.dumps(body), timeout=60)
+                      data=json.dumps(b), timeout=60)
+    r = start(body)
+    if r.status_code == 400:  # Fallback: nur Pflichtfelder
+        log(f"Hinweis: Metadaten abgelehnt ({r.text[:200]}), versuche es mit Minimal-Angaben.")
+        r = start({"snippet": {"title": title[:100], "description": desc[:4900], "categoryId": "19"},
+                   "status": {"privacyStatus": privacy, "selfDeclaredMadeForKids": False}})
     if r.status_code != 200:
         sys.exit(f"Upload-Start fehlgeschlagen ({r.status_code}): {r.text[:500]}")
     with open(path, "rb") as f:
