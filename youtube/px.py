@@ -179,13 +179,14 @@ def render_story(clip, music, cards, out, card_s=3.6):
     src = probe_duration(clip)
     if src < 2:
         raise ValueError(f"Clip zu kurz ({src:.1f} s)")
-    seg_src = src / n
-    speed = min(1.0, seg_src / card_s)        # <1 = Zeitlupe, damit der Clip reicht
+    # Fenster je Einstellung: ueberlappend, damit kurze Clips nicht zu stark verlangsamt werden
+    win = min(src, max(src / n, card_s * 0.5))
+    speed = min(1.0, win / card_s)            # <1 = Zeitlupe
     font = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
     parts = []
     for i, text in enumerate(cards):
-        a = i * seg_src
-        b = a + min(seg_src, card_s * speed)
+        a = (src - win) * i / max(1, n - 1)
+        b = a + min(win, card_s * speed)
         z0, z1 = (1.0, 1.12) if i % 2 == 0 else (1.18, 1.04)
         z = f"({z0}+({z1}-{z0})*t/{card_s:.2f})"
         clean = re.sub(r"[^\u0000-\uFFFF]|[\u2600-\u27BF\uFE0F]", "", text).strip()
