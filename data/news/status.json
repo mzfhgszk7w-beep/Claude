@@ -1,12 +1,12 @@
 {
-  "run": "2026-11-20T20:40:52.557Z",
+  "run": "2026-11-20T20:58:01.575Z",
   "feeds": [
     {
       "source": "Handelsblatt",
       "url": "https://www.handelsblatt.com/contentexport/feed/schlagzeilen",
       "ok": true,
       "items": 50,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Handelsblatt",
@@ -61,22 +61,22 @@
       "source": "FAZ",
       "url": "https://www.faz.net/rss/aktuell/",
       "ok": true,
-      "items": 164,
-      "added": 3
+      "items": 165,
+      "added": 0
     },
     {
       "source": "Zeit",
       "url": "https://newsfeed.zeit.de/index",
       "ok": true,
       "items": 15,
-      "added": 5
+      "added": 1
     },
     {
       "source": "n-tv",
       "url": "https://www.n-tv.de/rss",
       "ok": true,
       "items": 50,
-      "added": 1
+      "added": 3
     },
     {
       "source": "DW",
@@ -90,14 +90,14 @@
       "url": "https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml",
       "ok": true,
       "items": 100,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Gulf News",
       "url": "https://gulfnews.com/feed",
       "ok": true,
       "items": 16,
-      "added": 2
+      "added": 1
     },
     {
       "source": "Google News",
@@ -122,13 +122,13 @@
       "url": "https://www.aljazeera.com/xml/rss/all.xml",
       "ok": true,
       "items": 25,
-      "added": 0
+      "added": 2
     },
     {
       "source": "BBC",
       "url": "https://feeds.bbci.co.uk/news/rss.xml",
       "ok": true,
-      "items": 29,
+      "items": 27,
       "added": 0
     },
     {
@@ -149,7 +149,7 @@
       "source": "Sky News",
       "url": "https://feeds.skynews.com/feeds/rss/home.xml",
       "ok": true,
-      "items": 9,
+      "items": 8,
       "added": 0
     },
     {
@@ -164,7 +164,7 @@
       "url": "https://moxie.foxnews.com/google-publisher/latest.xml",
       "ok": true,
       "items": 25,
-      "added": 1
+      "added": 4
     },
     {
       "source": "Fox News",
@@ -333,7 +333,7 @@
       "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories",
       "ok": true,
       "items": 10,
-      "added": 3
+      "added": 0
     },
     {
       "source": "CoinDesk",
@@ -354,7 +354,7 @@
       "url": "https://decrypt.co/feed",
       "ok": true,
       "items": 37,
-      "added": 1
+      "added": 0
     },
     {
       "source": "The Block",
