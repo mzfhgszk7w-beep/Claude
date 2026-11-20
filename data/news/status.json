@@ -1,12 +1,12 @@
 {
-  "run": "2026-11-20T21:15:16.126Z",
+  "run": "2026-11-20T21:32:24.505Z",
   "feeds": [
     {
       "source": "Handelsblatt",
       "url": "https://www.handelsblatt.com/contentexport/feed/schlagzeilen",
       "ok": true,
       "items": 50,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Handelsblatt",
@@ -40,8 +40,8 @@
       "source": "Tagesschau",
       "url": "https://www.tagesschau.de/index~rss2.xml",
       "ok": true,
-      "items": 63,
-      "added": 0
+      "items": 65,
+      "added": 10
     },
     {
       "source": "Tagesschau",
@@ -55,21 +55,21 @@
       "url": "https://www.spiegel.de/schlagzeilen/index.rss",
       "ok": true,
       "items": 30,
-      "added": 1
+      "added": 0
     },
     {
       "source": "FAZ",
       "url": "https://www.faz.net/rss/aktuell/",
       "ok": true,
       "items": 165,
-      "added": 0
+      "added": 2
     },
     {
       "source": "Zeit",
       "url": "https://newsfeed.zeit.de/index",
       "ok": true,
       "items": 15,
-      "added": 0
+      "added": 4
     },
     {
       "source": "n-tv",
@@ -90,13 +90,13 @@
       "url": "https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml",
       "ok": true,
       "items": 100,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Gulf News",
       "url": "https://gulfnews.com/feed",
       "ok": true,
-      "items": 14,
+      "items": 13,
       "added": 0
     },
     {
@@ -122,7 +122,7 @@
       "url": "https://www.aljazeera.com/xml/rss/all.xml",
       "ok": true,
       "items": 25,
-      "added": 1
+      "added": 5
     },
     {
       "source": "BBC",
@@ -164,7 +164,7 @@
       "url": "https://moxie.foxnews.com/google-publisher/latest.xml",
       "ok": true,
       "items": 25,
-      "added": 5
+      "added": 2
     },
     {
       "source": "Fox News",
@@ -185,7 +185,7 @@
       "url": "https://www.france24.com/en/rss",
       "ok": true,
       "items": 24,
-      "added": 0
+      "added": 1
     },
     {
       "source": "DW",
@@ -312,7 +312,7 @@
       "url": "https://www.federalreserve.gov/feeds/press_all.xml",
       "ok": true,
       "items": 20,
-      "added": 0
+      "added": 1
     },
     {
       "source": "CNBC",
@@ -368,7 +368,7 @@
       "url": "https://bitcoinmagazine.com/.rss/full/",
       "ok": true,
       "items": 10,
-      "added": 1
+      "added": 0
     },
     {
       "source": "U.Today",
