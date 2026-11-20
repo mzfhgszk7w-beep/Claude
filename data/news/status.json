@@ -1,19 +1,19 @@
 {
-  "run": "2026-11-20T22:41:10.822Z",
+  "run": "2026-11-20T22:58:19.167Z",
   "feeds": [
     {
       "source": "Handelsblatt",
       "url": "https://www.handelsblatt.com/contentexport/feed/schlagzeilen",
       "ok": true,
       "items": 50,
-      "added": 0
+      "added": 2
     },
     {
       "source": "Handelsblatt",
       "url": "https://www.handelsblatt.com/contentexport/feed/top-themen",
       "ok": true,
       "items": 21,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Handelsblatt",
@@ -61,22 +61,22 @@
       "source": "FAZ",
       "url": "https://www.faz.net/rss/aktuell/",
       "ok": true,
-      "items": 166,
-      "added": 2
+      "items": 165,
+      "added": 1
     },
     {
       "source": "Zeit",
       "url": "https://newsfeed.zeit.de/index",
       "ok": true,
       "items": 15,
-      "added": 3
+      "added": 2
     },
     {
       "source": "n-tv",
       "url": "https://www.n-tv.de/rss",
       "ok": true,
       "items": 50,
-      "added": 1
+      "added": 0
     },
     {
       "source": "DW",
@@ -115,7 +115,7 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Dubai+OR+VAE+OR+Emirate+when:1d&hl=de&gl=DE&ceid=DE:de",
       "ok": false,
-      "error": "HTTP 429"
+      "error": "HTTP 503"
     },
     {
       "source": "Al Jazeera",
@@ -128,15 +128,15 @@
       "source": "BBC",
       "url": "https://feeds.bbci.co.uk/news/rss.xml",
       "ok": true,
-      "items": 28,
-      "added": 0
+      "items": 29,
+      "added": 2
     },
     {
       "source": "BBC",
       "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
       "ok": true,
-      "items": 25,
-      "added": 0
+      "items": 26,
+      "added": 1
     },
     {
       "source": "BBC",
@@ -149,8 +149,8 @@
       "source": "Sky News",
       "url": "https://feeds.skynews.com/feeds/rss/home.xml",
       "ok": true,
-      "items": 8,
-      "added": 0
+      "items": 9,
+      "added": 1
     },
     {
       "source": "Sky News",
@@ -164,7 +164,7 @@
       "url": "https://moxie.foxnews.com/google-publisher/latest.xml",
       "ok": true,
       "items": 25,
-      "added": 0
+      "added": 2
     },
     {
       "source": "Fox News",
@@ -178,7 +178,7 @@
       "url": "https://www.theguardian.com/world/rss",
       "ok": true,
       "items": 45,
-      "added": 1
+      "added": 0
     },
     {
       "source": "France 24",
@@ -212,7 +212,7 @@
       "source": "BBC",
       "url": "https://feeds.bbci.co.uk/news/world/europe/rss.xml",
       "ok": true,
-      "items": 22,
+      "items": 23,
       "added": 0
     },
     {
@@ -333,14 +333,14 @@
       "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories",
       "ok": true,
       "items": 10,
-      "added": 0
+      "added": 2
     },
     {
       "source": "CoinDesk",
       "url": "https://www.coindesk.com/arc/outboundfeeds/rss/",
       "ok": true,
       "items": 25,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Cointelegraph",
