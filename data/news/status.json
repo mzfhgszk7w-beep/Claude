@@ -1,12 +1,12 @@
 {
-  "run": "2026-11-21T00:06:56.551Z",
+  "run": "2026-11-21T00:24:05.096Z",
   "feeds": [
     {
       "source": "Handelsblatt",
       "url": "https://www.handelsblatt.com/contentexport/feed/schlagzeilen",
       "ok": true,
       "items": 50,
-      "added": 0
+      "added": 2
     },
     {
       "source": "Handelsblatt",
@@ -69,7 +69,7 @@
       "url": "https://newsfeed.zeit.de/index",
       "ok": true,
       "items": 15,
-      "added": 3
+      "added": 0
     },
     {
       "source": "n-tv",
@@ -122,13 +122,13 @@
       "url": "https://www.aljazeera.com/xml/rss/all.xml",
       "ok": true,
       "items": 25,
-      "added": 1
+      "added": 0
     },
     {
       "source": "BBC",
       "url": "https://feeds.bbci.co.uk/news/rss.xml",
       "ok": true,
-      "items": 29,
+      "items": 30,
       "added": 2
     },
     {
@@ -136,7 +136,7 @@
       "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
       "ok": true,
       "items": 25,
-      "added": 0
+      "added": 1
     },
     {
       "source": "BBC",
@@ -150,7 +150,7 @@
       "url": "https://feeds.skynews.com/feeds/rss/home.xml",
       "ok": true,
       "items": 10,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Sky News",
@@ -178,7 +178,7 @@
       "url": "https://www.theguardian.com/world/rss",
       "ok": true,
       "items": 45,
-      "added": 2
+      "added": 0
     },
     {
       "source": "France 24",
@@ -192,7 +192,7 @@
       "url": "https://rss.dw.com/rdf/rss-en-all",
       "ok": true,
       "items": 135,
-      "added": 1
+      "added": 0
     },
     {
       "source": "BBC",
@@ -234,7 +234,7 @@
       "url": "https://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml",
       "ok": true,
       "items": 27,
-      "added": 2
+      "added": 0
     },
     {
       "source": "BBC",
@@ -374,8 +374,8 @@
       "source": "U.Today",
       "url": "https://u.today/rss",
       "ok": true,
-      "items": 95,
-      "added": 0
+      "items": 96,
+      "added": 1
     },
     {
       "source": "Google News",
