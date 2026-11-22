@@ -1,5 +1,5 @@
 {
-  "run": "2026-11-22T23:19:50.480Z",
+  "run": "2026-11-22T23:35:36.192Z",
   "feeds": [
     {
       "source": "Handelsblatt",
@@ -69,7 +69,7 @@
       "url": "https://newsfeed.zeit.de/index",
       "ok": true,
       "items": 15,
-      "added": 0
+      "added": 2
     },
     {
       "source": "n-tv",
@@ -96,7 +96,7 @@
       "source": "Gulf News",
       "url": "https://gulfnews.com/feed",
       "ok": true,
-      "items": 9,
+      "items": 10,
       "added": 1
     },
     {
@@ -104,7 +104,7 @@
       "url": "https://news.google.com/rss/search?q=Dubai+OR+%22Abu+Dhabi%22+OR+UAE+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 2
+      "added": 1
     },
     {
       "source": "Google News",
@@ -132,7 +132,7 @@
       "url": "https://feeds.bbci.co.uk/news/rss.xml",
       "ok": true,
       "items": 30,
-      "added": 0
+      "added": 1
     },
     {
       "source": "BBC",
@@ -167,7 +167,7 @@
       "url": "https://moxie.foxnews.com/google-publisher/latest.xml",
       "ok": true,
       "items": 25,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Fox News",
@@ -181,7 +181,7 @@
       "url": "https://www.theguardian.com/world/rss",
       "ok": true,
       "items": 45,
-      "added": 0
+      "added": 1
     },
     {
       "source": "France 24",
@@ -278,8 +278,8 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=site:reuters.com+world+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 98,
-      "added": 3
+      "items": 99,
+      "added": 1
     },
     {
       "source": "Google News",
@@ -293,21 +293,21 @@
       "url": "https://news.google.com/rss/search?q=%22Saudi+Arabia%22+OR+Riyadh+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Qatar+OR+Doha+OR+Kuwait+OR+Bahrain+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 4
+      "added": 1
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Oman+OR+Muscat+OR+Iraq+OR+Jordan+OR+Lebanon+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
       "items": 100,
-      "added": 12
+      "added": 2
     },
     {
       "source": "Google News",
@@ -370,7 +370,7 @@
       "url": "https://www.theblock.co/rss.xml",
       "ok": true,
       "items": 20,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Bitcoin Magazine",
@@ -390,14 +390,14 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=%22Shiba+Inu%22+OR+SHIB+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 24,
+      "items": 23,
       "added": 0
     },
     {
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=crypto+regulation+OR+law+OR+bill+OR+ban+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 29,
+      "items": 28,
       "added": 0
     },
     {
@@ -411,8 +411,8 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=%22Federal+Reserve%22+OR+FOMC+OR+%22Fed+chair%22+OR+Warsh+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": true,
-      "items": 27,
-      "added": 0
+      "items": 28,
+      "added": 1
     }
   ]
 }
