@@ -1,19 +1,19 @@
 {
-  "run": "2026-11-24T12:29:21.824Z",
+  "run": "2026-11-24T12:46:41.165Z",
   "feeds": [
     {
       "source": "Handelsblatt",
       "url": "https://www.handelsblatt.com/contentexport/feed/schlagzeilen",
       "ok": true,
       "items": 50,
-      "added": 1
+      "added": 2
     },
     {
       "source": "Handelsblatt",
       "url": "https://www.handelsblatt.com/contentexport/feed/top-themen",
       "ok": true,
       "items": 27,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Handelsblatt",
@@ -47,7 +47,7 @@
       "source": "Tagesschau",
       "url": "https://www.tagesschau.de/wirtschaft/index~rss2.xml",
       "ok": true,
-      "items": 37,
+      "items": 38,
       "added": 0
     },
     {
@@ -62,21 +62,21 @@
       "url": "https://www.faz.net/rss/aktuell/",
       "ok": true,
       "items": 161,
-      "added": 6
+      "added": 4
     },
     {
       "source": "Zeit",
       "url": "https://newsfeed.zeit.de/index",
       "ok": true,
       "items": 15,
-      "added": 5
+      "added": 9
     },
     {
       "source": "n-tv",
       "url": "https://www.n-tv.de/rss",
       "ok": true,
       "items": 50,
-      "added": 0
+      "added": 2
     },
     {
       "source": "DW",
@@ -90,14 +90,14 @@
       "url": "https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml",
       "ok": true,
       "items": 100,
-      "added": 2
+      "added": 1
     },
     {
       "source": "Gulf News",
       "url": "https://gulfnews.com/feed",
       "ok": true,
-      "items": 45,
-      "added": 6
+      "items": 46,
+      "added": 3
     },
     {
       "source": "Google News",
@@ -129,7 +129,7 @@
       "url": "https://feeds.bbci.co.uk/news/rss.xml",
       "ok": true,
       "items": 32,
-      "added": 2
+      "added": 1
     },
     {
       "source": "BBC",
@@ -149,8 +149,8 @@
       "source": "Sky News",
       "url": "https://feeds.skynews.com/feeds/rss/home.xml",
       "ok": true,
-      "items": 8,
-      "added": 1
+      "items": 9,
+      "added": 2
     },
     {
       "source": "Sky News",
@@ -164,7 +164,7 @@
       "url": "https://moxie.foxnews.com/google-publisher/latest.xml",
       "ok": true,
       "items": 25,
-      "added": 3
+      "added": 0
     },
     {
       "source": "Fox News",
@@ -184,7 +184,7 @@
       "url": "https://www.france24.com/en/rss",
       "ok": true,
       "items": 24,
-      "added": 0
+      "added": 1
     },
     {
       "source": "DW",
@@ -261,7 +261,7 @@
       "url": "https://www.france24.com/en/americas/rss",
       "ok": true,
       "items": 30,
-      "added": 1
+      "added": 0
     },
     {
       "source": "France 24",
@@ -332,14 +332,14 @@
       "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories",
       "ok": true,
       "items": 10,
-      "added": 1
+      "added": 0
     },
     {
       "source": "CoinDesk",
       "url": "https://www.coindesk.com/arc/outboundfeeds/rss/",
       "ok": true,
       "items": 25,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Cointelegraph",
@@ -353,7 +353,7 @@
       "url": "https://decrypt.co/feed",
       "ok": true,
       "items": 37,
-      "added": 0
+      "added": 1
     },
     {
       "source": "The Block",
