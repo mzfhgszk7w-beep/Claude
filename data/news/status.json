@@ -1,19 +1,19 @@
 {
-  "run": "2026-11-24T14:13:05.365Z",
+  "run": "2026-11-24T14:30:23.998Z",
   "feeds": [
     {
       "source": "Handelsblatt",
       "url": "https://www.handelsblatt.com/contentexport/feed/schlagzeilen",
       "ok": true,
       "items": 50,
-      "added": 3
+      "added": 6
     },
     {
       "source": "Handelsblatt",
       "url": "https://www.handelsblatt.com/contentexport/feed/top-themen",
       "ok": true,
       "items": 24,
-      "added": 0
+      "added": 2
     },
     {
       "source": "Handelsblatt",
@@ -27,7 +27,7 @@
       "url": "https://www.handelsblatt.com/contentexport/feed/unternehmen",
       "ok": true,
       "items": 20,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Handelsblatt",
@@ -40,43 +40,43 @@
       "source": "Tagesschau",
       "url": "https://www.tagesschau.de/index~rss2.xml",
       "ok": true,
-      "items": 63,
-      "added": 2
+      "items": 64,
+      "added": 1
     },
     {
       "source": "Tagesschau",
       "url": "https://www.tagesschau.de/wirtschaft/index~rss2.xml",
       "ok": true,
       "items": 39,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Spiegel",
       "url": "https://www.spiegel.de/schlagzeilen/index.rss",
       "ok": true,
       "items": 30,
-      "added": 5
+      "added": 2
     },
     {
       "source": "FAZ",
       "url": "https://www.faz.net/rss/aktuell/",
       "ok": true,
       "items": 161,
-      "added": 10
+      "added": 3
     },
     {
       "source": "Zeit",
       "url": "https://newsfeed.zeit.de/index",
       "ok": true,
       "items": 15,
-      "added": 9
+      "added": 7
     },
     {
       "source": "n-tv",
       "url": "https://www.n-tv.de/rss",
       "ok": true,
       "items": 50,
-      "added": 5
+      "added": 4
     },
     {
       "source": "DW",
@@ -96,8 +96,8 @@
       "source": "Gulf News",
       "url": "https://gulfnews.com/feed",
       "ok": true,
-      "items": 51,
-      "added": 2
+      "items": 56,
+      "added": 5
     },
     {
       "source": "Google News",
@@ -122,7 +122,7 @@
       "url": "https://www.aljazeera.com/xml/rss/all.xml",
       "ok": true,
       "items": 25,
-      "added": 0
+      "added": 4
     },
     {
       "source": "BBC",
@@ -156,7 +156,7 @@
       "source": "Sky News",
       "url": "https://feeds.skynews.com/feeds/rss/world.xml",
       "ok": true,
-      "items": 7,
+      "items": 8,
       "added": 0
     },
     {
@@ -184,21 +184,21 @@
       "url": "https://www.france24.com/en/rss",
       "ok": true,
       "items": 24,
-      "added": 2
+      "added": 0
     },
     {
       "source": "DW",
       "url": "https://rss.dw.com/rdf/rss-en-all",
       "ok": true,
       "items": 142,
-      "added": 0
+      "added": 1
     },
     {
       "source": "BBC",
       "url": "https://feeds.bbci.co.uk/news/world/africa/rss.xml",
       "ok": true,
       "items": 31,
-      "added": 0
+      "added": 1
     },
     {
       "source": "BBC",
@@ -212,7 +212,7 @@
       "url": "https://feeds.bbci.co.uk/news/world/europe/rss.xml",
       "ok": true,
       "items": 25,
-      "added": 0
+      "added": 1
     },
     {
       "source": "BBC",
@@ -304,7 +304,7 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Egypt+OR+Cairo+OR+Yemen+OR+Syria+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": false,
-      "error": "fetch failed"
+      "error": "HTTP 503"
     },
     {
       "source": "Federal Reserve",
@@ -332,7 +332,7 @@
       "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories",
       "ok": true,
       "items": 10,
-      "added": 0
+      "added": 1
     },
     {
       "source": "CoinDesk",
@@ -353,14 +353,14 @@
       "url": "https://decrypt.co/feed",
       "ok": true,
       "items": 37,
-      "added": 0
+      "added": 1
     },
     {
       "source": "The Block",
       "url": "https://www.theblock.co/rss.xml",
       "ok": true,
       "items": 20,
-      "added": 3
+      "added": 0
     },
     {
       "source": "Bitcoin Magazine",
