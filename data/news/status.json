@@ -1,5 +1,5 @@
 {
-  "run": "2026-11-24T15:22:21.435Z",
+  "run": "2026-11-24T15:39:39.763Z",
   "feeds": [
     {
       "source": "Handelsblatt",
@@ -13,7 +13,7 @@
       "url": "https://www.handelsblatt.com/contentexport/feed/top-themen",
       "ok": true,
       "items": 24,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Handelsblatt",
@@ -40,8 +40,8 @@
       "source": "Tagesschau",
       "url": "https://www.tagesschau.de/index~rss2.xml",
       "ok": true,
-      "items": 69,
-      "added": 6
+      "items": 70,
+      "added": 2
     },
     {
       "source": "Tagesschau",
@@ -55,35 +55,35 @@
       "url": "https://www.spiegel.de/schlagzeilen/index.rss",
       "ok": true,
       "items": 30,
-      "added": 4
+      "added": 3
     },
     {
       "source": "FAZ",
       "url": "https://www.faz.net/rss/aktuell/",
       "ok": true,
-      "items": 161,
-      "added": 1
+      "items": 162,
+      "added": 7
     },
     {
       "source": "Zeit",
       "url": "https://newsfeed.zeit.de/index",
       "ok": true,
       "items": 15,
-      "added": 8
+      "added": 7
     },
     {
       "source": "n-tv",
       "url": "https://www.n-tv.de/rss",
       "ok": true,
       "items": 50,
-      "added": 3
+      "added": 2
     },
     {
       "source": "DW",
       "url": "https://rss.dw.com/xml/rss-de-all",
       "ok": true,
-      "items": 85,
-      "added": 1
+      "items": 89,
+      "added": 3
     },
     {
       "source": "The National",
@@ -96,7 +96,7 @@
       "source": "Gulf News",
       "url": "https://gulfnews.com/feed",
       "ok": true,
-      "items": 54,
+      "items": 51,
       "added": 0
     },
     {
@@ -122,20 +122,20 @@
       "url": "https://www.aljazeera.com/xml/rss/all.xml",
       "ok": true,
       "items": 25,
-      "added": 1
+      "added": 4
     },
     {
       "source": "BBC",
       "url": "https://feeds.bbci.co.uk/news/rss.xml",
       "ok": true,
       "items": 32,
-      "added": 1
+      "added": 0
     },
     {
       "source": "BBC",
       "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
       "ok": true,
-      "items": 27,
+      "items": 28,
       "added": 0
     },
     {
@@ -164,14 +164,14 @@
       "url": "https://moxie.foxnews.com/google-publisher/latest.xml",
       "ok": true,
       "items": 25,
-      "added": 5
+      "added": 7
     },
     {
       "source": "Fox News",
       "url": "https://moxie.foxnews.com/google-publisher/world.xml",
       "ok": true,
       "items": 25,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Guardian",
@@ -225,8 +225,8 @@
       "source": "BBC",
       "url": "https://feeds.bbci.co.uk/news/world/middle_east/rss.xml",
       "ok": true,
-      "items": 27,
-      "added": 1
+      "items": 26,
+      "added": 0
     },
     {
       "source": "BBC",
@@ -339,7 +339,7 @@
       "url": "https://www.coindesk.com/arc/outboundfeeds/rss/",
       "ok": true,
       "items": 25,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Cointelegraph",
@@ -360,21 +360,21 @@
       "url": "https://www.theblock.co/rss.xml",
       "ok": true,
       "items": 20,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Bitcoin Magazine",
       "url": "https://bitcoinmagazine.com/.rss/full/",
       "ok": true,
       "items": 10,
-      "added": 1
+      "added": 0
     },
     {
       "source": "U.Today",
       "url": "https://u.today/rss",
       "ok": true,
-      "items": 93,
-      "added": 0
+      "items": 94,
+      "added": 2
     },
     {
       "source": "Google News",
