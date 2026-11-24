@@ -1,12 +1,12 @@
 {
-  "run": "2026-11-24T13:55:47.345Z",
+  "run": "2026-11-24T14:13:05.365Z",
   "feeds": [
     {
       "source": "Handelsblatt",
       "url": "https://www.handelsblatt.com/contentexport/feed/schlagzeilen",
       "ok": true,
       "items": 50,
-      "added": 5
+      "added": 3
     },
     {
       "source": "Handelsblatt",
@@ -34,49 +34,49 @@
       "url": "https://www.handelsblatt.com/contentexport/feed/politik",
       "ok": true,
       "items": 20,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Tagesschau",
       "url": "https://www.tagesschau.de/index~rss2.xml",
       "ok": true,
-      "items": 62,
-      "added": 3
+      "items": 63,
+      "added": 2
     },
     {
       "source": "Tagesschau",
       "url": "https://www.tagesschau.de/wirtschaft/index~rss2.xml",
       "ok": true,
-      "items": 38,
-      "added": 0
+      "items": 39,
+      "added": 1
     },
     {
       "source": "Spiegel",
       "url": "https://www.spiegel.de/schlagzeilen/index.rss",
       "ok": true,
       "items": 30,
-      "added": 1
+      "added": 5
     },
     {
       "source": "FAZ",
       "url": "https://www.faz.net/rss/aktuell/",
       "ok": true,
       "items": 161,
-      "added": 7
+      "added": 10
     },
     {
       "source": "Zeit",
       "url": "https://newsfeed.zeit.de/index",
       "ok": true,
       "items": 15,
-      "added": 7
+      "added": 9
     },
     {
       "source": "n-tv",
       "url": "https://www.n-tv.de/rss",
       "ok": true,
       "items": 50,
-      "added": 0
+      "added": 5
     },
     {
       "source": "DW",
@@ -90,14 +90,14 @@
       "url": "https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml",
       "ok": true,
       "items": 100,
-      "added": 0
+      "added": 1
     },
     {
       "source": "Gulf News",
       "url": "https://gulfnews.com/feed",
       "ok": true,
-      "items": 52,
-      "added": 3
+      "items": 51,
+      "added": 2
     },
     {
       "source": "Google News",
@@ -122,14 +122,14 @@
       "url": "https://www.aljazeera.com/xml/rss/all.xml",
       "ok": true,
       "items": 25,
-      "added": 5
+      "added": 0
     },
     {
       "source": "BBC",
       "url": "https://feeds.bbci.co.uk/news/rss.xml",
       "ok": true,
       "items": 32,
-      "added": 1
+      "added": 0
     },
     {
       "source": "BBC",
@@ -184,14 +184,14 @@
       "url": "https://www.france24.com/en/rss",
       "ok": true,
       "items": 24,
-      "added": 3
+      "added": 2
     },
     {
       "source": "DW",
       "url": "https://rss.dw.com/rdf/rss-en-all",
       "ok": true,
       "items": 142,
-      "added": 1
+      "added": 0
     },
     {
       "source": "BBC",
@@ -247,7 +247,7 @@
       "url": "https://www.france24.com/en/africa/rss",
       "ok": true,
       "items": 30,
-      "added": 1
+      "added": 0
     },
     {
       "source": "France 24",
@@ -304,7 +304,7 @@
       "source": "Google News",
       "url": "https://news.google.com/rss/search?q=Egypt+OR+Cairo+OR+Yemen+OR+Syria+when:1d&hl=en-AE&gl=AE&ceid=AE:en",
       "ok": false,
-      "error": "HTTP 503"
+      "error": "fetch failed"
     },
     {
       "source": "Federal Reserve",
@@ -332,7 +332,7 @@
       "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories",
       "ok": true,
       "items": 10,
-      "added": 2
+      "added": 0
     },
     {
       "source": "CoinDesk",
@@ -353,28 +353,28 @@
       "url": "https://decrypt.co/feed",
       "ok": true,
       "items": 37,
-      "added": 1
+      "added": 0
     },
     {
       "source": "The Block",
       "url": "https://www.theblock.co/rss.xml",
       "ok": true,
       "items": 20,
-      "added": 0
+      "added": 3
     },
     {
       "source": "Bitcoin Magazine",
       "url": "https://bitcoinmagazine.com/.rss/full/",
       "ok": true,
       "items": 10,
-      "added": 2
+      "added": 0
     },
     {
       "source": "U.Today",
       "url": "https://u.today/rss",
       "ok": true,
       "items": 94,
-      "added": 1
+      "added": 0
     },
     {
       "source": "Google News",
